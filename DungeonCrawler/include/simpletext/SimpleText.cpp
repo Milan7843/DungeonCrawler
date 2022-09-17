@@ -10,15 +10,16 @@ SimpleText::~SimpleText()
 	std::cout << "Simple text instance destroyed" << std::endl;
 }
 
-void SimpleText::renderText(Shader& shader, const char* text, 
+void SimpleText::renderText(unsigned int shader, const char* text, 
     unsigned int width, unsigned int height, 
     float x, float y, glm::vec2 scale, glm::vec3 color)
 {
     // Setting up the shader
     glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(width), 0.0f, static_cast<float>(height));
-    shader.use();
-    shader.setMat4("projection", projection);
-    shader.setVector3("textColor", color);
+
+    glUseProgram(shader);
+    glUniformMatrix4fv(glGetUniformLocation(shader, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+    glUniform3f(glGetUniformLocation(shader, "textColor"), color.r, color.g, color.b);
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

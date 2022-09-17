@@ -36,6 +36,18 @@ void Logger::logError(const char* message)
     write(message);
 }
 
+void Logger::destructorMessage(std::string message)
+{
+    log(message.c_str());
+}
+
+void Logger::destructorMessage(const char* message)
+{
+    // White text on black background
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+    write(message);
+}
+
 void Logger::write(const char* message)
 {
     // Actually write the message in the console

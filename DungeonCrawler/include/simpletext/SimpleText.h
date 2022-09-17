@@ -5,8 +5,6 @@
 * Requires GLFW, GLM, FreeType
 */
 
-#include "Shader.h"
-
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
@@ -14,6 +12,7 @@
 #include <GLFW/glfw3.h>
 
 #include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include <iostream>
 #include <map>
@@ -34,7 +33,7 @@ public:
 	~SimpleText();
 
     // Render the given text
-    void renderText(Shader& shader, const char* text, unsigned int width, unsigned int height, 
+    void renderText(unsigned int shader, const char* text, unsigned int width, unsigned int height, 
         float x, float y, glm::vec2 scale, glm::vec3 color);
 
 private:

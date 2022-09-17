@@ -113,6 +113,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,6 +130,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -166,8 +168,10 @@
     <ClInclude Include="include\simpletext\SimpleText.h" />
     <ClInclude Include="include\stb_image\stbi_image.h" />
     <ClInclude Include="include\Root\Script.h" />
-    <ClInclude Include="src\Application.h" />
     <ClInclude Include="include\Root\Transform.h" />
+    <ClInclude Include="include\Root\Time.h" />
+    <ClInclude Include="src\ScriptLoader.h" />
+    <ClInclude Include="src\scripts\MyScript.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\Root\Component.cpp" />
@@ -181,9 +185,11 @@
     <ClCompile Include="include\imgui\imgui_widgets.cpp" />
     <ClCompile Include="include\Root\Camera.cpp" />
     <ClCompile Include="include\Root\Logger.cpp" />
+    <ClCompile Include="include\Root\Root.cpp" />
     <ClCompile Include="include\Root\shaders\AbstractShader.cpp" />
     <ClCompile Include="include\Root\shaders\ComputeShader.cpp" />
     <ClCompile Include="include\Root\shaders\Shader.cpp" />
+    <ClCompile Include="include\Root\Time.cpp" />
     <ClCompile Include="include\simplegui\Image.cpp" />
     <ClCompile Include="include\simplegui\Item.cpp" />
     <ClCompile Include="include\simplegui\Rectangle.cpp" />
@@ -191,10 +197,11 @@
     <ClCompile Include="include\simpleprofiler\Profiler.cpp" />
     <ClCompile Include="include\simpletext\SimpleText.cpp" />
     <ClCompile Include="include\Root\Script.cpp" />
-    <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="include\Root\Transform.cpp" />
+    <ClCompile Include="src\ScriptLoader.cpp" />
+    <ClCompile Include="src\scripts\MyScript.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
