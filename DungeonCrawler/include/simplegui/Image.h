@@ -2,6 +2,8 @@
 
 #include "Rectangle.h"
 
+#include <stbi_utility/TextureData.h>
+
 class SimpleGUI;
 
 namespace SimpleGUIComponent

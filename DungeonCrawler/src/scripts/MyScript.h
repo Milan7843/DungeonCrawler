@@ -8,6 +8,7 @@
 #include <Root/Script.h>
 #include <Root/Logger.h>
 #include <Root/Transform.h>
+#include <Root/rendering/SpriteRenderer.h>
 
 class MyScript : public Script
 {

@@ -5,6 +5,7 @@
 #include "Logger.h"
 
 #include <glm/glm.hpp>
+#include <glm/gtx/transform.hpp>
 
 #include <vector>
 
@@ -38,6 +39,13 @@ public:
 	 * \returns all components attached to this transform.
 	 */
 	std::vector<std::shared_ptr<Component>>& getComponents();
+
+	/**
+	 * Get a matrix which correctly.
+	 * 
+	 * \return 
+	 */
+	glm::mat4& getModelMatrix();
 
 	void addComponent(std::shared_ptr<Component> component);
 

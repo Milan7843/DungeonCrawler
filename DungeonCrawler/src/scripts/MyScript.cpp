@@ -18,6 +18,12 @@ void MyScript::start()
 	std::shared_ptr<MyComponentScript> myComponentScript = std::shared_ptr<MyComponentScript>(new MyComponentScript());
 	transform->addComponent(myComponentScript);
 
+	// Adding a sprite renderer to the object
+	std::shared_ptr<SpriteRenderer> spriteRenderer = std::shared_ptr<SpriteRenderer>(new SpriteRenderer());
+	spriteRenderer->setSprite("src/sprites/cutie_cat.png");
+	transform->addComponent(spriteRenderer);
+	
+
 	// Adding the created object to the scene
 	Root::addTransform(transform);
 

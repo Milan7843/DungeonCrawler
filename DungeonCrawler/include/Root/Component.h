@@ -20,13 +20,19 @@ public:
 	virtual void update() {}
 
 	/**
+	 * The render function of this component, gets called automatically every frame.
+	 * This function gets called after update().
+	 */
+	virtual void render() {}
+
+	/**
 	 * Set the point to the transform of this component.
 	 * 
 	 * \param transform: a pointer to the transform which this component belongs to.
 	 */
 	void setTransform(Transform* transform);
 
-private:
+protected:
 
 	// A pointer to the transform this component belongs to.
 	Transform* transform;

@@ -11,6 +11,8 @@ namespace Root
         std::vector<std::shared_ptr<Transform>> transforms;
         std::vector<std::shared_ptr<Script>> scripts;
 
+        Shader* spriteRenderShader;
+
         void initialiseGLFW()
         {
             // Initialising GLFW
@@ -82,6 +84,21 @@ namespace Root
 
             Profiler::addCheckpoint("Component script updates");
         }
+
+        void renderComponents()
+        {
+            // Calling all components' render() functions
+            for (std::shared_ptr<Transform>& transform : transforms)
+            {
+                // Calling render() on each component attached to this Transform
+                for (std::shared_ptr<Component>& component : transform->getComponents())
+                {
+                    component->render();
+                }
+            }
+
+            Profiler::addCheckpoint("Component rendering");
+        }
     }
 
 	int Start(unsigned int windowWidth, unsigned int windowHeight)
@@ -110,11 +127,17 @@ namespace Root
 
         initialiseImGui(window);
 
+        spriteRenderShader = new Shader(
+            "include/Root/shaders/default_shader_source/spriteVertex.shader",
+            "include/Root/shaders/default_shader_source/spriteFragment.shader");
+
         // Shader textRenderShader("src/shaders/textVertex.shader", "src/shaders/textFragment.shader");
 
         // Enabling depth testing for rasterized view: 
         // makes sure objects get drawn on top of each other in the correct order
         glEnable(GL_DEPTH_TEST);
+
+        Renderer::initialise();
 
         unsigned int frame = 0;
 
@@ -140,12 +163,16 @@ namespace Root
             // Calling all component and script update() functions
             updateScripts();
 
+
             // Input
             //processInput(window);
 
             // Rendering
             glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            // Calling all component render() functions
+            renderComponents();
 
             Profiler::addCheckpoint("End of frame");
 
@@ -168,6 +195,11 @@ namespace Root
         return 0;
 	}
 
+    Shader* getSpriteRenderShader()
+    {
+        return spriteRenderShader;
+    }
+
 
     void addScript(std::shared_ptr<Script> script)
     {
@@ -177,5 +209,13 @@ namespace Root
     void addTransform(std::shared_ptr<Transform> transform)
     {
         transforms.push_back(transform);
+    }
+    unsigned int getScreenWidth()
+    {
+        return WINDOW_SIZE_X;
+    }
+    unsigned int getScreenHeight()
+    {
+        return WINDOW_SIZE_Y;
     }
 };

@@ -2,9 +2,11 @@
 
 #include "Transform.h"
 #include "Script.h"
+#include "shaders/Shader.h"
 
 #include "simpleprofiler/Profiler.h"
 #include "Time.h"
+#include "rendering/Renderer.h"
 
 #include <simpletext/SimpleText.h>
 #include <simplegui/SimpleGUI.h>
@@ -51,6 +53,13 @@ namespace Root
 	int Start(unsigned int windowWidth, unsigned int windowHeight);
 
 	/**
+	 * Get a pointer to the shader used for sprite rendering.
+	 * 
+	 * \returns a pointer to the shader used for sprite rendering.
+	 */
+	Shader* getSpriteRenderShader();
+
+	/**
 	 * Add a script to the scene.
 	 * 
 	 * \param script: the script to add to the scene.
@@ -63,4 +72,13 @@ namespace Root
 	 * \param transform: the transform to add to the scene.
 	 */
 	void addTransform(std::shared_ptr<Transform> transform);
+
+	/**
+	 * Get the current width of the screen.
+	 */
+	unsigned int getScreenWidth();
+	/**
+	 * Get the current height of the screen.
+	 */
+	unsigned int getScreenHeight();
 };

@@ -2,9 +2,6 @@
 
 #include "SimpleGUI.h"
 
-#define STB_IMAGE_IMPLEMENTATION
-#include <stb_image/stbi_image.h>
-
 SimpleGUIComponent::Image::Image(const char* imagePath,
 	unsigned int windowWidth, unsigned int windowHeight,
     glm::vec2 position, glm::vec2 size, glm::vec2 scale)
@@ -56,14 +53,13 @@ void SimpleGUIComponent::Image::render(unsigned int guiShader, unsigned int text
 
 float SimpleGUIComponent::Image::loadImage(const char* imagePath)
 {
-	stbi_set_flip_vertically_on_load(true);
-
 	glGenTextures(1, &textureID);
 
 	int width, height, nrComponents;
-	unsigned char* data = stbi_load(imagePath, &width, &height, &nrComponents, 0);
 
-	if (data)
+	TextureData textureData(imagePath, &width, &height, &nrComponents, 0);
+
+	if (textureData.hasData())
 	{
 		GLenum format;
 		if (nrComponents == 1)
@@ -74,7 +70,7 @@ float SimpleGUIComponent::Image::loadImage(const char* imagePath)
 			format = GL_RGBA;
 
 		glBindTexture(GL_TEXTURE_2D, textureID);
-		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, textureData.getData());
 		glGenerateMipmap(GL_TEXTURE_2D);
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -84,10 +80,8 @@ float SimpleGUIComponent::Image::loadImage(const char* imagePath)
 	}
 	else
 	{
-		std::cout << "Failed to load image: " << imagePath << ".\nReason: " << stbi_failure_reason() << std::endl;
+		std::cout << "Failed to load image: " << imagePath << ".\nReason: " << textureData.getFailureReason() << std::endl;
 	}
-
-	stbi_image_free(data);
 
 	return (float)width / (float)height;
 }
