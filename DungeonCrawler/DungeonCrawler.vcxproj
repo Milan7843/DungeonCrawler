@@ -160,6 +160,7 @@
     <ClInclude Include="include\Root\shaders\AbstractShader.h" />
     <ClInclude Include="include\Root\shaders\ComputeShader.h" />
     <ClInclude Include="include\Root\shaders\Shader.h" />
+    <ClInclude Include="include\Root\rendering\SpriteRenderer.h" />
     <ClInclude Include="include\simplegui\Image.h" />
     <ClInclude Include="include\simplegui\Item.h" />
     <ClInclude Include="include\simplegui\Rectangle.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="include\Root\Transform.h" />
     <ClInclude Include="include\Root\Time.h" />
     <ClInclude Include="src\ScriptLoader.h" />
+    <ClInclude Include="src\scripts\MyComponentScript.h" />
     <ClInclude Include="src\scripts\MyScript.h" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +187,7 @@
     <ClCompile Include="include\imgui\imgui_widgets.cpp" />
     <ClCompile Include="include\Root\Camera.cpp" />
     <ClCompile Include="include\Root\Logger.cpp" />
+    <ClCompile Include="include\Root\rendering\SpriteRenderer.cpp" />
     <ClCompile Include="include\Root\Root.cpp" />
     <ClCompile Include="include\Root\shaders\AbstractShader.cpp" />
     <ClCompile Include="include\Root\shaders\ComputeShader.cpp" />
@@ -201,6 +204,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="include\Root\Transform.cpp" />
     <ClCompile Include="src\ScriptLoader.cpp" />
+    <ClCompile Include="src\scripts\MyComponentScript.cpp" />
     <ClCompile Include="src\scripts\MyScript.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

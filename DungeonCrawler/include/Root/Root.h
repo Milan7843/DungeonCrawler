@@ -56,7 +56,11 @@ namespace Root
 	 * \param script: the script to add to the scene.
 	 */
 	void addScript(std::shared_ptr<Script> script);
+
+	/**
+	 * Add a transform to the scene.
+	 *
+	 * \param transform: the transform to add to the scene.
+	 */
+	void addTransform(std::shared_ptr<Transform> transform);
 };
-
-
-

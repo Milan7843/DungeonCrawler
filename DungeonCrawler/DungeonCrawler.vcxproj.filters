@@ -108,6 +108,12 @@
     <ClInclude Include="src\scripts\MyScript.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Root\rendering\SpriteRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scripts\MyComponentScript.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\imgui\imgui.cpp">
@@ -192,6 +198,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\scripts\MyScript.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Root\rendering\SpriteRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scripts\MyComponentScript.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

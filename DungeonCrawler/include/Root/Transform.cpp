@@ -16,3 +16,9 @@ std::vector<std::shared_ptr<Component>>& Transform::getComponents()
 {
 	return components;
 }
+
+void Transform::addComponent(std::shared_ptr<Component> component)
+{
+	components.push_back(component);
+	component->setTransform(this);
+}

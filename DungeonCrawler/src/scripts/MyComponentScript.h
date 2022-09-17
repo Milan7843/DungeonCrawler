@@ -1,19 +1,14 @@
 #pragma once
 
-#include "MyComponentScript.h"
-
-#include "scripts/MyComponentScript.h"
-
-#include <Root/Root.h>
 #include <Root/Script.h>
 #include <Root/Logger.h>
 #include <Root/Transform.h>
 
-class MyScript : public Script
+class MyComponentScript : public Component
 {
 public:
-	MyScript();
-	~MyScript();
+	MyComponentScript();
+	~MyComponentScript();
 
 	void start() override;
 

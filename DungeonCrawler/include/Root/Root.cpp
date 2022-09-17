@@ -173,4 +173,9 @@ namespace Root
     {
         scripts.push_back(script);
     }
+
+    void addTransform(std::shared_ptr<Transform> transform)
+    {
+        transforms.push_back(transform);
+    }
 };

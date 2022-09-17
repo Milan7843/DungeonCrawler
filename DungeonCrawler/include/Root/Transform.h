@@ -39,6 +39,8 @@ public:
 	 */
 	std::vector<std::shared_ptr<Component>>& getComponents();
 
+	void addComponent(std::shared_ptr<Component> component);
+
 private:
 
 	std::vector<std::shared_ptr<Component>> components;
@@ -48,6 +50,3 @@ private:
 	glm::vec2 scale;
 
 };
-
-
-
