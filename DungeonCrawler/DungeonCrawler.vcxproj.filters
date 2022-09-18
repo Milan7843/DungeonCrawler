@@ -120,7 +120,7 @@
     <ClInclude Include="include\Root\rendering\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RootEngine.h">
+    <ClInclude Include="include\Root\engine\RootEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -221,7 +221,7 @@
     <ClCompile Include="include\Root\rendering\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RootEngine.cpp">
+    <ClCompile Include="include\Root\engine\RootEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

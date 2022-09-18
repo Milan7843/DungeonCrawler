@@ -2,7 +2,7 @@
 
 #include "Root/Component.h" // Base class
 #include "Root/Logger.h"
-#include "Root/Root.h"
+#include "Root/engine/RootEngine.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>

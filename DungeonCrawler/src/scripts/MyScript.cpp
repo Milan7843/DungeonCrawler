@@ -27,8 +27,6 @@ void MyScript::start()
 	// Adding the created object to the scene
 	Root::addTransform(transform);
 
-	Logger::log("We called the start function from a script!");
-
 
 	// Adding a camera to the scene
 	std::shared_ptr<Transform> cameraTransform = std::shared_ptr<Transform>(new Transform());
@@ -41,5 +39,4 @@ void MyScript::start()
 
 void MyScript::update()
 {
-	Logger::log("We called the update function from a script!");
 }

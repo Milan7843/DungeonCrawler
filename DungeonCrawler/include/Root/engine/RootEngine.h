@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Transform.h"
-#include "Script.h"
-#include "shaders/Shader.h"
+#include "Root/Transform.h"
+#include "Root/Script.h"
+#include "Root/shaders/Shader.h"
 
+#include "Root/Time.h"
+#include "Root/rendering/Renderer.h"
 #include "simpleprofiler/Profiler.h"
-#include "Time.h"
-#include "rendering/Renderer.h"
 
 #include <simpletext/SimpleText.h>
 #include <simplegui/SimpleGUI.h>
@@ -38,11 +38,11 @@
 #endif
 
 
-#include "Logger.h"
+#include "Root/Logger.h"
 
 class Camera;
 
-namespace Root
+namespace RootEngine
 {
 	/**
 	* <summary>
@@ -56,14 +56,14 @@ namespace Root
 
 	/**
 	 * Get a pointer to the shader used for sprite rendering.
-	 * 
+	 *
 	 * \returns a pointer to the shader used for sprite rendering.
 	 */
 	Shader* getSpriteRenderShader();
 
 	/**
 	 * Add a script to the scene.
-	 * 
+	 *
 	 * \param script: the script to add to the scene.
 	 */
 	void addScript(std::shared_ptr<Script> script);
@@ -74,6 +74,13 @@ namespace Root
 	 * \param transform: the transform to add to the scene.
 	 */
 	void addTransform(std::shared_ptr<Transform> transform);
+
+	/**
+	 * Set a camera as the one used for all rendering.
+	 *
+	 * \param camera: a pointer to the camera to be used for future rendering.
+	 */
+	void setActiveCamera(Camera* camera);
 
 	/**
 	 * Get the camera currently actively used for rendering.
@@ -92,3 +99,4 @@ namespace Root
 	 */
 	unsigned int getScreenHeight();
 };
+
