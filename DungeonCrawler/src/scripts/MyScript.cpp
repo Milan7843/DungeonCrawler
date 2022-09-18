@@ -28,6 +28,15 @@ void MyScript::start()
 	Root::addTransform(transform);
 
 	Logger::log("We called the start function from a script!");
+
+
+	// Adding a camera to the scene
+	std::shared_ptr<Transform> cameraTransform = std::shared_ptr<Transform>(new Transform());
+	std::shared_ptr<Camera> camera = std::shared_ptr<Camera>(new Camera());
+	cameraTransform->addComponent(camera);
+
+	// Adding the created camera to the scene
+	Root::addTransform(cameraTransform);
 }
 
 void MyScript::update()

@@ -40,6 +40,8 @@
 
 #include "Logger.h"
 
+class Camera;
+
 namespace Root
 {
 	/**
@@ -72,6 +74,21 @@ namespace Root
 	 * \param transform: the transform to add to the scene.
 	 */
 	void addTransform(std::shared_ptr<Transform> transform);
+
+	/**
+	 * Set a camera as the one used for all rendering.
+	 * 
+	 * \param camera: a pointer to the camera to be used for future rendering.
+	 */
+	void setActiveCamera(Camera* camera);
+
+	/**
+	 * Get the camera currently actively used for rendering.
+	 *
+	 * \returns the currently active camera.
+	 */
+	Camera* getActiveCamera();
+
 
 	/**
 	 * Get the current width of the screen.

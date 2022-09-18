@@ -1,5 +1,7 @@
 #include "Root.h"
 
+#include "rendering/Camera.h"
+
 
 namespace Root
 {
@@ -12,6 +14,8 @@ namespace Root
         std::vector<std::shared_ptr<Script>> scripts;
 
         Shader* spriteRenderShader;
+
+        Camera* activeCamera{ nullptr };
 
         void initialiseGLFW()
         {
@@ -210,10 +214,22 @@ namespace Root
     {
         transforms.push_back(transform);
     }
+
+    void setActiveCamera(Camera* camera)
+    {
+        activeCamera = camera;
+    }
+
+    Camera* getActiveCamera()
+    {
+        return activeCamera;
+    }
+
     unsigned int getScreenWidth()
     {
         return WINDOW_SIZE_X;
     }
+
     unsigned int getScreenHeight()
     {
         return WINDOW_SIZE_Y;

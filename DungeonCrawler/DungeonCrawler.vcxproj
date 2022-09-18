@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\Root\rendering\Camera.h" />
     <ClInclude Include="include\Root\Component.h" />
     <ClInclude Include="include\GLFW\glfw3.h" />
     <ClInclude Include="include\GLFW\glfw3native.h" />
@@ -171,12 +172,14 @@
     <ClInclude Include="include\Root\Script.h" />
     <ClInclude Include="include\Root\Transform.h" />
     <ClInclude Include="include\Root\Time.h" />
+    <ClInclude Include="RootEngine.h" />
     <ClInclude Include="src\ScriptLoader.h" />
     <ClInclude Include="src\scripts\MyComponentScript.h" />
     <ClInclude Include="src\scripts\MyScript.h" />
     <ClInclude Include="include\stbi_utility\TextureData.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\Root\rendering\Camera.cpp" />
     <ClCompile Include="include\Root\Component.cpp" />
     <ClCompile Include="include\imgui\imgui.cpp" />
     <ClCompile Include="include\imgui\imgui_demo.cpp" />
@@ -201,6 +204,7 @@
     <ClCompile Include="include\simpleprofiler\Profiler.cpp" />
     <ClCompile Include="include\simpletext\SimpleText.cpp" />
     <ClCompile Include="include\Root\Script.cpp" />
+    <ClCompile Include="RootEngine.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="include\Root\Transform.cpp" />

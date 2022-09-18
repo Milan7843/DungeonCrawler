@@ -117,6 +117,12 @@
     <ClInclude Include="include\stbi_utility\TextureData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Root\rendering\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RootEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\imgui\imgui.cpp">
@@ -210,6 +216,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="include\stbi_utility\TextureData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Root\rendering\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RootEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
