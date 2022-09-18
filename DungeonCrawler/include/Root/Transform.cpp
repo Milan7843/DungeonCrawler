@@ -20,11 +20,15 @@ std::vector<std::shared_ptr<Component>>& Transform::getComponents()
 glm::mat4& Transform::getModelMatrix()
 {
 	glm::mat4 model{ glm::mat4(1.0f) };
-	/*
+	
 	model = glm::translate(model, glm::vec3(position.x, position.y, 0.0f));
+
+	model = glm::translate(model, glm::vec3(0.5f * scale.x, 0.5f * scale.y, 0.0f));
 	model = glm::rotate(model, rotation, glm::vec3(0, 0, 1));
+	model = glm::translate(model, glm::vec3(-0.5f * scale.x, -0.5f * scale.y, 0.0f));
+
 	model = glm::scale(model, glm::vec3(scale.x, scale.y, 1.0f));
-	*/
+	
 	return model;
 }
 

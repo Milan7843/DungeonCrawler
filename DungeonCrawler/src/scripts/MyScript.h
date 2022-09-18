@@ -10,6 +10,7 @@
 #include <Root/Logger.h>
 #include <Root/Transform.h>
 #include <Root/rendering/SpriteRenderer.h>
+#include <Root/Input.h>
 
 class MyScript : public Script
 {
@@ -22,4 +23,5 @@ public:
 	void update() override;
 
 private:
+	std::shared_ptr<Transform> transform;
 };

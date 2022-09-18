@@ -58,12 +58,13 @@ public:
 
 	void addComponent(std::shared_ptr<Component> component);
 
-private:
-
-	std::vector<std::shared_ptr<Component>> components;
-
+	// Public variables
 	glm::vec2 position;
 	float rotation;
 	glm::vec2 scale;
+
+private:
+
+	std::vector<std::shared_ptr<Component>> components;
 
 };

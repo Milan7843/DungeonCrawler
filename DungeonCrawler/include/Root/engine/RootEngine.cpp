@@ -16,6 +16,7 @@ namespace RootEngine
         Shader* spriteRenderShader;
 
         Camera* activeCamera{ nullptr };
+        GLFWwindow* window{ nullptr };
 
         void initialiseGLFW()
         {
@@ -113,7 +114,7 @@ namespace RootEngine
         initialiseGLFW();
 
         // Making a GLFW window
-        GLFWwindow* window = glfwCreateWindow(WINDOW_SIZE_X, WINDOW_SIZE_Y, "OpenGL", NULL, NULL);
+        window = glfwCreateWindow(WINDOW_SIZE_X, WINDOW_SIZE_Y, "OpenGL", NULL, NULL);
         if (window == NULL)
         {
             Logger::logError("Failed to create GLFW window");
@@ -143,6 +144,8 @@ namespace RootEngine
 
         Renderer::initialise();
 
+        InputEngine::initialise();
+
         unsigned int frame = 0;
 
         SimpleText simpleText("src/fonts/arial.ttf");
@@ -154,6 +157,9 @@ namespace RootEngine
         while (!glfwWindowShouldClose(window))
         {
             Profiler::addCheckpoint("Start of frame");
+
+            // Updating the input engine
+            InputEngine::update();
 
             // Getting viewport size
             glfwGetWindowSize(window, (int*)&WINDOW_SIZE_X, (int*)&WINDOW_SIZE_Y);
@@ -177,6 +183,8 @@ namespace RootEngine
 
             // Calling all component render() functions
             renderComponents();
+
+            InputEngine::newFrame();
 
             Profiler::addCheckpoint("End of frame");
 
@@ -223,6 +231,11 @@ namespace RootEngine
     Camera* getActiveCamera()
     {
         return activeCamera;
+    }
+
+    GLFWwindow* getActiveWindow()
+    {
+        return window;
     }
 
     unsigned int getScreenWidth()

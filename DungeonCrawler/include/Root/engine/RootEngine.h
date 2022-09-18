@@ -2,6 +2,8 @@
 
 #include "Root/Transform.h"
 #include "Root/Script.h"
+
+#include "Root/engine/InputEngine.h"
 #include "Root/shaders/Shader.h"
 
 #include "Root/Time.h"
@@ -89,6 +91,12 @@ namespace RootEngine
 	 */
 	Camera* getActiveCamera();
 
+	/**
+	 * Get a pointer to the window that is currently actively being rendered to.
+	 * 
+	 * \returns a pointer to the active GLFWwindow.
+	 */
+	GLFWwindow* getActiveWindow();
 
 	/**
 	 * Get the current width of the screen.

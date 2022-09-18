@@ -12,7 +12,7 @@ MyScript::~MyScript()
 void MyScript::start()
 {
 	// Adding an object to the scene
-	std::shared_ptr<Transform> transform = std::shared_ptr<Transform>(new Transform());
+	transform = std::shared_ptr<Transform>(new Transform());
 
 	// Adding a script to this object
 	std::shared_ptr<MyComponentScript> myComponentScript = std::shared_ptr<MyComponentScript>(new MyComponentScript());
@@ -39,4 +39,18 @@ void MyScript::start()
 
 void MyScript::update()
 {
+
+	if (Input::getKeyPressed(KEY_A))
+	{
+		std::cout << "Key A pressed!" << std::endl;
+	}
+	if (Input::getKey(KEY_A))
+	{
+		std::cout << "Key A down!" << std::endl;
+		transform->position += glm::vec2(0.01f);
+	}
+	if (Input::getKeyReleased(KEY_A))
+	{
+		std::cout << "Key A released!" << std::endl;
+	}
 }

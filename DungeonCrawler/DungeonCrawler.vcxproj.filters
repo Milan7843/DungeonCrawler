@@ -123,6 +123,12 @@
     <ClInclude Include="include\Root\engine\RootEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Root\Input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Root\engine\InputEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\imgui\imgui.cpp">
@@ -222,6 +228,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="include\Root\engine\RootEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Root\Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Root\engine\InputEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -173,6 +173,8 @@
     <ClInclude Include="include\Root\Transform.h" />
     <ClInclude Include="include\Root\Time.h" />
     <ClInclude Include="include\Root\engine\RootEngine.h" />
+    <ClInclude Include="include\Root\Input.h" />
+    <ClInclude Include="include\Root\engine\InputEngine.h" />
     <ClInclude Include="src\ScriptLoader.h" />
     <ClInclude Include="src\scripts\MyComponentScript.h" />
     <ClInclude Include="src\scripts\MyScript.h" />
@@ -205,6 +207,8 @@
     <ClCompile Include="include\simpletext\SimpleText.cpp" />
     <ClCompile Include="include\Root\Script.cpp" />
     <ClCompile Include="include\Root\engine\RootEngine.cpp" />
+    <ClCompile Include="include\Root\Input.cpp" />
+    <ClCompile Include="include\Root\engine\InputEngine.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="include\Root\Transform.cpp" />
