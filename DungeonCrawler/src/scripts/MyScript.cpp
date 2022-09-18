@@ -39,18 +39,20 @@ void MyScript::start()
 
 void MyScript::update()
 {
-
-	if (Input::getKeyPressed(KEY_A))
+	if (Input::getKey(KEY_W))
 	{
-		std::cout << "Key A pressed!" << std::endl;
+		transform->position += glm::vec2(0.0f, 0.01f);
+	}
+	if (Input::getKey(KEY_S))
+	{
+		transform->position += glm::vec2(0.0f, -0.01f);
 	}
 	if (Input::getKey(KEY_A))
 	{
-		std::cout << "Key A down!" << std::endl;
-		transform->position += glm::vec2(0.01f);
+		transform->position += glm::vec2(-0.01f, 0.0f);
 	}
-	if (Input::getKeyReleased(KEY_A))
+	if (Input::getKey(KEY_D))
 	{
-		std::cout << "Key A released!" << std::endl;
+		transform->position += glm::vec2(0.01f, 0.0f);
 	}
 }
