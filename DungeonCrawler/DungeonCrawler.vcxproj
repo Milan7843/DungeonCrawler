@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Collider.h" />
     <ClInclude Include="include\box2d\b2_api.h" />
     <ClInclude Include="include\box2d\b2_block_allocator.h" />
     <ClInclude Include="include\box2d\b2_body.h" />
@@ -215,12 +216,16 @@
     <ClInclude Include="include\Root\engine\RootEngine.h" />
     <ClInclude Include="include\Root\Input.h" />
     <ClInclude Include="include\Root\engine\InputEngine.h" />
+    <ClInclude Include="include\Root\Physics.h" />
+    <ClInclude Include="include\Root\engine\PhysicsEngine.h" />
+    <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="src\ScriptLoader.h" />
     <ClInclude Include="src\scripts\MyComponentScript.h" />
     <ClInclude Include="src\scripts\MyScript.h" />
     <ClInclude Include="include\stbi_utility\TextureData.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="include\Root\rendering\Camera.cpp" />
     <ClCompile Include="include\Root\Component.cpp" />
     <ClCompile Include="include\imgui\imgui.cpp" />
@@ -249,6 +254,9 @@
     <ClCompile Include="include\Root\engine\RootEngine.cpp" />
     <ClCompile Include="include\Root\Input.cpp" />
     <ClCompile Include="include\Root\engine\InputEngine.cpp" />
+    <ClCompile Include="include\Root\Physics.cpp" />
+    <ClCompile Include="include\Root\engine\PhysicsEngine.cpp" />
+    <ClCompile Include="Rigidbody.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="include\Root\Transform.cpp" />
