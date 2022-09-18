@@ -8,6 +8,8 @@
 #include <glm/gtx/transform.hpp>
 
 #include <vector>
+#include <typeinfo>
+#include <typeindex>
 
 /**
  * Class which holds values for a 2D transformation.
@@ -46,6 +48,13 @@ public:
 	 * \return 
 	 */
 	glm::mat4& getModelMatrix();
+
+	/**
+	 * Get a component on this transform by type.
+	 * 
+	 * \returns the first components on this transform with the given type.
+	 */
+	std::shared_ptr<Component> getComponentOfType(const std::type_info& type);
 
 	void addComponent(std::shared_ptr<Component> component);
 

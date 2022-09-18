@@ -28,6 +28,18 @@ glm::mat4& Transform::getModelMatrix()
 	return model;
 }
 
+std::shared_ptr<Component> Transform::getComponentOfType(const std::type_info& type)
+{
+	for (std::shared_ptr<Component>& component : components)
+	{
+		if (typeid(*component) == type)
+		{
+			return components[0];
+		}
+	}
+	return NULL;
+}
+
 void Transform::addComponent(std::shared_ptr<Component> component)
 {
 	components.push_back(component);
