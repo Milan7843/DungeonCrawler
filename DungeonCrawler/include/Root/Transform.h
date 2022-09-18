@@ -47,7 +47,7 @@ public:
 	 * 
 	 * \return 
 	 */
-	glm::mat4& getModelMatrix();
+	glm::mat4 getModelMatrix();
 
 	/**
 	 * Get a component on this transform by type.
