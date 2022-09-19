@@ -12,6 +12,8 @@
 #include <typeinfo>
 #include <typeindex>
 
+#define TransformPointer std::shared_ptr<Transform>
+
 /**
  * Class which holds values for a 2D transformation.
  */
@@ -35,6 +37,15 @@ public:
 	 * Destructor for the Transform class.
 	 */
 	~Transform();
+
+	/**
+	 * Set the parent transform of this transform.
+	 * Having a parent will make the child transform's data in local space.
+	 *
+	 * \param parent: a shared_ptr to the transform that will be the parent.
+	 * If this is NULL, the transform will have no parent
+	 */
+	void setParent(std::shared_ptr<Transform> parent);
 
 	/**
 	 * Get all components attached to this transform.
@@ -80,4 +91,5 @@ private:
 
 	std::vector<std::shared_ptr<Component>> components;
 
+	std::shared_ptr<Transform> parent = NULL;
 };

@@ -1,5 +1,7 @@
 #pragma once
 
+#define ComponentPointer std::shared_ptr<Component>
+
 class Transform;
 
 /**

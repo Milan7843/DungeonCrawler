@@ -9,6 +9,10 @@ class Animator : public Component
 {
 public:
 
+	/**
+	 * Create a new Animator component.
+	 * Requires a SpriteRenderer component.
+	 */
 	Animator();
 	~Animator();
 

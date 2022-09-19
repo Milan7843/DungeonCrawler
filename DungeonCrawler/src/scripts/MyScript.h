@@ -23,5 +23,5 @@ public:
 	void update() override;
 
 private:
-	std::shared_ptr<Transform> transform;
+	TransformPointer transform;
 };

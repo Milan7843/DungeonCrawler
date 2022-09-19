@@ -12,6 +12,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#define SpriteRendererPointer std::shared_ptr<SpriteRenderer>
+
 /**
  * Component for rendering sprites.
  */
@@ -19,8 +21,16 @@ class SpriteRenderer : public Component
 {
 public:
 
+	/**
+	 * Create a new sprite renderer.
+	 */
 	SpriteRenderer();
 	~SpriteRenderer();
+
+	/**
+	 * Create a new sprite renderer.
+	 */
+	static std::shared_ptr<SpriteRenderer> create();
 
 	void render() override;
 

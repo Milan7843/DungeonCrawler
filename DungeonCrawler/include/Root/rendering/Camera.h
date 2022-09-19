@@ -7,6 +7,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 
+#define CameraPointer std::shared_ptr<Camera>
+
 /**
  * Class that holds information about a camera in a component form.
  */

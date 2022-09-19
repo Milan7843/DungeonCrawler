@@ -8,6 +8,14 @@ SpriteRenderer::~SpriteRenderer()
 {
 }
 
+std::shared_ptr<SpriteRenderer> SpriteRenderer::create()
+{
+	SpriteRenderer* spriteRenderer = new SpriteRenderer();
+	std::shared_ptr<SpriteRenderer> pointer{ spriteRenderer };
+	return pointer;
+}
+
+
 void SpriteRenderer::render()
 {
 	// Getting the shader
