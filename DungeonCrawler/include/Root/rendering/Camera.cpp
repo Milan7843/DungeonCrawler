@@ -34,3 +34,10 @@ void Camera::setAsActiveCamera()
 {
 	RootEngine::setActiveCamera(this);
 }
+
+std::shared_ptr<Camera> Camera::create(float cameraHeight)
+{
+	Camera* transform = new Camera(cameraHeight);
+	std::shared_ptr<Camera> pointer{ transform };
+	return pointer;
+}

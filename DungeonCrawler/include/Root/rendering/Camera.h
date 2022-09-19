@@ -19,8 +19,6 @@ public:
 	 * Will automatically set the active camera to this if no camera was active.
 	 *
 	 * \param cameraHeight: the height of the camera [optional: default = 2]
-	 * \param position: the world position of this camera [optional: default = (0, 0)]
-	 * \param rotation: the rotation of this camera [optional: default = 0]
 	 */
 	Camera(float cameraHeight = 2.0f); // Initialize cameraHeight to 2.0
 
@@ -37,6 +35,14 @@ public:
 	 * Set this camera as the current active one used for rendering.
 	 */
 	void setAsActiveCamera();
+
+	/**
+	 * Create a new Camera.
+	 * Will automatically set the active camera to this if no camera was active.
+	 *
+	 * \param cameraHeight: the height of the camera [optional: default = 2]
+	 */
+	static std::shared_ptr<Camera> create(float cameraHeight = 2.0f);
 
 private:
 

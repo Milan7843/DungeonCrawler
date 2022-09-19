@@ -30,7 +30,7 @@ void MyScript::start()
 
 	// Adding a camera to the scene
 	std::shared_ptr<Transform> cameraTransform = Transform::create();
-	std::shared_ptr<Camera> camera = std::shared_ptr<Camera>(new Camera(4.0f));
+	std::shared_ptr<Camera> camera = Camera::create(4.0f);
 	cameraTransform->addComponent(camera);
 
 	// Adding the created camera to the scene

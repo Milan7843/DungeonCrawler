@@ -4,14 +4,17 @@ namespace PhysicsEngine
 	namespace
 	{
 		float gravity{};
+
+		// Initialise the world without gravity
+		b2World world{ b2World(b2Vec2(0.0f, 0.0f)) };
 	}
 
 	void initialise()
 	{
-		// No gravity
-		b2Vec2 gravity(0.0f, 0.0f);
+	}
 
-		// Initialising the world
-		b2World world = b2World(gravity);
+	void setGravity(float x, float y)
+	{
+		world.SetGravity(b2Vec2(x, y));
 	}
 };

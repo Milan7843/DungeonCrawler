@@ -5,6 +5,8 @@
 namespace PhysicsEngine
 {
 	void initialise();
+
+	void setGravity(float x, float y);
 };
 
 
