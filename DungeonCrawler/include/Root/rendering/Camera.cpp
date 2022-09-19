@@ -17,6 +17,24 @@ Camera::~Camera()
 	Logger::destructorMessage("Camera destroyed");
 }
 
+std::shared_ptr<Camera> Camera::create(float cameraHeight)
+{
+	Camera* transform = new Camera(cameraHeight);
+	std::shared_ptr<Camera> pointer{ transform };
+	return pointer;
+}
+
+std::string Camera::toString()
+{
+	std::stringstream ss;
+
+	// Writing this object to the stream
+	ss << "[Camera]"
+		<< " > height: " << cameraHeight
+		<< std::endl;
+	return ss.str();
+}
+
 glm::mat4 Camera::getProjectionMatrix()
 {
 	float aspectRatio{ (float)RootEngine::getScreenWidth() / (float)RootEngine::getScreenHeight() };
@@ -35,22 +53,21 @@ void Camera::setAsActiveCamera()
 	RootEngine::setActiveCamera(this);
 }
 
-std::shared_ptr<Camera> Camera::create(float cameraHeight)
-{
-	Camera* transform = new Camera(cameraHeight);
-	std::shared_ptr<Camera> pointer{ transform };
-	return pointer;
-}
-
 glm::vec2 Camera::worldToScreenPosition(glm::vec2 worldPosition)
 {
+	if (this == nullptr)
+		return glm::vec2(0.0f);
+
 	return glm::vec2(
 		glm::vec4(worldPosition.x, worldPosition.y, 0.0f, 1.0f)
-		* RootEngine::getActiveCamera()->getProjectionMatrix());
+		* this->getProjectionMatrix());
 }
 
 glm::vec2 Camera::screenToWorldPosition(glm::vec2 screenPosition)
 {
+	if (this == nullptr)
+		return glm::vec2(0.0f);
+
 	// First converting screenPosition from [0, width], [0, height] to [-1, 1], [-1, 1]
 	screenPosition = glm::vec2(
 		(screenPosition.x / (float)RootEngine::getScreenWidth()) * 2.0f - 1.0f,

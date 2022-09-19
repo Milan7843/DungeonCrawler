@@ -2,6 +2,8 @@
 
 #define ComponentPointer std::shared_ptr<Component>
 
+#include <string>
+
 class Transform;
 
 /**
@@ -33,6 +35,13 @@ public:
 	 * \param transform: a pointer to the transform which this component belongs to.
 	 */
 	void setTransform(Transform* transform);
+
+	/**
+	 * Get a string representing this Component.
+	 *
+	 * \returns this Component in a human-readable format.
+	 */
+	virtual std::string toString() { return std::string{}; };
 
 protected:
 

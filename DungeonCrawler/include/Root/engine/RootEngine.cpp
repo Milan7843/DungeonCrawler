@@ -92,14 +92,16 @@ namespace RootEngine
 
         void renderComponents()
         {
+            // Don't render if there is no active camera
+            if (getActiveCamera() == nullptr)
+                return;
+
             // Calling all components' render() functions
             for (std::shared_ptr<Transform>& transform : transforms)
             {
-                // Calling render() on each component attached to this Transform
-                for (std::shared_ptr<Component>& component : transform->getComponents())
-                {
-                    component->render();
-                }
+                // Only render the root transforms
+                if (transform->getParent() == NULL)
+                    transform->render();
             }
 
             Profiler::addCheckpoint("Component rendering");
@@ -200,6 +202,8 @@ namespace RootEngine
             glfwPollEvents();
         }
 
+        terminateRoot();
+
         Logger::stop();
 
         glfwTerminate();
@@ -246,5 +250,20 @@ namespace RootEngine
     unsigned int getScreenHeight()
     {
         return WINDOW_SIZE_Y;
+    }
+
+    void terminateRoot()
+    {
+        // Removing all links between transforms
+        for (TransformPointer transform : transforms)
+        {
+            transform->setParent(NULL);
+            //transform->removeAllChildren();
+            
+            for (TransformPointer child : transform->getChildren())
+            {
+                transform->removeChild(child);
+            }
+        }
     }
 };

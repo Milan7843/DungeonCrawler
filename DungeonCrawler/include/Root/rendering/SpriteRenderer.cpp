@@ -15,6 +15,15 @@ std::shared_ptr<SpriteRenderer> SpriteRenderer::create()
 	return pointer;
 }
 
+std::string SpriteRenderer::toString()
+{
+	std::stringstream ss;
+
+	// Writing this object to the stream
+	ss << "[SpriteRenderer]"
+		<< std::endl;
+	return ss.str();
+}
 
 void SpriteRenderer::render()
 {

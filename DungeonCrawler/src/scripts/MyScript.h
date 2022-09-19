@@ -24,4 +24,5 @@ public:
 
 private:
 	TransformPointer transform;
+	TransformPointer weapon;
 };

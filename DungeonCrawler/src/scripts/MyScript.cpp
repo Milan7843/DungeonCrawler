@@ -23,29 +23,31 @@ void MyScript::start()
 	spriteRenderer->setSprite("src/sprites/cutie_cat.png");
 	transform->addComponent(spriteRenderer);
 
-
-	TransformPointer child = Transform::create();
+	
+	weapon = Transform::create();
 
 	// Adding a sprite renderer to the object
-	SpriteRendererPointer childSpriteRenderer = SpriteRenderer::create();
-	childSpriteRenderer->setSprite("src/sprites/cutie_cat.png");
-	child->addComponent(childSpriteRenderer);
-	child->position = glm::vec2(1.0f, 1.0f);
-	child->scale = glm::vec2(0.5f);
-	child->setParent(transform);
-
+	SpriteRendererPointer weaponSpriteRenderer = SpriteRenderer::create();
+	weaponSpriteRenderer->setSprite("src/sprites/weapon.png");
+	weapon->addComponent(weaponSpriteRenderer);
+	weapon->setParent(transform);
+	
 	// Adding a camera to the scene
 	TransformPointer cameraTransform = Transform::create();
 	CameraPointer camera = Camera::create(4.0f);
 	cameraTransform->addComponent(camera);
-
-	// Adding the created camera to the scene
-	Root::addTransform(cameraTransform);
+	
 }
 
 void MyScript::update()
 {
+	//weapon->rotation = weapon->lookAt(Input::getMouseWorldPosition());
+
 	if (Input::getKeyPressed(KEY_F)) {
+
+		std::cout << transform->toString() << std::endl;
+		std::cout << weapon->toString()<< std::endl;
+		/*
 		std::cout << "Mouse position: "
 			<< Input::getMousePosition().x << ", "
 			<< Input::getMousePosition().y << std::endl;
@@ -62,6 +64,7 @@ void MyScript::update()
 		std::cout << "World transform position: "
 			<< transform->position.x << ", "
 			<< transform->position.y << std::endl;
+		*/
 	}
 
 	if (Input::getKey(KEY_W))

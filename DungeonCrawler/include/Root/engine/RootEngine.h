@@ -106,5 +106,12 @@ namespace RootEngine
 	 * Get the current height of the screen.
 	 */
 	unsigned int getScreenHeight();
+
+	/**
+	 * Stop all Root processes and clean up memory for destruction.
+	 */
+	void terminateRoot();
 };
+
+
 

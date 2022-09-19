@@ -27,6 +27,21 @@ public:
 	~Camera();
 
 	/**
+	 * Create a new Camera.
+	 * Will automatically set the active camera to this if no camera was active.
+	 *
+	 * \param cameraHeight: the height of the camera [optional: default = 2]
+	 */
+	static std::shared_ptr<Camera> create(float cameraHeight = 2.0f);
+
+	/**
+	 * Get a string representing this Component.
+	 * 
+	 * \returns this Component in a human-readable format.
+	 */
+	std::string toString() override;
+
+	/**
 	 * Get the projection matrix which belongs to the values of this camera.
 	 * 
 	 * \return the projection matrix for this camera
@@ -37,14 +52,6 @@ public:
 	 * Set this camera as the current active one used for rendering.
 	 */
 	void setAsActiveCamera();
-
-	/**
-	 * Create a new Camera.
-	 * Will automatically set the active camera to this if no camera was active.
-	 *
-	 * \param cameraHeight: the height of the camera [optional: default = 2]
-	 */
-	static std::shared_ptr<Camera> create(float cameraHeight = 2.0f);
 
 
 	/**

@@ -32,6 +32,13 @@ public:
 	 */
 	static std::shared_ptr<SpriteRenderer> create();
 
+	/**
+	 * Get a string representing this Component.
+	 *
+	 * \returns this Component in a human-readable format.
+	 */
+	std::string toString() override;
+
 	void render() override;
 
 	/**

@@ -9,12 +9,111 @@ Transform::Transform(glm::vec2 position, float rotation, glm::vec2 scale)
 
 Transform::~Transform()
 {
+	std::cout << this->toString() << std::endl;
 	Logger::destructorMessage("Transform destroyed");
 }
 
-void Transform::setParent(std::shared_ptr<Transform> parent)
+std::shared_ptr<Transform> Transform::create(glm::vec2 position, float rotation, glm::vec2 scale)
 {
+	Transform* transform = new Transform();
+	std::shared_ptr<Transform> pointer{ transform };
+	Root::addTransform(pointer);
+	return pointer;
+}
+
+void Transform::render()
+{
+	// Calling render() on each component attached to this Transform
+	for (std::shared_ptr<Component>& component : getComponents())
+	{
+		component->render();
+	}
+}
+
+std::string Transform::toString()
+{
+	std::stringstream stream;
+	// Writing this object to the stream
+	stream << "[Transform]"
+		<< "\n > position: (" << position.x << ", " << position.y << ")"
+		<< "\n > rotation: " << rotation
+		<< "\n > scale: (" << scale.x << ", " << scale.y << ")"
+		<< "\n > components: ["
+		<< "\n";
+
+	for (ComponentPointer component : components)
+	{
+		stream << " >" << component->toString() << "\n";
+	}
+
+	stream << "\n > children: [\n";
+
+	for (TransformPointer child : children)
+	{
+		stream << " >" << child->toString() << "\n";
+	}
+
+	stream << "]" << std::endl;
+
+	return stream.str();
+}
+
+
+void Transform::setParent(std::shared_ptr<Transform> parent, bool alsoAddChild)
+{
+	// Check if the transform already had a parent, 
+	// and remove it as a child from that parent if it did
+	if (this->parent != NULL)
+		this->parent->removeChild(std::shared_ptr<Transform>(this));
+
+	// Setting new parent
 	this->parent = parent;
+
+	// Possibly adding child to new parent
+	if (alsoAddChild && parent != NULL)
+		parent->addChild(std::shared_ptr<Transform>(this), false);
+}
+
+std::shared_ptr<Transform> Transform::getParent()
+{
+	return parent;
+}
+
+void Transform::addChild(std::shared_ptr<Transform> child, bool alsoSetParent)
+{
+	children.push_back(child);
+	if (alsoSetParent)
+		child->setParent(std::shared_ptr<Transform>(this), false);
+}
+
+bool Transform::removeChild(std::shared_ptr<Transform> childToRemove)
+{
+	for (unsigned int i{ 0 }; i < children.size(); i++)
+	{
+		// Comparing each current child to find one that matches
+		if (children[i] == childToRemove)
+		{
+			// If it does, unset its parent reference,
+			children[i]->parent = NULL;
+
+			// remove it,
+			children.erase(children.begin() + i);
+
+			// and return true
+			return true;
+		}
+	}
+	return false;
+}
+
+void Transform::removeAllChildren()
+{
+	children.clear();
+}
+
+std::vector<std::shared_ptr<Transform>>& Transform::getChildren()
+{
+	return children;
 }
 
 std::vector<std::shared_ptr<Component>>& Transform::getComponents()
@@ -59,10 +158,16 @@ void Transform::addComponent(std::shared_ptr<Component> component)
 	component->setTransform(this);
 }
 
-std::shared_ptr<Transform> Transform::create(glm::vec2 position, float rotation, glm::vec2 scale)
+float Transform::lookAt(glm::vec2 point)
 {
-	Transform* transform = new Transform();
-	std::shared_ptr<Transform> pointer{ transform };
-	Root::addTransform(pointer);
-	return pointer;
+	if (this == nullptr)
+		Logger::logError("Transform is NULL. Check if it gets initialized.");
+
+	glm::vec2 offset{ point - position };
+
+	// Both zero are invalid atan2 inputs
+	if (offset.x == 0.0f && offset.y == 0.0f)
+		return 0.0f;
+
+	return glm::degrees(glm::atan(offset.y, offset.x));
 }
