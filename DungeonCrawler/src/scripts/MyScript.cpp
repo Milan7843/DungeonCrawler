@@ -33,11 +33,6 @@ void MyScript::start()
 	child->position = glm::vec2(1.0f, 1.0f);
 	child->scale = glm::vec2(0.5f);
 	child->setParent(transform);
-	
-
-	// Adding the created object to the scene
-	//Root::addTransform(transform);
-
 
 	// Adding a camera to the scene
 	TransformPointer cameraTransform = Transform::create();
@@ -50,6 +45,25 @@ void MyScript::start()
 
 void MyScript::update()
 {
+	if (Input::getKeyPressed(KEY_F)) {
+		std::cout << "Mouse position: "
+			<< Input::getMousePosition().x << ", "
+			<< Input::getMousePosition().y << std::endl;
+
+
+		std::cout << "Mouse delta: "
+			<< Input::getMouseDelta().x << ", "
+			<< Input::getMouseDelta().y << std::endl;
+
+		std::cout << "World mouse position: "
+			<< Input::getMouseWorldPosition().x << ", "
+			<< Input::getMouseWorldPosition().y << std::endl;
+
+		std::cout << "World transform position: "
+			<< transform->position.x << ", "
+			<< transform->position.y << std::endl;
+	}
+
 	if (Input::getKey(KEY_W))
 	{
 		transform->position += glm::vec2(0.0f, 1.0f) * Time::getDeltaTime();

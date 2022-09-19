@@ -8,6 +8,8 @@ namespace InputEngine
 	{
 		std::vector<int> keysDownThisFrame;
 		std::vector<int> keysDownLastFrame;
+		glm::vec2 mousePosition;
+		glm::vec2 deltaMousePosition;
 
 		const int ALL_KEYS[] {
 			KEY_SPACE,
@@ -158,6 +160,9 @@ namespace InputEngine
 			if (glfwGetKey(RootEngine::getActiveWindow(), key) == GLFW_PRESS)
 				keysDownThisFrame.push_back(key);
 		}
+		double mouseX, mouseY;
+		glfwGetCursorPos(RootEngine::getActiveWindow(), &mouseX, &mouseY);
+		mousePosition = glm::vec2(mouseX, mouseY);
 	}
 
 	void newFrame()
@@ -181,5 +186,21 @@ namespace InputEngine
 	{
 		// Key must not be pressed now but last frame
 		return !find(keysDownThisFrame, key) && find(keysDownLastFrame, key);
+	}
+
+	glm::vec2 getMousePosition()
+	{
+		return mousePosition;
+	}
+
+	glm::vec2 getMouseDelta()
+	{
+		return deltaMousePosition;
+	}
+
+	glm::vec2 getMouseWorldPosition()
+	{
+		glm::vec2 screenPos = mousePosition;
+		return RootEngine::getActiveCamera()->screenToWorldPosition(screenPos);
 	}
 };

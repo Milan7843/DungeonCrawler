@@ -41,3 +41,29 @@ std::shared_ptr<Camera> Camera::create(float cameraHeight)
 	std::shared_ptr<Camera> pointer{ transform };
 	return pointer;
 }
+
+glm::vec2 Camera::worldToScreenPosition(glm::vec2 worldPosition)
+{
+	return glm::vec2(
+		glm::vec4(worldPosition.x, worldPosition.y, 0.0f, 1.0f)
+		* RootEngine::getActiveCamera()->getProjectionMatrix());
+}
+
+glm::vec2 Camera::screenToWorldPosition(glm::vec2 screenPosition)
+{
+	// First converting screenPosition from [0, width], [0, height] to [-1, 1], [-1, 1]
+	screenPosition = glm::vec2(
+		(screenPosition.x / (float)RootEngine::getScreenWidth()) * 2.0f - 1.0f,
+		(screenPosition.y / (float)RootEngine::getScreenHeight()) * 2.0f - 1.0f
+	);
+
+	// Invering vertically
+	screenPosition.y *= -1;
+
+	// Then convering to world position
+	float aspectRatio{ (float)RootEngine::getScreenWidth() / (float)RootEngine::getScreenHeight() };
+	screenPosition.x *= aspectRatio;
+	glm::vec2 worldPosition = screenPosition * (cameraHeight / 2.0f);
+
+	return worldPosition;
+}

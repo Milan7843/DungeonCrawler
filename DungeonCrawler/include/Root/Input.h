@@ -1,4 +1,7 @@
 #pragma once
+
+#include <glm/glm.hpp>
+
 /* The unknown key */
 #define KEY_UNKNOWN				GLFW_KEY_UNKNOWN
 
@@ -155,5 +158,26 @@ namespace Input
 	 * \return whether the key is released.
 	 */
 	bool getKeyReleased(int key);
+
+	/**
+	 * Get the current location of the mouse.
+	 *
+	 * \return the location of the mouse.
+	 */
+	glm::vec2 getMousePosition();
+
+	/**
+	 * Get the change in the mouse position since last frame.
+	 *
+	 * \return the change in the mouse position since last frame.
+	 */
+	glm::vec2 getMouseDelta();
+
+	/**
+	 * Get the current location of the mouse relative to the world.
+	 *
+	 * \return the world location of the mouse.
+	 */
+	glm::vec2 getMouseWorldPosition();
 };
 

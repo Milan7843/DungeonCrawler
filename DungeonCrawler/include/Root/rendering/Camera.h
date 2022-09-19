@@ -46,6 +46,23 @@ public:
 	 */
 	static std::shared_ptr<Camera> create(float cameraHeight = 2.0f);
 
+
+	/**
+	 * Get the screen position corresponding to the given world position.
+	 *
+	 * \param worldPosition: the world position to convert to screen space.
+	 * \returns the screen position corresponding to the given world position.
+	 */
+	glm::vec2 worldToScreenPosition(glm::vec2 worldPosition);
+
+	/**
+	 * Get the world position corresponding to the given screen position.
+	 *
+	 * \param screenPosition: the screen position to convert to world space.
+	 * \returns the world position corresponding to the given screen position.
+	 */
+	glm::vec2 screenToWorldPosition(glm::vec2 screenPosition);
+
 private:
 
 	float cameraHeight;

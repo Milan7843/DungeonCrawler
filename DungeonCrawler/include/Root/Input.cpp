@@ -17,4 +17,19 @@ namespace Input
 	{
 		return InputEngine::getKeyReleased(key);
 	}
+
+	glm::vec2 getMousePosition()
+	{
+		return InputEngine::getMousePosition();
+	}
+
+	glm::vec2 getMouseDelta()
+	{
+		return InputEngine::getMouseDelta();
+	}
+
+	glm::vec2 getMouseWorldPosition()
+	{
+		return InputEngine::getMouseWorldPosition();
+	}
 };
