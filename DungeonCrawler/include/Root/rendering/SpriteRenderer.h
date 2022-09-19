@@ -5,6 +5,7 @@
 #include "Root/Component.h" // Base class
 #include "Root/shaders/Shader.h"
 #include "Root/rendering/Renderer.h"
+#include "Root/rendering/Camera.h"
 
 #include <stbi_utility/TextureData.h>
 

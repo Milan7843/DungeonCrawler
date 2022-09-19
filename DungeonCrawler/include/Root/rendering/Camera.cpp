@@ -22,7 +22,12 @@ glm::mat4 Camera::getProjectionMatrix()
 	float aspectRatio{ (float)RootEngine::getScreenWidth() / (float)RootEngine::getScreenHeight() };
 	// The projection matrix maps [-aspectRatio, aspectRatio] to [-1, 1] horizontally,
 	// and [-1, 1] to [-1, 1] vertically
-	return glm::ortho(-aspectRatio, aspectRatio, -1.0f, 1.0f, -1.0f, 1.0f);
+	return glm::ortho(
+		-aspectRatio * (cameraHeight / 2.0f), 
+		aspectRatio * (cameraHeight / 2.0f),
+		-1.0f * (cameraHeight / 2.0f), 
+		1.0f * (cameraHeight / 2.0f), 
+		-1.0f, 1.0f);
 }
 
 void Camera::setAsActiveCamera()

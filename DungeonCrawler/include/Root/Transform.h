@@ -1,8 +1,9 @@
 #pragma once
 
-#include "Component.h"
+#include "Root/Component.h"
 
-#include "Logger.h"
+#include "Root/Logger.h"
+#include "Root/Root.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
@@ -19,7 +20,7 @@ class Transform
 public:
 
 	/**
-	 * Create a new Transform.
+	 * Create a new Transform. Will NOT automatically add this transform to the current scene.
 	 * 
 	 * \param position: the world position of this transform [optional: default = (0, 0)]
 	 * \param rotation: the rotation of this transform [optional: default = 0]
@@ -62,6 +63,18 @@ public:
 	glm::vec2 position;
 	float rotation;
 	glm::vec2 scale;
+
+	/**
+	 * Create a new Transform. Will automatically add this transform to the current scene.
+	 *
+	 * \param position: the world position of this transform [optional: default = (0, 0)]
+	 * \param rotation: the rotation of this transform [optional: default = 0]
+	 * \param scale: the scale of this transform [optional: default = (1, 1)]
+	 */
+	static std::shared_ptr<Transform> create(
+		glm::vec2 position = glm::vec2(0.0f), // Initialize position to (0, 0)
+		float rotation = 0.0f, // Initialize rotation to no rotation
+		glm::vec2 scale = glm::vec2(1.0f)); // Initialize scale to no scaling
 
 private:
 

@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\Root\Animator.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="include\box2d\b2_api.h" />
     <ClInclude Include="include\box2d\b2_block_allocator.h" />
@@ -225,6 +226,7 @@
     <ClInclude Include="include\stbi_utility\TextureData.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\Root\Animator.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="include\Root\rendering\Camera.cpp" />
     <ClCompile Include="include\Root\Component.cpp" />

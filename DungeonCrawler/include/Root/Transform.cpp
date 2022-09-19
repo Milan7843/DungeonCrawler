@@ -49,3 +49,11 @@ void Transform::addComponent(std::shared_ptr<Component> component)
 	components.push_back(component);
 	component->setTransform(this);
 }
+
+std::shared_ptr<Transform> Transform::create(glm::vec2 position, float rotation, glm::vec2 scale)
+{
+	Transform* transform = new Transform();
+	std::shared_ptr<Transform> pointer{ transform };
+	Root::addTransform(pointer);
+	return pointer;
+}

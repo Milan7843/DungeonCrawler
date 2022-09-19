@@ -12,7 +12,7 @@ MyScript::~MyScript()
 void MyScript::start()
 {
 	// Adding an object to the scene
-	transform = std::shared_ptr<Transform>(new Transform());
+	transform = Transform::create();// std::shared_ptr<Transform>(new Transform());
 
 	// Adding a script to this object
 	std::shared_ptr<MyComponentScript> myComponentScript = std::shared_ptr<MyComponentScript>(new MyComponentScript());
@@ -25,12 +25,12 @@ void MyScript::start()
 	
 
 	// Adding the created object to the scene
-	Root::addTransform(transform);
+	//Root::addTransform(transform);
 
 
 	// Adding a camera to the scene
-	std::shared_ptr<Transform> cameraTransform = std::shared_ptr<Transform>(new Transform());
-	std::shared_ptr<Camera> camera = std::shared_ptr<Camera>(new Camera());
+	std::shared_ptr<Transform> cameraTransform = Transform::create();
+	std::shared_ptr<Camera> camera = std::shared_ptr<Camera>(new Camera(4.0f));
 	cameraTransform->addComponent(camera);
 
 	// Adding the created camera to the scene
@@ -41,18 +41,18 @@ void MyScript::update()
 {
 	if (Input::getKey(KEY_W))
 	{
-		transform->position += glm::vec2(0.0f, 0.01f);
+		transform->position += glm::vec2(0.0f, 1.0f) * Time::getDeltaTime();
 	}
 	if (Input::getKey(KEY_S))
 	{
-		transform->position += glm::vec2(0.0f, -0.01f);
+		transform->position += glm::vec2(0.0f, -1.0f) * Time::getDeltaTime();
 	}
 	if (Input::getKey(KEY_A))
 	{
-		transform->position += glm::vec2(-0.01f, 0.0f);
+		transform->position += glm::vec2(-1.0f, 0.0f) * Time::getDeltaTime();
 	}
 	if (Input::getKey(KEY_D))
 	{
-		transform->position += glm::vec2(0.01f, 0.0f);
+		transform->position += glm::vec2(1.0f, 0.0f) * Time::getDeltaTime();
 	}
 }

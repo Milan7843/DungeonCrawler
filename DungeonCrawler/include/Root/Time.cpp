@@ -11,7 +11,27 @@ namespace Time
 
 	void update(float newTime)
 	{
-		deltaTime = newTime - time;
+		deltaTime = (newTime - time) * timeScale;
 		time = newTime;
+	}
+
+	float getTime()
+	{
+		return time;
+	}
+
+	float getDeltaTime()
+	{
+		return deltaTime;
+	}
+
+	void setTimeScale(float newTimeScale)
+	{
+		timeScale = newTimeScale;
+	}
+
+	float getTimeScale()
+	{
+		return timeScale;
 	}
 }

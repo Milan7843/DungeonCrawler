@@ -4,8 +4,6 @@ namespace PhysicsEngine
 	namespace
 	{
 		float gravity{};
-
-		b2World world;
 	}
 
 	void initialise()
@@ -14,6 +12,6 @@ namespace PhysicsEngine
 		b2Vec2 gravity(0.0f, 0.0f);
 
 		// Initialising the world
-		world = b2World(gravity);
+		b2World world = b2World(gravity);
 	}
 };

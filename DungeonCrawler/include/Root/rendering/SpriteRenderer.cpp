@@ -17,10 +17,7 @@ void SpriteRenderer::render()
 	spriteRenderShader->use();
 	spriteRenderShader->setMat4("model", transform->getModelMatrix());
 
-	float aspectRatio{ (float)Root::getScreenWidth() / (float)Root::getScreenHeight() };
-	// The projection matrix maps [-aspectRatio, aspectRatio] to [-1, 1] horizontally,
-	// and [-1, 1] to [-1, 1] vertically
-	spriteRenderShader->setMat4("projection", glm::ortho(-aspectRatio, aspectRatio, -1.0f, 1.0f, -1.0f, 1.0f));
+	spriteRenderShader->setMat4("projection", Root::getActiveCamera()->getProjectionMatrix());
 	spriteRenderShader->setInt("sprite", 0);
 
 	// Binding the sprite
