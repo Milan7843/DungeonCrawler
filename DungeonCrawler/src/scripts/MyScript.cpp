@@ -33,10 +33,11 @@ void MyScript::start()
 	weapon->setParent(transform);
 	
 	// Adding a camera to the scene
+	/*
 	TransformPointer cameraTransform = Transform::create();
 	CameraPointer camera = Camera::create(4.0f);
 	cameraTransform->addComponent(camera);
-	
+	*/
 }
 
 void MyScript::update()

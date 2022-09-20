@@ -258,12 +258,7 @@ namespace RootEngine
         for (TransformPointer transform : transforms)
         {
             transform->setParent(NULL);
-            //transform->removeAllChildren();
-            
-            for (TransformPointer child : transform->getChildren())
-            {
-                transform->removeChild(child);
-            }
+            transform->removeAllChildren();
         }
     }
 };

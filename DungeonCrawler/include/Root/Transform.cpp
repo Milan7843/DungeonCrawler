@@ -18,6 +18,7 @@ std::shared_ptr<Transform> Transform::create(glm::vec2 position, float rotation,
 	Transform* transform = new Transform();
 	std::shared_ptr<Transform> pointer{ transform };
 	Root::addTransform(pointer);
+	transform->self = pointer;
 	return pointer;
 }
 
@@ -64,14 +65,14 @@ void Transform::setParent(std::shared_ptr<Transform> parent, bool alsoAddChild)
 	// Check if the transform already had a parent, 
 	// and remove it as a child from that parent if it did
 	if (this->parent != NULL)
-		this->parent->removeChild(std::shared_ptr<Transform>(this));
+		this->parent->removeChild(this->self);
 
 	// Setting new parent
 	this->parent = parent;
 
 	// Possibly adding child to new parent
 	if (alsoAddChild && parent != NULL)
-		parent->addChild(std::shared_ptr<Transform>(this), false);
+		parent->addChild(this->self, false);
 }
 
 std::shared_ptr<Transform> Transform::getParent()
@@ -99,7 +100,7 @@ bool Transform::removeChild(std::shared_ptr<Transform> childToRemove)
 			// remove it,
 			children.erase(children.begin() + i);
 
-			// and return true
+			// and return true to indicate a child was removed
 			return true;
 		}
 	}

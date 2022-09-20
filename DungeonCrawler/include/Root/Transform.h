@@ -167,4 +167,5 @@ private:
 
 	std::shared_ptr<Transform> parent = NULL;
 	std::vector<std::shared_ptr<Transform>> children;
+	std::shared_ptr<Transform> self;
 };
