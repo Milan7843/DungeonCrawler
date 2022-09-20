@@ -25,7 +25,7 @@ std::string SpriteRenderer::toString()
 	return ss.str();
 }
 
-void SpriteRenderer::render()
+void SpriteRenderer::render(float renderDepth)
 {
 	// Getting the shader
 	Shader* spriteRenderShader{ Root::getSpriteRenderShader() };
@@ -36,6 +36,7 @@ void SpriteRenderer::render()
 
 	spriteRenderShader->setMat4("projection", Root::getActiveCamera()->getProjectionMatrix());
 	spriteRenderShader->setInt("sprite", 0);
+	spriteRenderShader->setFloat("renderDepth", renderDepth / 10000.0f);
 
 	// Binding the sprite
 	glActiveTexture(GL_TEXTURE0);

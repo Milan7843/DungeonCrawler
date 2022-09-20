@@ -19,30 +19,29 @@ void MyScript::start()
 	transform->addComponent(myComponentScript);
 
 	// Adding a sprite renderer to the object
-	SpriteRendererPointer spriteRenderer = SpriteRenderer::create();
+	SpriteRendererPointer spriteRenderer = transform->addComponent<SpriteRenderer>();
 	spriteRenderer->setSprite("src/sprites/cutie_cat.png");
 	transform->addComponent(spriteRenderer);
+	transform->setRenderDepth(1.0f);
 
 	
 	weapon = Transform::create();
 
 	// Adding a sprite renderer to the object
-	SpriteRendererPointer weaponSpriteRenderer = SpriteRenderer::create();
+	SpriteRendererPointer weaponSpriteRenderer = weapon->addComponent<SpriteRenderer>();
 	weaponSpriteRenderer->setSprite("src/sprites/weapon.png");
-	weapon->addComponent(weaponSpriteRenderer);
 	weapon->setParent(transform);
+	//weapon->setRenderDepth(0.0f);
 	
 	// Adding a camera to the scene
-	/*
 	TransformPointer cameraTransform = Transform::create();
 	CameraPointer camera = Camera::create(4.0f);
 	cameraTransform->addComponent(camera);
-	*/
 }
 
 void MyScript::update()
 {
-	//weapon->rotation = weapon->lookAt(Input::getMouseWorldPosition());
+	weapon->rotation = weapon->lookAt(Input::getMouseWorldPosition());
 
 	if (Input::getKeyPressed(KEY_F)) {
 

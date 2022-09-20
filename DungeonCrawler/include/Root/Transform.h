@@ -22,18 +22,6 @@ class Transform
 public:
 
 	/**
-	 * Create a new Transform. Will NOT automatically add this transform to the current scene.
-	 * 
-	 * \param position: the world position of this transform [optional: default = (0, 0)]
-	 * \param rotation: the rotation of this transform [optional: default = 0]
-	 * \param scale: the scale of this transform [optional: default = (1, 1)]
-	 */
-	Transform(
-		glm::vec2 position = glm::vec2(0.0f), // Initialize position to (0, 0)
-		float rotation = 0.0f, // Initialize rotation to no rotation
-		glm::vec2 scale = glm::vec2(1.0f)); // Initialize scale to no scaling
-
-	/**
 	 * Destructor for the Transform class.
 	 */
 	~Transform();
@@ -44,17 +32,24 @@ public:
 	 * \param position: the world position of this transform [optional: default = (0, 0)]
 	 * \param rotation: the rotation of this transform [optional: default = 0]
 	 * \param scale: the scale of this transform [optional: default = (1, 1)]
+	 * \param renderDepth: the depth at which this transform will be rendered.
+	 * If this is not set or -1, the render depth of the parent will be used.
+	 * The render depth is a scale from 0 (closest) to 10000 (furthest).
 	 */
 	static std::shared_ptr<Transform> create(
 		glm::vec2 position = glm::vec2(0.0f), // Initialize position to (0, 0)
 		float rotation = 0.0f, // Initialize rotation to no rotation
-		glm::vec2 scale = glm::vec2(1.0f)); // Initialize scale to no scaling
+		glm::vec2 scale = glm::vec2(1.0f), // Initialize scale to no scaling
+		float renderDepth = 0.0f); // Initialize render depth to 0
 
 	/**
 	 * Render this Transform.
 	 * Should not be called by the user.
+	 * 
+	 * \param parentRenderDepth: render the depth of the parent of this transform.
+	 * \param renderDepthOffset: the offset on top of the render depth.
 	 */
-	void render();
+	void render(float parentRenderDepth = 0.0f, float renderDepthOffset = 0.0f);
 
 	/**
 	 * Get a string representing this Transform.
@@ -109,6 +104,23 @@ public:
 	void removeAllChildren();
 
 	/**
+	 * Set this transform's render depth.
+	 * The render depth is a scale from 0 (closest) to 10000 (furthest).
+	 * 
+	 * \param renderDepth: the new render depth.
+	 * If this is -1, this transform will use its parent's render depth.
+	 * If it additionally has no parent, it will use render depth 0 (front).
+	 */
+	void setRenderDepth(float renderDepth);
+
+	/**
+	 * Get this transform's render depth.
+	 * 
+	 * \returns this transform's render depth.
+	 */
+	float getRenderDepth();
+
+	/**
 	 * Get the children of this transform.
 	 *
 	 * \returns the children of this transform.
@@ -130,11 +142,29 @@ public:
 	glm::mat4 getModelMatrix();
 
 	/**
-	 * Get a component on this transform by type.
+	 * Get a matrix which correctly transforms points to local space.
+	 *
+	 * \returns the model matrix.
+	 */
+	glm::mat4 getFullModelMatrix();
+
+	/**
+	 * Get a component on this transform of type T.
 	 * 
 	 * \returns the first components on this transform with the given type.
 	 */
-	std::shared_ptr<Component> getComponentOfType(const std::type_info& type);
+	template <class T>
+	std::shared_ptr<Component> getComponent()
+	{
+		for (std::shared_ptr<Component>& component : components)
+		{
+			if (typeid(*component) == typeid(T))
+			{
+				return components[0];
+			}
+		}
+		return NULL;
+	}
 
 	/**
 	 * Add a component to this transform.
@@ -142,6 +172,18 @@ public:
 	 * \param component: the component to add to this transform.
 	 */
 	void addComponent(std::shared_ptr<Component> component);
+
+	/**
+	 * Add a component of type T to this transform.
+	 */
+	template <class T>
+	std::shared_ptr<T> addComponent()
+	{
+		static_assert(std::is_base_of<Component, T>::value, "Cannot add a non-component to a transform.");
+		std::shared_ptr<T> ptr = T::create();
+		addComponent(ptr);
+		return ptr;
+	}
 
 	/**
 	 * Get the angle required for this transform to look at a point.
@@ -162,6 +204,10 @@ public:
 	glm::vec2 scale;
 
 private:
+
+	float renderDepth{ -1.0f };
+
+	Transform(glm::vec2 position, float rotation, glm::vec2 scale, float renderDepth);
 
 	std::vector<std::shared_ptr<Component>> components;
 

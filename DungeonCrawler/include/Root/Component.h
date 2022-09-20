@@ -26,8 +26,10 @@ public:
 	/**
 	 * The render function of this component, gets called automatically every frame.
 	 * This function gets called after update().
+	 * 
+	 * \param renderDepth: the depth at which this component should be rendered.
 	 */
-	virtual void render() {}
+	virtual void render(float renderDepth) {}
 
 	/**
 	 * Set the point to the transform of this component.

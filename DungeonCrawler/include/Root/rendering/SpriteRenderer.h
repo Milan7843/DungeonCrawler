@@ -20,11 +20,6 @@
 class SpriteRenderer : public Component
 {
 public:
-
-	/**
-	 * Create a new sprite renderer.
-	 */
-	SpriteRenderer();
 	~SpriteRenderer();
 
 	/**
@@ -39,7 +34,7 @@ public:
 	 */
 	std::string toString() override;
 
-	void render() override;
+	void render(float renderDepth) override;
 
 	/**
 	 * Set the sprite used by this sprite renderer.
@@ -49,6 +44,8 @@ public:
 	void setSprite(const char* spritePath);
 
 private:
+
+	SpriteRenderer();
 
 	unsigned int textureID{ 0 };
 

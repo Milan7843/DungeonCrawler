@@ -45,7 +45,7 @@ glm::mat4 Camera::getProjectionMatrix()
 		aspectRatio * (cameraHeight / 2.0f),
 		-1.0f * (cameraHeight / 2.0f), 
 		1.0f * (cameraHeight / 2.0f), 
-		-1.0f, 1.0f);
+		-1.0f, 10000.0f);
 }
 
 void Camera::setAsActiveCamera()

@@ -1,9 +1,10 @@
 #include "Transform.h"
 
-Transform::Transform(glm::vec2 position, float rotation, glm::vec2 scale)
+Transform::Transform(glm::vec2 position, float rotation, glm::vec2 scale, float renderDepth)
 	: position(position)
 	, rotation(rotation)
 	, scale(scale)
+	, renderDepth(renderDepth)
 {
 }
 
@@ -13,21 +14,36 @@ Transform::~Transform()
 	Logger::destructorMessage("Transform destroyed");
 }
 
-std::shared_ptr<Transform> Transform::create(glm::vec2 position, float rotation, glm::vec2 scale)
+std::shared_ptr<Transform> Transform::create(glm::vec2 position, float rotation, glm::vec2 scale, float renderDepth)
 {
-	Transform* transform = new Transform();
+	Transform* transform = new Transform(position, rotation, scale, renderDepth);
 	std::shared_ptr<Transform> pointer{ transform };
 	Root::addTransform(pointer);
 	transform->self = pointer;
 	return pointer;
 }
 
-void Transform::render()
+void Transform::render(float parentRenderDepth, float renderDepthOffset)
 {
+	// Either use own renderdepth
+	float usedRenderDepth{ renderDepth };
+
+	// Or parent's
+	if (renderDepth == -1.0f)
+		usedRenderDepth = parentRenderDepth + renderDepthOffset;
+
+
 	// Calling render() on each component attached to this Transform
 	for (std::shared_ptr<Component>& component : getComponents())
 	{
-		component->render();
+		renderDepthOffset -= 0.001f;
+		component->render(usedRenderDepth + renderDepthOffset);
+	}
+	// Then rendering each child
+	for (std::shared_ptr<Transform>& child : children)
+	{
+		renderDepthOffset -= 0.001f;
+		child->render(usedRenderDepth, renderDepthOffset);
 	}
 }
 
@@ -112,6 +128,20 @@ void Transform::removeAllChildren()
 	children.clear();
 }
 
+void Transform::setRenderDepth(float renderDepth)
+{
+	if (renderDepth == -1.0f) {
+		this->renderDepth = renderDepth;
+		return;
+	}
+	this->renderDepth = glm::clamp(renderDepth, 0.0f, 10000.0f);
+}
+
+float Transform::getRenderDepth()
+{
+	return renderDepth;
+}
+
 std::vector<std::shared_ptr<Transform>>& Transform::getChildren()
 {
 	return children;
@@ -141,18 +171,6 @@ glm::mat4 Transform::getModelMatrix()
 	return model;
 }
 
-std::shared_ptr<Component> Transform::getComponentOfType(const std::type_info& type)
-{
-	for (std::shared_ptr<Component>& component : components)
-	{
-		if (typeid(*component) == type)
-		{
-			return components[0];
-		}
-	}
-	return NULL;
-}
-
 void Transform::addComponent(std::shared_ptr<Component> component)
 {
 	components.push_back(component);
@@ -164,7 +182,9 @@ float Transform::lookAt(glm::vec2 point)
 	if (this == nullptr)
 		Logger::logError("Transform is NULL. Check if it gets initialized.");
 
-	glm::vec2 offset{ point - position };
+	glm::vec2 offset{ point - this->position };
+
+	std::cout << this->position.x << ", " << this->position.y << std::endl;
 
 	// Both zero are invalid atan2 inputs
 	if (offset.x == 0.0f && offset.y == 0.0f)
