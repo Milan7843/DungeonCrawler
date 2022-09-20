@@ -192,3 +192,36 @@ float Transform::lookAt(glm::vec2 point)
 
 	return glm::degrees(glm::atan(offset.y, offset.x));
 }
+
+glm::vec2 Transform::getPosition()
+{
+	return position;
+}
+void Transform::setPosition(glm::vec2 position)
+{
+	this->position = position;
+	// Set updated flag
+	transformUpdated = true;
+}
+
+float Transform::getRotation()
+{
+	return rotation;
+}
+void Transform::setRotation(float rotation)
+{
+	this->rotation = rotation;
+	// Set updated flag
+	transformUpdated = true;
+}
+
+glm::vec2 Transform::getScale()
+{
+	return scale;
+}
+void Transform::setScale(glm::vec2 scale)
+{
+	this->scale = scale;
+	// Set updated flag
+	transformUpdated = true;
+}

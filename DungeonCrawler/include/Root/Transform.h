@@ -198,14 +198,59 @@ public:
 	 */
 	float lookAt(glm::vec2 point);
 
-	// Public variables
+
+
+	/* GETTERS AND SETTERS */
+
+
+	/**
+	 * Get this transform's position.
+	 * 
+	 * \returns the position of this transform.
+	 */
+	glm::vec2 getPosition();
+	/**
+	 * Set this transform's position.
+	 *
+	 * \param position: the new position of this transform.
+	 */
+	void setPosition(glm::vec2 position);
+
+	/**
+	 * Get this transform's rotation.
+	 *
+	 * \returns the rotation of this transform.
+	 */
+	float getRotation();
+	/**
+	 * Set this transform's rotation.
+	 *
+	 * \param rotation: the new rotation of this transform.
+	 */
+	void setRotation(float rotation);
+
+	/**
+	 * Get this transform's scale.
+	 *
+	 * \returns the scale of this transform.
+	 */
+	glm::vec2 getScale();
+	/**
+	 * Set this transform's scale.
+	 *
+	 * \param scale: the new scale of this transform.
+	 */
+	void setScale(glm::vec2 scale);
+
+private:
+
 	glm::vec2 position;
 	float rotation;
 	glm::vec2 scale;
 
-private:
-
 	float renderDepth{ -1.0f };
+
+	bool transformUpdated{ false };
 
 	Transform(glm::vec2 position, float rotation, glm::vec2 scale, float renderDepth);
 
