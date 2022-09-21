@@ -8,6 +8,44 @@ Transform::Transform(glm::vec2 position, float rotation, glm::vec2 scale, float 
 {
 }
 
+void Transform::updateTransformMatrices()
+{
+	// Only change the matrices if the values have changed
+	if (!transformUpdated)
+		return;
+
+	// Updating the transform matrix
+	transform = glm::mat4(1.0f);
+
+	transform = glm::translate(transform, glm::vec3(position.x, position.y, 0.0f));
+
+	//model = glm::translate(model, glm::vec3(0.5f * scale.x, 0.5f * scale.y, 0.0f));
+	transform = glm::rotate(transform, glm::radians(rotation), glm::vec3(0, 0, 1));
+	//model = glm::translate(model, glm::vec3(-0.5f * scale.x, -0.5f * scale.y, 0.0f));
+
+	transform = glm::scale(transform, glm::vec3(scale.x, scale.y, 1.0f));
+
+
+
+	// Updating the inverse transform matrix
+	inverseTransform = glm::mat4(1.0f);
+
+	// Scale must not be zero for this step
+	if (scale.x != 0.0f && scale.y != 0.0f)
+		inverseTransform = glm::scale(inverseTransform, glm::vec3(1.0f / scale.x, 1.0f / scale.y, 1.0f));
+
+	//model = glm::translate(model, glm::vec3(0.5f * scale.x, 0.5f * scale.y, 0.0f));
+	inverseTransform = glm::rotate(inverseTransform, glm::radians(-rotation), glm::vec3(0, 0, 1));
+	//model = glm::translate(model, glm::vec3(-0.5f * scale.x, -0.5f * scale.y, 0.0f));
+
+	inverseTransform = glm::translate(inverseTransform, glm::vec3(-position.x, -position.y, 0.0f));
+
+	std::cout << "Transforms updated" << std::endl;
+
+	// Disabling the transform changed flag
+	transformUpdated = false;
+}
+
 Transform::~Transform()
 {
 	std::cout << this->toString() << std::endl;
@@ -160,6 +198,9 @@ glm::mat4 Transform::getModelMatrix()
 		model = model * parent->getModelMatrix();
 	}
 	
+	model = model * getTransformMatrix();
+
+	/*
 	model = glm::translate(model, glm::vec3(position.x, position.y, 0.0f));
 
 	//model = glm::translate(model, glm::vec3(0.5f * scale.x, 0.5f * scale.y, 0.0f));
@@ -167,8 +208,22 @@ glm::mat4 Transform::getModelMatrix()
 	//model = glm::translate(model, glm::vec3(-0.5f * scale.x, -0.5f * scale.y, 0.0f));
 
 	model = glm::scale(model, glm::vec3(scale.x, scale.y, 1.0f));
-	
+	*/
 	return model;
+}
+
+glm::mat4 Transform::getTransformMatrix()
+{
+	updateTransformMatrices();
+
+	return transform;
+}
+
+glm::mat4 Transform::getInverseTransformMatrix()
+{
+	updateTransformMatrices();
+
+	return inverseTransform;
 }
 
 void Transform::addComponent(std::shared_ptr<Component> component)
@@ -199,9 +254,21 @@ glm::vec2 Transform::getPosition()
 }
 void Transform::setPosition(glm::vec2 position)
 {
-	this->position = position;
-	// Set updated flag
-	transformUpdated = true;
+	// Update position and set updated flag if the position changed
+	if (this->position != position)
+	{
+		transformUpdated = true;
+		this->position = position;
+	}
+}
+void Transform::movePosition(glm::vec2 offset)
+{
+	// Update position and set updated flag if the position changed
+	if (offset != glm::vec2(0.0f))
+	{
+		this->position += offset;
+		transformUpdated = true;
+	}
 }
 
 float Transform::getRotation()
@@ -210,9 +277,21 @@ float Transform::getRotation()
 }
 void Transform::setRotation(float rotation)
 {
-	this->rotation = rotation;
-	// Set updated flag
-	transformUpdated = true;
+	// Update rotation and set updated flag if the rotation changed
+	if (this->rotation != rotation)
+	{
+		this->rotation = rotation;
+		transformUpdated = true;
+	}
+}
+void Transform::rotate(float angle)
+{
+	// Update rotation and set updated flag if the rotation changed
+	if (angle != 0.0f)
+	{
+		this->rotation += angle;
+		transformUpdated = true;
+	}
 }
 
 glm::vec2 Transform::getScale()
@@ -221,7 +300,10 @@ glm::vec2 Transform::getScale()
 }
 void Transform::setScale(glm::vec2 scale)
 {
-	this->scale = scale;
-	// Set updated flag
-	transformUpdated = true;
+	// Update scale and set updated flag if the scale changed
+	if (this->scale != scale)
+	{
+		this->scale = scale;
+		transformUpdated = true;
+	}
 }

@@ -7,6 +7,7 @@
 
 #include <glm/glm.hpp>
 #include <glm/trigonometric.hpp>
+#include <glm/ext/matrix_transform.hpp>
 
 #include <vector>
 #include <typeinfo>
@@ -135,11 +136,25 @@ public:
 	std::vector<std::shared_ptr<Component>>& getComponents();
 
 	/**
-	 * Get a matrix which correctly transforms points to local space.
+	 * Get a matrix which correctly transforms world space points to local space.
 	 * 
 	 * \returns the model matrix.
 	 */
 	glm::mat4 getModelMatrix();
+
+	/**
+	 * Get a matrix which correctly transforms parent space points to local space.
+	 *
+	 * \returns the transform matrix.
+	 */
+	glm::mat4 getTransformMatrix();
+
+	/**
+	 * Get a matrix which correctly transforms local space points to parent space.
+	 *
+	 * \returns the inverse transform matrix.
+	 */
+	glm::mat4 getInverseTransformMatrix();
 
 	/**
 	 * Get a matrix which correctly transforms points to local space.
@@ -215,6 +230,13 @@ public:
 	 * \param position: the new position of this transform.
 	 */
 	void setPosition(glm::vec2 position);
+	/**
+	 * Move this transform. Adds the offset to the position.
+	 *
+	 * \param offset: the offset to add to the position.
+	 */
+	void movePosition(glm::vec2 offset);
+
 
 	/**
 	 * Get this transform's rotation.
@@ -228,6 +250,12 @@ public:
 	 * \param rotation: the new rotation of this transform.
 	 */
 	void setRotation(float rotation);
+	/**
+	 * Rotate this transform. Adds the angle to the rotation.
+	 *
+	 * \param angle: the angle to add to the rotation.
+	 */
+	void rotate(float angle);
 
 	/**
 	 * Get this transform's scale.
@@ -250,9 +278,14 @@ private:
 
 	float renderDepth{ -1.0f };
 
+	// Flag that when set, causes the transform matrices to be updated
 	bool transformUpdated{ false };
+	glm::mat4 transform{ glm::identity<glm::mat4>() };
+	glm::mat4 inverseTransform{ glm::identity<glm::mat4>() };
 
 	Transform(glm::vec2 position, float rotation, glm::vec2 scale, float renderDepth);
+
+	void updateTransformMatrices();
 
 	std::vector<std::shared_ptr<Component>> components;
 
