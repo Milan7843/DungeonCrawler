@@ -15,7 +15,7 @@ void Transform::updateTransformMatrices()
 		return;
 
 	// Updating the transform matrix
-	transform = glm::mat4(1.0f);
+	transform = glm::identity<glm::mat4>();
 
 	transform = glm::translate(transform, glm::vec3(position.x, position.y, 0.0f));
 
@@ -25,11 +25,21 @@ void Transform::updateTransformMatrices()
 
 	transform = glm::scale(transform, glm::vec3(scale.x, scale.y, 1.0f));
 
+	//glm::vec3 newTranslation = glm::mat3(transform) * glm::vec3(position.x, position.y, 0.0f);
 
-
+	/* Could this be done more efficiently, with this method?:
+	// http://www.info.hiroshima-cu.ac.jp/~miyazaki/knowledge/teche0053.html
+	inverseTransform = glm::mat4 {
+		transform[0][0] / scale.x, transform[1][0] / scale.x, transform[2][0] / scale.x, 0.0f,
+		transform[0][1] / scale.y, transform[1][1] / scale.y, transform[2][1] / scale.y, 0.0f,
+		transform[0][2], transform[1][2], transform[2][2], 0.0f,
+		-newTranslation.x, -newTranslation.y, -newTranslation.z, 1.0f,
+	};*/
+	
 	// Updating the inverse transform matrix
-	inverseTransform = glm::mat4(1.0f);
-
+	
+	inverseTransform = glm::identity<glm::mat4>();
+	
 	// Scale must not be zero for this step
 	if (scale.x != 0.0f && scale.y != 0.0f)
 		inverseTransform = glm::scale(inverseTransform, glm::vec3(1.0f / scale.x, 1.0f / scale.y, 1.0f));
@@ -40,7 +50,9 @@ void Transform::updateTransformMatrices()
 
 	inverseTransform = glm::translate(inverseTransform, glm::vec3(-position.x, -position.y, 0.0f));
 
-	std::cout << "Transforms updated" << std::endl;
+	//inverseTransform = glm::inverse(transform);
+	
+	//std::cout << "Transforms updated" << std::endl;
 
 	// Disabling the transform changed flag
 	transformUpdated = false;
@@ -226,6 +238,28 @@ glm::mat4 Transform::getInverseTransformMatrix()
 	return inverseTransform;
 }
 
+glm::vec2 Transform::worldPointToLocalPoint(glm::vec2 point)
+{
+	if (this->parent != NULL)
+		point = this->parent->worldPointToLocalPoint(point);
+
+	glm::vec4 transformedPoint =  this->getInverseTransformMatrix() * glm::vec4(point.x, point.y, 0.0f, 1.0f);
+	glm::vec2 transformedPoint2D = glm::vec2(transformedPoint);
+
+	return transformedPoint2D;
+}
+
+glm::vec2 Transform::localPointToWorldPoint(glm::vec2 point)
+{
+	glm::vec4 transformedPoint = this->getTransformMatrix() * glm::vec4(point.x, point.y, 0.0f, 1.0f);
+	glm::vec2 transformedPoint2D = glm::vec2(transformedPoint);
+
+	if (this->parent != NULL)
+		transformedPoint2D = this->parent->localPointToWorldPoint(transformedPoint2D);
+
+	return transformedPoint2D;
+}
+
 void Transform::addComponent(std::shared_ptr<Component> component)
 {
 	components.push_back(component);
@@ -238,8 +272,6 @@ float Transform::lookAt(glm::vec2 point)
 		Logger::logError("Transform is NULL. Check if it gets initialized.");
 
 	glm::vec2 offset{ point - this->position };
-
-	std::cout << this->position.x << ", " << this->position.y << std::endl;
 
 	// Both zero are invalid atan2 inputs
 	if (offset.x == 0.0f && offset.y == 0.0f)

@@ -25,4 +25,6 @@ public:
 private:
 	TransformPointer transform;
 	TransformPointer weapon;
+	TransformPointer cat;
+	TransformPointer cat2;
 };

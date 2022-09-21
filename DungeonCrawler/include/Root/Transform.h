@@ -157,11 +157,20 @@ public:
 	glm::mat4 getInverseTransformMatrix();
 
 	/**
-	 * Get a matrix which correctly transforms points to local space.
-	 *
-	 * \returns the model matrix.
+	 * Transform a point from world space into local space.
+	 * 
+	 * \param point: the world point to get the local position for.
+	 * \return the local position that corresponds to the given world point.
 	 */
-	glm::mat4 getFullModelMatrix();
+	glm::vec2 worldPointToLocalPoint(glm::vec2 point);
+
+	/**
+	 * Transform a point from local space into world space.
+	 *
+	 * \param point: the local point to get the world position for.
+	 * \return the world position that corresponds to the given local point.
+	 */
+	glm::vec2 localPointToWorldPoint(glm::vec2 point);
 
 	/**
 	 * Get a component on this transform of type T.
