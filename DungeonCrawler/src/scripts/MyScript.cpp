@@ -54,7 +54,6 @@ void MyScript::start()
 	TransformPointer cameraTransform = Transform::create();
 	CameraPointer camera = Camera::create(8.0f);
 	cameraTransform->addComponent(camera);
-
 }
 
 void MyScript::update()

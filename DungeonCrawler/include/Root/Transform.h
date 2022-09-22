@@ -228,37 +228,67 @@ public:
 
 
 	/**
-	 * Get this transform's position.
+	 * Get this transform's world position (relative to origin).
 	 * 
 	 * \returns the position of this transform.
 	 */
 	glm::vec2 getPosition();
 	/**
-	 * Set this transform's position.
+	 * Get this transform's position.
 	 *
-	 * \param position: the new position of this transform.
+	 * \returns the position of this transform.
+	 */
+	glm::vec2 getLocalPosition();
+	/**
+	 * Set this transform's world position.
+	 *
+	 * \param position: the new world position of this transform.
 	 */
 	void setPosition(glm::vec2 position);
 	/**
-	 * Move this transform. Adds the offset to the position.
+	 * Set this transform's local position (relative to parent).
 	 *
-	 * \param offset: the offset to add to the position.
+	 * \param position: the new position of this transform.
+	 */
+	void setLocalPosition(glm::vec2 position);
+	/**
+	 * Move this transform in world space. Adds the offset to the world position.
+	 *
+	 * \param offset: the offset to add to the world position.
 	 */
 	void movePosition(glm::vec2 offset);
+	/**
+	 * Move this transform. Adds the offset to the local position (relative to parent).
+	 *
+	 * \param offset: the offset to add to the local position.
+	 */
+	void moveLocalPosition(glm::vec2 offset);
 
 
 	/**
-	 * Get this transform's rotation.
+	 * Get this transform's world rotation (relative to origin).
 	 *
 	 * \returns the rotation of this transform.
 	 */
 	float getRotation();
 	/**
-	 * Set this transform's rotation.
+	 * Get this transform's local rotation (relative to parent).
+	 *
+	 * \returns the rotation of this transform.
+	 */
+	float getLocalRotation();
+	/**
+	 * Set this transform's world rotation (relative to origin).
 	 *
 	 * \param rotation: the new rotation of this transform.
 	 */
 	void setRotation(float rotation);
+	/**
+	 * Set this transform's local rotation (relative to parent).
+	 *
+	 * \param rotation: the new rotation of this transform.
+	 */
+	void setLocalRotation(float rotation);
 	/**
 	 * Rotate this transform. Adds the angle to the rotation.
 	 *
@@ -278,6 +308,12 @@ public:
 	 * \param scale: the new scale of this transform.
 	 */
 	void setScale(glm::vec2 scale);
+	/**
+	 * Set this transform's scale.
+	 *
+	 * \param scale: the new scale of this transform (scale, scale).
+	 */
+	void setScale(float scale);
 
 private:
 

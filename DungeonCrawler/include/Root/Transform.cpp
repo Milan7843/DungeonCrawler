@@ -282,9 +282,20 @@ float Transform::lookAt(glm::vec2 point)
 
 glm::vec2 Transform::getPosition()
 {
+	return localPointToWorldPoint(glm::vec2(0.0f));
+}
+glm::vec2 Transform::getLocalPosition()
+{
 	return position;
 }
 void Transform::setPosition(glm::vec2 position)
+{
+	// Converting world position back to local
+	glm::vec2 newLocalPosition{ worldPointToLocalPoint(position) };
+
+	setLocalPosition(newLocalPosition);
+}
+void Transform::setLocalPosition(glm::vec2 position)
 {
 	// Update position and set updated flag if the position changed
 	if (this->position != position)
@@ -294,6 +305,23 @@ void Transform::setPosition(glm::vec2 position)
 	}
 }
 void Transform::movePosition(glm::vec2 offset)
+{
+	// Getting world position
+	glm::vec2 worldPosition{ getPosition() };
+	// Adding offset
+	worldPosition = worldPosition + offset;
+	// Converting world position back to local
+	glm::vec2 newPosition{ worldPointToLocalPoint(worldPosition + offset) };
+
+	// Update position and set updated flag if the position changed
+	if (this->position != newPosition)
+	{
+		transformUpdated = true;
+		this->position = newPosition;
+	}
+}
+
+void Transform::moveLocalPosition(glm::vec2 offset)
 {
 	// Update position and set updated flag if the position changed
 	if (offset != glm::vec2(0.0f))
@@ -305,9 +333,26 @@ void Transform::movePosition(glm::vec2 offset)
 
 float Transform::getRotation()
 {
+	float total{ rotation };
+	if (this->parent != NULL)
+		total += this->parent->getRotation();
+
+	return total;
+}
+float Transform::getLocalRotation()
+{
 	return rotation;
 }
 void Transform::setRotation(float rotation)
+{
+	// Update rotation and set updated flag if the rotation changed
+	if (this->rotation != rotation)
+	{
+		this->rotation = rotation;
+		transformUpdated = true;
+	}
+}
+void Transform::setLocalRotation(float rotation)
 {
 	// Update rotation and set updated flag if the rotation changed
 	if (this->rotation != rotation)
@@ -336,6 +381,16 @@ void Transform::setScale(glm::vec2 scale)
 	if (this->scale != scale)
 	{
 		this->scale = scale;
+		transformUpdated = true;
+	}
+}
+
+void Transform::setScale(float scale)
+{
+	// Update scale and set updated flag if the scale changed
+	if (this->scale != glm::vec2(scale))
+	{
+		this->scale = glm::vec2(scale);
 		transformUpdated = true;
 	}
 }
