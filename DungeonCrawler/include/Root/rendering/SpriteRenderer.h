@@ -24,8 +24,11 @@ public:
 
 	/**
 	 * Create a new sprite renderer.
+	 * Will automatically add this component to the given transform.
+	 * 
+	 * \param transform: the transform to add this component to.
 	 */
-	static std::shared_ptr<SpriteRenderer> create();
+	static std::shared_ptr<SpriteRenderer> create(std::shared_ptr<Transform>transform, const char* spritePath);
 
 	/**
 	 * Get a string representing this Component.

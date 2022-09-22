@@ -19,41 +19,33 @@ void MyScript::start()
 	transform->addComponent(myComponentScript);
 
 	// Adding a sprite renderer to the object
-	SpriteRendererPointer spriteRenderer = transform->addComponent<SpriteRenderer>();
-	spriteRenderer->setSprite("src/sprites/cutie_cat.png");
-	transform->addComponent(spriteRenderer);
+	SpriteRendererPointer spriteRenderer = SpriteRenderer::create(transform, "src/sprites/cutie_cat.png");
 	transform->setRenderDepth(1.0f);
 
 	
 	weapon = Transform::create();
-
-	// Adding a sprite renderer to the object
-	SpriteRendererPointer weaponSpriteRenderer = weapon->addComponent<SpriteRenderer>();
-	weaponSpriteRenderer->setSprite("src/sprites/weapon.png");
 	weapon->setScale(glm::vec2(0.8f, 0.4f));
 	weapon->setParent(transform);
 
-	cat = Transform::create();
+	// Adding a sprite renderer to the object
+	SpriteRendererPointer weaponSpriteRenderer = SpriteRenderer::create(weapon, "src/sprites/weapon.png");
+
+	cat = Transform::create(glm::vec2(2.0f, -1.0f), 90.0f, glm::vec2(0.1f));
+	cat->setParent(weapon);
 
 	// Adding a sprite renderer to the cat
-	SpriteRendererPointer catSpriteRenderer = cat->addComponent<SpriteRenderer>();
-	catSpriteRenderer->setSprite("src/sprites/cutie_cat.png");
-	cat->setPosition(glm::vec2(2.0f, -1.0f));
-	cat->setRotation(90.0f);
-	cat->setScale(glm::vec2(0.1f));
-	cat->setParent(weapon);
+	SpriteRendererPointer catSpriteRenderer = SpriteRenderer::create(cat, "src/sprites/cutie_cat.png");
+
 
 	cat2 = Transform::create();
 	cat2->setScale(glm::vec2(0.2f));
 
 	// Adding a sprite renderer to the cat
-	SpriteRendererPointer cat2SpriteRenderer = cat2->addComponent<SpriteRenderer>();
-	cat2SpriteRenderer->setSprite("src/sprites/cutie_cat.png");
+	SpriteRendererPointer cat2SpriteRenderer = SpriteRenderer::create(cat2, "src/sprites/cutie_cat.png");
 	
 	// Adding a camera to the scene
 	TransformPointer cameraTransform = Transform::create();
-	CameraPointer camera = Camera::create(8.0f);
-	cameraTransform->addComponent(camera);
+	CameraPointer camera = Camera::create(cameraTransform, 8.0f);
 }
 
 void MyScript::update()
@@ -96,6 +88,8 @@ void MyScript::update()
 			<< transform->position.y << std::endl;
 		*/
 	}
+
+	//std::cout << transform->getLocalPosition().x << ", " << transform->getLocalPosition().y << std::endl;
 
 	if (Input::getKey(KEY_W))
 	{

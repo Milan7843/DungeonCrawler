@@ -8,10 +8,12 @@ SpriteRenderer::~SpriteRenderer()
 {
 }
 
-std::shared_ptr<SpriteRenderer> SpriteRenderer::create()
+std::shared_ptr<SpriteRenderer> SpriteRenderer::create(std::shared_ptr<Transform> transform, const char* spritePath)
 {
 	SpriteRenderer* spriteRenderer = new SpriteRenderer();
 	std::shared_ptr<SpriteRenderer> pointer{ spriteRenderer };
+	pointer->setSprite(spritePath);
+	transform->addComponent(pointer);
 	return pointer;
 }
 

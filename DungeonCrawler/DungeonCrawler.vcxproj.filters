@@ -249,7 +249,7 @@
     <ClInclude Include="include\box2d\box2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Collider.h">
+    <ClInclude Include="include\Root\Collider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Root\Physics.h">
@@ -258,7 +258,7 @@
     <ClInclude Include="include\Root\engine\PhysicsEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Rigidbody.h">
+    <ClInclude Include="include\Root\Rigidbody.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Root\Animator.h">
@@ -371,7 +371,7 @@
     <ClCompile Include="include\Root\engine\InputEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Collider.cpp">
+    <ClCompile Include="include\Root\Collider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="include\Root\Physics.cpp">
@@ -380,7 +380,7 @@
     <ClCompile Include="include\Root\engine\PhysicsEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Rigidbody.cpp">
+    <ClCompile Include="include\Root\Rigidbody.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="include\Root\Animator.cpp">

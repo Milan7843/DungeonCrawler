@@ -29,10 +29,12 @@ public:
 	/**
 	 * Create a new Camera.
 	 * Will automatically set the active camera to this if no camera was active.
+	 * Will automatically add this component to the given transform.
 	 *
+	 * \param transform: the transform to add this component to.
 	 * \param cameraHeight: the height of the camera [optional: default = 2]
 	 */
-	static std::shared_ptr<Camera> create(float cameraHeight = 2.0f);
+	static std::shared_ptr<Camera> create(std::shared_ptr<Transform> transform, float cameraHeight = 2.0f);
 
 	/**
 	 * Get a string representing this Component.

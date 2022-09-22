@@ -17,10 +17,11 @@ Camera::~Camera()
 	Logger::destructorMessage("Camera destroyed");
 }
 
-std::shared_ptr<Camera> Camera::create(float cameraHeight)
+std::shared_ptr<Camera> Camera::create(std::shared_ptr<Transform> transform, float cameraHeight)
 {
-	Camera* transform = new Camera(cameraHeight);
-	std::shared_ptr<Camera> pointer{ transform };
+	Camera* camera = new Camera(cameraHeight);
+	std::shared_ptr<Camera> pointer{ camera };
+	transform->addComponent(pointer);
 	return pointer;
 }
 

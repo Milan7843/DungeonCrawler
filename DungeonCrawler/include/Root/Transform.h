@@ -165,6 +165,14 @@ public:
 	glm::vec2 worldPointToLocalPoint(glm::vec2 point);
 
 	/**
+	 * Transform a point from world space into the parent's local space.
+	 *
+	 * \param point: the world point to get the parent's local position for.
+	 * \return the parent's local position that corresponds to the given world point.
+	 */
+	glm::vec2 worldPointToParentLocalPoint(glm::vec2 point);
+
+	/**
 	 * Transform a point from local space into world space.
 	 *
 	 * \param point: the local point to get the world position for.
@@ -200,6 +208,7 @@ public:
 	/**
 	 * Add a component of type T to this transform.
 	 */
+	/*
 	template <class T>
 	std::shared_ptr<T> addComponent()
 	{
@@ -207,7 +216,7 @@ public:
 		std::shared_ptr<T> ptr = T::create();
 		addComponent(ptr);
 		return ptr;
-	}
+	}*/
 
 	/**
 	 * Get the angle required for this transform to look at a point.

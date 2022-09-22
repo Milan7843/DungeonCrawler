@@ -212,15 +212,6 @@ glm::mat4 Transform::getModelMatrix()
 	
 	model = model * getTransformMatrix();
 
-	/*
-	model = glm::translate(model, glm::vec3(position.x, position.y, 0.0f));
-
-	//model = glm::translate(model, glm::vec3(0.5f * scale.x, 0.5f * scale.y, 0.0f));
-	model = glm::rotate(model, glm::radians(rotation), glm::vec3(0, 0, 1));
-	//model = glm::translate(model, glm::vec3(-0.5f * scale.x, -0.5f * scale.y, 0.0f));
-
-	model = glm::scale(model, glm::vec3(scale.x, scale.y, 1.0f));
-	*/
 	return model;
 }
 
@@ -247,6 +238,14 @@ glm::vec2 Transform::worldPointToLocalPoint(glm::vec2 point)
 	glm::vec2 transformedPoint2D = glm::vec2(transformedPoint);
 
 	return transformedPoint2D;
+}
+
+glm::vec2 Transform::worldPointToParentLocalPoint(glm::vec2 point)
+{
+	if (this->parent != NULL)
+		point = this->parent->worldPointToLocalPoint(point);
+
+	return point;
 }
 
 glm::vec2 Transform::localPointToWorldPoint(glm::vec2 point)
@@ -291,7 +290,7 @@ glm::vec2 Transform::getLocalPosition()
 void Transform::setPosition(glm::vec2 position)
 {
 	// Converting world position back to local
-	glm::vec2 newLocalPosition{ worldPointToLocalPoint(position) };
+	glm::vec2 newLocalPosition{ worldPointToParentLocalPoint(position) };
 
 	setLocalPosition(newLocalPosition);
 }
@@ -308,10 +307,13 @@ void Transform::movePosition(glm::vec2 offset)
 {
 	// Getting world position
 	glm::vec2 worldPosition{ getPosition() };
+	std::cout << worldPosition.x << ", " << worldPosition.y << std::endl;
 	// Adding offset
 	worldPosition = worldPosition + offset;
 	// Converting world position back to local
-	glm::vec2 newPosition{ worldPointToLocalPoint(worldPosition + offset) };
+	std::cout << worldPosition.x << ", " << worldPosition.y << std::endl;
+	glm::vec2 newPosition{ worldPointToParentLocalPoint(worldPosition) };
+	std::cout << newPosition.x << ", " << newPosition.y << std::endl;
 
 	// Update position and set updated flag if the position changed
 	if (this->position != newPosition)
