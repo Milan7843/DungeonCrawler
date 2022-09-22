@@ -307,13 +307,12 @@ void Transform::movePosition(glm::vec2 offset)
 {
 	// Getting world position
 	glm::vec2 worldPosition{ getPosition() };
-	std::cout << worldPosition.x << ", " << worldPosition.y << std::endl;
+
 	// Adding offset
 	worldPosition = worldPosition + offset;
+
 	// Converting world position back to local
-	std::cout << worldPosition.x << ", " << worldPosition.y << std::endl;
 	glm::vec2 newPosition{ worldPointToParentLocalPoint(worldPosition) };
-	std::cout << newPosition.x << ", " << newPosition.y << std::endl;
 
 	// Update position and set updated flag if the position changed
 	if (this->position != newPosition)

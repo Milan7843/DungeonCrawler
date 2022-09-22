@@ -18,6 +18,8 @@ namespace RootEngine
         Camera* activeCamera{ nullptr };
         GLFWwindow* window{ nullptr };
 
+        bool physicsSimulationActive{ true };
+
         void initialiseGLFW()
         {
             // Initialising GLFW
@@ -156,6 +158,8 @@ namespace RootEngine
         // Calling all component and script start() functions
         startScripts();
 
+        std::thread physicsSimulation(PhysicsEngine::simulate);
+
         while (!glfwWindowShouldClose(window))
         {
             Profiler::addCheckpoint("Start of frame");
@@ -201,6 +205,10 @@ namespace RootEngine
             // Check for input
             glfwPollEvents();
         }
+
+        physicsSimulationActive = false;
+
+        physicsSimulation.join();
 
         terminateRoot();
 
@@ -260,5 +268,10 @@ namespace RootEngine
             transform->setParent(NULL);
             transform->removeAllChildren();
         }
+    }
+
+    bool isPhysicsSimulationActive()
+    {
+        return physicsSimulationActive;
     }
 };

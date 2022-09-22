@@ -38,10 +38,11 @@ void MyScript::start()
 
 
 	cat2 = Transform::create();
-	cat2->setScale(glm::vec2(0.2f));
+	cat2->setScale(glm::vec2(0.4f));
 
 	// Adding a sprite renderer to the cat
 	SpriteRendererPointer cat2SpriteRenderer = SpriteRenderer::create(cat2, "src/sprites/cutie_cat.png");
+	Rigidbody::create(cat2, b2_dynamicBody);
 	
 	// Adding a camera to the scene
 	TransformPointer cameraTransform = Transform::create();

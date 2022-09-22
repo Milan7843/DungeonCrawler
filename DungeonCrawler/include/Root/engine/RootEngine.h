@@ -4,6 +4,7 @@
 #include "Root/Script.h"
 
 #include "Root/engine/InputEngine.h"
+#include "Root/engine/PhysicsEngine.h"
 #include "Root/shaders/Shader.h"
 
 #include "Root/Time.h"
@@ -19,6 +20,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
+#include <thread>
 
 
 // ImGui
@@ -111,6 +114,13 @@ namespace RootEngine
 	 * Stop all Root processes and clean up memory for destruction.
 	 */
 	void terminateRoot();
+
+	/**
+	 * Get whether the physics simulation should still go on.
+	 * 
+	 * \returns whether the physics simulation is still active.
+	 */
+	bool isPhysicsSimulationActive();
 };
 
 

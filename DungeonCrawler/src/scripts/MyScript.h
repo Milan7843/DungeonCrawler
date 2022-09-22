@@ -8,6 +8,7 @@
 #include <Root/Script.h>
 #include <Root/rendering/Camera.h>
 #include <Root/Logger.h>
+#include <Root/Rigidbody.h>
 #include <Root/Transform.h>
 #include <Root/rendering/SpriteRenderer.h>
 #include <Root/Input.h>
