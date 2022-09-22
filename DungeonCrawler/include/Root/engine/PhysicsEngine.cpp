@@ -8,9 +8,10 @@ namespace PhysicsEngine
 		int32 velocityIterations{ 6 };
 		int32 positionIterations{ 2 };
 		float timeStep{ 1.0f / 60.0f };
+		b2Body* body;
 
 		// Initialise the world without gravity
-		b2World world{ b2World(b2Vec2(0.0f, 0.0f)) };
+		b2World world{ b2World(b2Vec2(0.0f, -10.0f)) };
 	}
 
 	void initialise()
@@ -28,8 +29,9 @@ namespace PhysicsEngine
 
 			// Time step here
 			world.Step(timeStep, velocityIterations, positionIterations);
+			std::cout << body->GetPosition().x << ", " << body->GetPosition().y << std::endl;
 
-			float waitTime = 0.5f - (float(clock() - beginTime) / CLOCKS_PER_SEC);
+			float waitTime = timeStep - (float(clock() - beginTime) / CLOCKS_PER_SEC);
 
 			int milliseconds = (waitTime * 1000.0f);
 
@@ -49,7 +51,7 @@ namespace PhysicsEngine
 
 	b2Body* addBody(b2BodyDef* definition)
 	{
-		b2Body* body = world.CreateBody(definition);
+		body = world.CreateBody(definition);
 		return body;
 	}
 };

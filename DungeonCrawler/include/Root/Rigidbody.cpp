@@ -19,7 +19,16 @@ Rigidbody::Rigidbody(std::shared_ptr<Transform> transform, float linearDamping, 
 	bodyDef.enabled = enabled;
 	bodyDef.gravityScale = gravityScale;
 
+	b2PolygonShape shape;
+	shape.SetAsBox(1.0f, 1.0f);
+
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &shape;
+	fixtureDef.density = 1.0f;
+	fixtureDef.friction = 0.3f;
+
 	body = PhysicsEngine::addBody(&bodyDef);
+	body->CreateFixture(&fixtureDef);
 }
 
 std::shared_ptr<Rigidbody> Rigidbody::create(
@@ -52,6 +61,6 @@ void Rigidbody::update()
 
 	this->transform->setRotation(glm::degrees(body->GetAngle()));
 
-	std::cout << position.x << ", " << position.y << std::endl;
-	std::cout << transform->getPosition().x << ", " << transform->getPosition().y << std::endl;
+	//std::cout << position.x << ", " << position.y << std::endl;
+	//std::cout << transform->getPosition().x << ", " << transform->getPosition().y << std::endl;
 }
