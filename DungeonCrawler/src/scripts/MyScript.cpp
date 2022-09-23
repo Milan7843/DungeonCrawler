@@ -17,6 +17,7 @@ void MyScript::start()
 	// Adding a script to this object
 	std::shared_ptr<MyComponentScript> myComponentScript = std::shared_ptr<MyComponentScript>(new MyComponentScript());
 	transform->addComponent(myComponentScript);
+	Rigidbody::create(transform, b2_dynamicBody, 0.0f, true);
 
 	// Adding a sprite renderer to the object
 	SpriteRendererPointer spriteRenderer = SpriteRenderer::create(transform, "src/sprites/cutie_cat.png");
@@ -42,11 +43,18 @@ void MyScript::start()
 
 	// Adding a sprite renderer to the cat
 	SpriteRendererPointer cat2SpriteRenderer = SpriteRenderer::create(cat2, "src/sprites/cutie_cat.png");
-	Rigidbody::create(cat2, b2_dynamicBody);
+	Rigidbody::create(cat2, b2_dynamicBody, 1.0f, false, false);
 	
 	// Adding a camera to the scene
 	TransformPointer cameraTransform = Transform::create();
 	CameraPointer camera = Camera::create(cameraTransform, 8.0f);
+
+
+	// Creating a wall
+	//TransformPointer wall = Transform::create(glm::vec2(5.0f, 0.0f), 0.0f, glm::vec2(1.0f, 5.0f));
+	TransformPointer wall = Transform::create(glm::vec2(0.0f, -3.0f), 0.0f, glm::vec2(6.0f, 0.5f));
+	SpriteRenderer::create(wall, "src/sprites/Wiskunde.png");
+	Rigidbody::create(wall, b2_staticBody);
 }
 
 void MyScript::update()

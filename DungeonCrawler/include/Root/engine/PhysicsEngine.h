@@ -15,6 +15,8 @@ namespace PhysicsEngine
 
 	void simulate();
 
+	void step(float deltaTima);
+
 	void setGravity(float x, float y);
 
 	b2Body* addBody(b2BodyDef* definition);

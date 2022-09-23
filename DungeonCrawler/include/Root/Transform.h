@@ -4,6 +4,7 @@
 
 #include "Root/Logger.h"
 #include "Root/Root.h"
+#include "Root/Rigidbody.h"
 
 #include <glm/glm.hpp>
 #include <glm/trigonometric.hpp>
@@ -233,6 +234,7 @@ public:
 
 
 
+
 	/* GETTERS AND SETTERS */
 
 
@@ -333,7 +335,7 @@ private:
 	float renderDepth{ -1.0f };
 
 	// Flag that when set, causes the transform matrices to be updated
-	bool transformUpdated{ false };
+	bool transformUpdated{ true };
 	glm::mat4 transform{ glm::identity<glm::mat4>() };
 	glm::mat4 inverseTransform{ glm::identity<glm::mat4>() };
 
@@ -342,6 +344,7 @@ private:
 	void updateTransformMatrices();
 
 	std::vector<std::shared_ptr<Component>> components;
+	std::shared_ptr<Rigidbody> attachedRigidbody{ nullptr };
 
 	std::shared_ptr<Transform> parent = NULL;
 	std::vector<std::shared_ptr<Transform>> children;

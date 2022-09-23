@@ -158,23 +158,25 @@ namespace RootEngine
         // Calling all component and script start() functions
         startScripts();
 
-        std::thread physicsSimulation(PhysicsEngine::simulate);
+        //std::thread physicsSimulation(PhysicsEngine::simulate);
 
         while (!glfwWindowShouldClose(window))
         {
             Profiler::addCheckpoint("Start of frame");
 
-            // Updating the input engine
-            InputEngine::update();
+            // Updating the variables in Time
+            Time::update(glfwGetTime());
 
             // Getting viewport size
             glfwGetWindowSize(window, (int*)&WINDOW_SIZE_X, (int*)&WINDOW_SIZE_Y);
 
+            // Updating the input engine
+            InputEngine::update();
+
             // Setting viewport size
             glViewport(0, 0, WINDOW_SIZE_X, WINDOW_SIZE_Y);
 
-            // Updating the variables in Time
-            Time::update(glfwGetTime());
+            PhysicsEngine::step(Time::getDeltaTime());
 
             // Calling all component and script update() functions
             updateScripts();
@@ -208,7 +210,7 @@ namespace RootEngine
 
         physicsSimulationActive = false;
 
-        physicsSimulation.join();
+        //physicsSimulation.join();
 
         terminateRoot();
 

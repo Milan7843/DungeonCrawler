@@ -50,6 +50,8 @@ private:
 
 	SpriteRenderer();
 
+	float height;
+
 	unsigned int textureID{ 0 };
 
 };

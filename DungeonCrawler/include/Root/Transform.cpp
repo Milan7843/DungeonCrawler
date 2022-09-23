@@ -261,6 +261,20 @@ glm::vec2 Transform::localPointToWorldPoint(glm::vec2 point)
 
 void Transform::addComponent(std::shared_ptr<Component> component)
 {
+	// If it is a rigidbody, save its reference
+	if (typeid(*component) == typeid(Rigidbody))
+	{
+		// Check if a rigidbody was already attached
+		if (attachedRigidbody != nullptr)
+		{
+			Logger::logError("Transform already contained a rigidbody! Only add ONE rigidbody per transform.");
+		}
+		else
+		{
+			attachedRigidbody = std::static_pointer_cast<Rigidbody>(component);
+		}
+	}
+
 	components.push_back(component);
 	component->setTransform(this);
 }
@@ -292,7 +306,18 @@ void Transform::setPosition(glm::vec2 position)
 	// Converting world position back to local
 	glm::vec2 newLocalPosition{ worldPointToParentLocalPoint(position) };
 
-	setLocalPosition(newLocalPosition);
+	// Update position and set updated flag if the position changed
+	if (this->position != newLocalPosition)
+	{
+		transformUpdated = true;
+		this->position = newLocalPosition;
+	}
+
+	// Setting the rigidbody position to the current world position
+	if (attachedRigidbody != nullptr)
+	{
+		attachedRigidbody->setPosition(position, false);
+	}
 }
 void Transform::setLocalPosition(glm::vec2 position)
 {
@@ -301,6 +326,12 @@ void Transform::setLocalPosition(glm::vec2 position)
 	{
 		transformUpdated = true;
 		this->position = position;
+	}
+
+	// Setting the rigidbody position to the current world position
+	if (attachedRigidbody != nullptr)
+	{
+		attachedRigidbody->setPosition(getPosition(), false);
 	}
 }
 void Transform::movePosition(glm::vec2 offset)
@@ -319,6 +350,12 @@ void Transform::movePosition(glm::vec2 offset)
 	{
 		transformUpdated = true;
 		this->position = newPosition;
+	}
+
+	// Setting the rigidbody position to the current world position
+	if (attachedRigidbody != nullptr)
+	{
+		attachedRigidbody->setPosition(worldPosition, false);
 	}
 }
 

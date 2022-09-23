@@ -28,8 +28,7 @@ namespace PhysicsEngine
 			const std::clock_t beginTime = clock();
 
 			// Time step here
-			world.Step(timeStep, velocityIterations, positionIterations);
-			std::cout << body->GetPosition().x << ", " << body->GetPosition().y << std::endl;
+			step(timeStep);
 
 			float waitTime = timeStep - (float(clock() - beginTime) / CLOCKS_PER_SEC);
 
@@ -42,6 +41,11 @@ namespace PhysicsEngine
 
 			//std::cout << elapsed_time_ms << "ms" << std::endl;
 		}
+	}
+
+	void step(float deltaTime)
+	{
+		world.Step(deltaTime, velocityIterations, positionIterations);
 	}
 
 	void setGravity(float x, float y)

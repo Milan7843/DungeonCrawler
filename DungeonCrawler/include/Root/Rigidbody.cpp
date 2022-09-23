@@ -1,6 +1,7 @@
 #include "Rigidbody.h"
 
 #include "Root/engine/PhysicsEngine.h"
+#include "Root/Transform.h"
 
 Rigidbody::Rigidbody(std::shared_ptr<Transform> transform, float linearDamping, float angularDamping, bool allowSleep, bool awake, bool fixedRotation, bool bullet, b2BodyType type, bool enabled, float gravityScale)
 {
@@ -20,7 +21,8 @@ Rigidbody::Rigidbody(std::shared_ptr<Transform> transform, float linearDamping, 
 	bodyDef.gravityScale = gravityScale;
 
 	b2PolygonShape shape;
-	shape.SetAsBox(1.0f, 1.0f);
+	glm::vec2 size = transform->getScale();
+	shape.SetAsBox(size.x * 0.5f, size.y * 0.5f);
 
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &shape;
@@ -34,14 +36,14 @@ Rigidbody::Rigidbody(std::shared_ptr<Transform> transform, float linearDamping, 
 std::shared_ptr<Rigidbody> Rigidbody::create(
 	std::shared_ptr<Transform> transform,
 	b2BodyType type,
+	float gravityScale,
+	bool fixedRotation,
+	bool allowSleep,
 	float linearDamping,
 	float angularDamping,
-	bool allowSleep,
-	bool awake,
-	bool fixedRotation,
 	bool bullet,
-	bool enabled,
-	float gravityScale)
+	bool awake,
+	bool enabled)
 {
 
 	Rigidbody* rigidbody = new Rigidbody(transform, linearDamping, angularDamping, allowSleep, awake, fixedRotation, bullet, type, enabled, gravityScale);
@@ -63,4 +65,9 @@ void Rigidbody::update()
 
 	//std::cout << position.x << ", " << position.y << std::endl;
 	//std::cout << transform->getPosition().x << ", " << transform->getPosition().y << std::endl;
+}
+
+void Rigidbody::setPosition(glm::vec2 position, bool alsoSetTransformPosition)
+{
+	body->SetTransform(b2Vec2(position.x, position.y), body->GetAngle());
 }
