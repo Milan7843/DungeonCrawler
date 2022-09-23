@@ -58,6 +58,10 @@ Rigidbody::~Rigidbody()
 
 void Rigidbody::update()
 {
+}
+
+void Rigidbody::updateTransform()
+{
 	b2Vec2 position{ body->GetPosition() };
 	this->transform->setPosition(glm::vec2(position.x, position.y));
 

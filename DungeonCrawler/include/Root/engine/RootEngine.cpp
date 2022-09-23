@@ -49,65 +49,6 @@ namespace RootEngine
             ImGui_ImplGlfw_InitForOpenGL(window, true);
             ImGui_ImplOpenGL3_Init("#version 130");
         }
-
-        void startScripts()
-        {
-            // Calling all script start() functions
-            for (std::shared_ptr<Script>& script : scripts)
-            {
-                script->start();
-            }
-
-            // Calling all components' start() functions
-            for (std::shared_ptr<Transform>& transform : transforms)
-            {
-                // Calling start() on each component attached to this Transform
-                for (std::shared_ptr<Component>& component : transform->getComponents())
-                {
-                    component->start();
-                }
-            }
-        }
-
-        void updateScripts()
-        {
-            // Calling all script update() functions
-            for (std::shared_ptr<Script>& script : scripts)
-            {
-                script->update();
-            }
-
-            Profiler::addCheckpoint("Script updates");
-
-            // Calling all components' update() functions
-            for (std::shared_ptr<Transform>& transform : transforms)
-            {
-                // Calling update() on each component attached to this Transform
-                for (std::shared_ptr<Component>& component : transform->getComponents())
-                {
-                    component->update();
-                }
-            }
-
-            Profiler::addCheckpoint("Component script updates");
-        }
-
-        void renderComponents()
-        {
-            // Don't render if there is no active camera
-            if (getActiveCamera() == nullptr)
-                return;
-
-            // Calling all components' render() functions
-            for (std::shared_ptr<Transform>& transform : transforms)
-            {
-                // Only render the root transforms
-                if (transform->getParent() == NULL)
-                    transform->render();
-            }
-
-            Profiler::addCheckpoint("Component rendering");
-        }
     }
 
     int Start(unsigned int windowWidth, unsigned int windowHeight)
@@ -156,7 +97,7 @@ namespace RootEngine
         SimpleGUI simpleGUI(WINDOW_SIZE_X, WINDOW_SIZE_Y);
 
         // Calling all component and script start() functions
-        startScripts();
+        ComponentEngine::startScripts();
 
         //std::thread physicsSimulation(PhysicsEngine::simulate);
 
@@ -176,11 +117,12 @@ namespace RootEngine
             // Setting viewport size
             glViewport(0, 0, WINDOW_SIZE_X, WINDOW_SIZE_Y);
 
+            // Calling all component and script update() functions
+            ComponentEngine::updateScripts();
+
             PhysicsEngine::step(Time::getDeltaTime());
 
-            // Calling all component and script update() functions
-            updateScripts();
-
+            ComponentEngine::updateRigidbodiesTransforms();
 
             // Input
             //processInput(window);
@@ -190,7 +132,7 @@ namespace RootEngine
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             // Calling all component render() functions
-            renderComponents();
+            ComponentEngine::renderComponents();
 
             InputEngine::newFrame();
 
@@ -232,9 +174,19 @@ namespace RootEngine
         scripts.push_back(script);
     }
 
+    std::vector<std::shared_ptr<Script>>& getScripts()
+    {
+        return scripts;
+    }
+
     void addTransform(std::shared_ptr<Transform> transform)
     {
         transforms.push_back(transform);
+    }
+
+    std::vector<std::shared_ptr<Transform>>& getTransforms()
+    {
+        return transforms;
     }
 
     void setActiveCamera(Camera* camera)

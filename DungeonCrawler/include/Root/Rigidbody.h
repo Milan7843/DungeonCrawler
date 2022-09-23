@@ -58,6 +58,11 @@ public:
 	void update() override;
 
 	/**
+	 * Update the transform to have the position and rotation of the rigidbody.
+	 */
+	void updateTransform();
+
+	/**
 	 * Set the position of this rigidbody.
 	 * 
 	 * \param position: the new position.

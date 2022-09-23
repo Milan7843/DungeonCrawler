@@ -5,6 +5,8 @@
 
 #include "Root/engine/InputEngine.h"
 #include "Root/engine/PhysicsEngine.h"
+#include "Root/Engine/TransformEngine.h"
+#include "Root/Engine/ComponentEngine.h"
 #include "Root/shaders/Shader.h"
 
 #include "Root/Time.h"
@@ -74,11 +76,25 @@ namespace RootEngine
 	void addScript(std::shared_ptr<Script> script);
 
 	/**
+	 * Get all scripts currently loaded.
+	 * 
+	 * \returns all scripts that are currently loaded.
+	 */
+	std::vector<std::shared_ptr<Script>>& getScripts();
+
+	/**
 	 * Add a transform to the scene.
 	 *
 	 * \param transform: the transform to add to the scene.
 	 */
 	void addTransform(std::shared_ptr<Transform> transform);
+
+	/**
+	 * Get all transforms currently in the scene.
+	 *
+	 * \returns all transforms currently in the scene.
+	 */
+	std::vector<std::shared_ptr<Transform>>& getTransforms();
 
 	/**
 	 * Set a camera as the one used for all rendering.

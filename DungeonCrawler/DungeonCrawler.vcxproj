@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\Root\engine\ComponentEngine.h" />
     <ClInclude Include="include\Root\Animator.h" />
     <ClInclude Include="include\Root\Collider.h" />
     <ClInclude Include="include\box2d\b2_api.h" />
@@ -224,8 +225,10 @@
     <ClInclude Include="src\scripts\MyComponentScript.h" />
     <ClInclude Include="src\scripts\MyScript.h" />
     <ClInclude Include="include\stbi_utility\TextureData.h" />
+    <ClInclude Include="include\Root\engine\TransformEngine.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\Root\engine\ComponentEngine.cpp" />
     <ClCompile Include="include\Root\Animator.cpp" />
     <ClCompile Include="include\Root\Collider.cpp" />
     <ClCompile Include="include\Root\rendering\Camera.cpp" />
@@ -266,6 +269,7 @@
     <ClCompile Include="src\scripts\MyComponentScript.cpp" />
     <ClCompile Include="src\scripts\MyScript.cpp" />
     <ClCompile Include="include\stbi_utility\TextureData.cpp" />
+    <ClCompile Include="include\Root\engine\TransformEngine.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

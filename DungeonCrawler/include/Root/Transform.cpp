@@ -279,6 +279,11 @@ void Transform::addComponent(std::shared_ptr<Component> component)
 	component->setTransform(this);
 }
 
+std::shared_ptr<Rigidbody> Transform::getAttachedRigidbody()
+{
+	return attachedRigidbody;
+}
+
 float Transform::lookAt(glm::vec2 point)
 {
 	if (this == nullptr)

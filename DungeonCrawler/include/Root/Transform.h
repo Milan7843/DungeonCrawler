@@ -137,6 +137,13 @@ public:
 	std::vector<std::shared_ptr<Component>>& getComponents();
 
 	/**
+	 * Get the rigidbody attached to this transform. Returns nullptr if no rigidbody is attached.
+	 * 
+	 * \returns the attached rigidbody or nullptr if no rigidbody is attached.
+	 */
+	std::shared_ptr<Rigidbody> getAttachedRigidbody();
+
+	/**
 	 * Get a matrix which correctly transforms world space points to local space.
 	 * 
 	 * \returns the model matrix.

@@ -264,6 +264,12 @@
     <ClInclude Include="include\Root\Animator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Root\engine\TransformEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Root\engine\ComponentEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\imgui\imgui.cpp">
@@ -384,6 +390,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="include\Root\Animator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Root\engine\TransformEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Root\engine\ComponentEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
