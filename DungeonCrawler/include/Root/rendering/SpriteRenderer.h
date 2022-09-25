@@ -2,7 +2,7 @@
 
 #include "Root/Root.h"
 #include "Root/Logger.h"
-#include "Root/Component.h" // Base class
+#include "Root/components/Component.h"
 #include "Root/shaders/Shader.h"
 #include "Root/rendering/Renderer.h"
 #include "Root/rendering/Camera.h"

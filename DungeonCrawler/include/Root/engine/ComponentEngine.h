@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Root/Component.h"
+#include "Root/components/Component.h"
 #include "Root/engine/RootEngine.h"
 #include "simpleprofiler/Profiler.h"
 

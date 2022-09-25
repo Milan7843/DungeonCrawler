@@ -87,10 +87,10 @@
     <ClInclude Include="include\Root\Transform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Root\Component.h">
+    <ClInclude Include="include\Root\components\Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Root\Script.h">
+    <ClInclude Include="include\Root\components\Script.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Root\Root.h">
@@ -249,7 +249,7 @@
     <ClInclude Include="include\box2d\box2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Root\Collider.h">
+    <ClInclude Include="include\Root\components\Collider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Root\Physics.h">
@@ -258,16 +258,28 @@
     <ClInclude Include="include\Root\engine\PhysicsEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Root\Rigidbody.h">
+    <ClInclude Include="include\Root\components\Rigidbody.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Root\Animator.h">
+    <ClInclude Include="include\Root\components\Animator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Root\engine\TransformEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Root\engine\ComponentEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Root\components\ParticleSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Root\Components.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Root\Gradient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -335,10 +347,10 @@
     <ClCompile Include="include\Root\Transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\Root\Component.cpp">
+    <ClCompile Include="include\Root\components\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\Root\Script.cpp">
+    <ClCompile Include="include\Root\components\Script.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="include\Root\Root.cpp">
@@ -377,7 +389,7 @@
     <ClCompile Include="include\Root\engine\InputEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\Root\Collider.cpp">
+    <ClCompile Include="include\Root\components\Collider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="include\Root\Physics.cpp">
@@ -386,16 +398,25 @@
     <ClCompile Include="include\Root\engine\PhysicsEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\Root\Rigidbody.cpp">
+    <ClCompile Include="include\Root\components\Rigidbody.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\Root\Animator.cpp">
+    <ClCompile Include="include\Root\components\Animator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="include\Root\engine\TransformEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="include\Root\engine\ComponentEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Root\components\ParticleSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Root\Gradient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

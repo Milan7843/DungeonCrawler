@@ -17,7 +17,7 @@ void MyScript::start()
 	// Adding a script to this object
 	std::shared_ptr<MyComponentScript> myComponentScript = std::shared_ptr<MyComponentScript>(new MyComponentScript());
 	transform->addComponent(myComponentScript);
-	Rigidbody::create(transform, b2_dynamicBody, 0.0f, true);
+	Rigidbody::create(transform, b2_dynamicBody, 0.0f, true, false);
 
 	// Adding a sprite renderer to the object
 	SpriteRendererPointer spriteRenderer = SpriteRenderer::create(transform, "src/sprites/cutie_cat.png");

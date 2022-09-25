@@ -1,9 +1,11 @@
 #pragma once
 
-#include "Root/Component.h" // Base class
+#include "Root/components/Component.h" // Base class
 #include "Root/Logger.h"
 
 #include <memory>
+
+#define AnimatorPointer std::shared_ptr<Animator>
 
 class Animator : public Component
 {

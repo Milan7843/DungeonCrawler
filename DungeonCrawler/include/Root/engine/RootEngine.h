@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Root/Transform.h"
-#include "Root/Script.h"
+#include "Root/Components.h"
+#include "Root/components/Script.h"
 
 #include "Root/engine/InputEngine.h"
 #include "Root/engine/PhysicsEngine.h"

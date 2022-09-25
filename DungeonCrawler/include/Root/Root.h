@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Transform.h"
-#include "Script.h"
+#include "Root/Components.h"
+#include "Root/components/Script.h"
 #include "shaders/Shader.h"
 
 #include "simpleprofiler/Profiler.h"

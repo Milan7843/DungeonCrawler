@@ -141,9 +141,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\Root\Components.h" />
     <ClInclude Include="include\Root\engine\ComponentEngine.h" />
-    <ClInclude Include="include\Root\Animator.h" />
-    <ClInclude Include="include\Root\Collider.h" />
+    <ClInclude Include="include\Root\components\Animator.h" />
+    <ClInclude Include="include\Root\components\Collider.h" />
     <ClInclude Include="include\box2d\b2_api.h" />
     <ClInclude Include="include\box2d\b2_block_allocator.h" />
     <ClInclude Include="include\box2d\b2_body.h" />
@@ -184,8 +185,9 @@
     <ClInclude Include="include\box2d\b2_world.h" />
     <ClInclude Include="include\box2d\b2_world_callbacks.h" />
     <ClInclude Include="include\box2d\box2d.h" />
+    <ClInclude Include="include\Root\Gradient.h" />
     <ClInclude Include="include\Root\rendering\Camera.h" />
-    <ClInclude Include="include\Root\Component.h" />
+    <ClInclude Include="include\Root\components\Component.h" />
     <ClInclude Include="include\GLFW\glfw3.h" />
     <ClInclude Include="include\GLFW\glfw3native.h" />
     <ClInclude Include="include\imgui\imconfig.h" />
@@ -212,7 +214,7 @@
     <ClInclude Include="include\simpleprofiler\Profiler.h" />
     <ClInclude Include="include\simpletext\SimpleText.h" />
     <ClInclude Include="include\stb_image\stbi_image.h" />
-    <ClInclude Include="include\Root\Script.h" />
+    <ClInclude Include="include\Root\components\Script.h" />
     <ClInclude Include="include\Root\Transform.h" />
     <ClInclude Include="include\Root\Time.h" />
     <ClInclude Include="include\Root\engine\RootEngine.h" />
@@ -220,7 +222,9 @@
     <ClInclude Include="include\Root\engine\InputEngine.h" />
     <ClInclude Include="include\Root\Physics.h" />
     <ClInclude Include="include\Root\engine\PhysicsEngine.h" />
-    <ClInclude Include="include\Root\Rigidbody.h" />
+    <ClInclude Include="include\Root\components\Rigidbody.h" />
+    <ClInclude Include="include\Root\components\ParticleSystem.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="src\ScriptLoader.h" />
     <ClInclude Include="src\scripts\MyComponentScript.h" />
     <ClInclude Include="src\scripts\MyScript.h" />
@@ -229,10 +233,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\Root\engine\ComponentEngine.cpp" />
-    <ClCompile Include="include\Root\Animator.cpp" />
-    <ClCompile Include="include\Root\Collider.cpp" />
+    <ClCompile Include="include\Root\components\Animator.cpp" />
+    <ClCompile Include="include\Root\components\Collider.cpp" />
+    <ClCompile Include="include\Root\Gradient.cpp" />
     <ClCompile Include="include\Root\rendering\Camera.cpp" />
-    <ClCompile Include="include\Root\Component.cpp" />
+    <ClCompile Include="include\Root\components\Component.cpp" />
     <ClCompile Include="include\imgui\imgui.cpp" />
     <ClCompile Include="include\imgui\imgui_demo.cpp" />
     <ClCompile Include="include\imgui\imgui_draw.cpp" />
@@ -255,13 +260,15 @@
     <ClCompile Include="include\simplegui\SimpleGUI.cpp" />
     <ClCompile Include="include\simpleprofiler\Profiler.cpp" />
     <ClCompile Include="include\simpletext\SimpleText.cpp" />
-    <ClCompile Include="include\Root\Script.cpp" />
+    <ClCompile Include="include\Root\components\Script.cpp" />
     <ClCompile Include="include\Root\engine\RootEngine.cpp" />
     <ClCompile Include="include\Root\Input.cpp" />
     <ClCompile Include="include\Root\engine\InputEngine.cpp" />
     <ClCompile Include="include\Root\Physics.cpp" />
     <ClCompile Include="include\Root\engine\PhysicsEngine.cpp" />
-    <ClCompile Include="include\Root\Rigidbody.cpp" />
+    <ClCompile Include="include\Root\components\Rigidbody.cpp" />
+    <ClCompile Include="include\Root\components\ParticleSystem.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="include\Root\Transform.cpp" />

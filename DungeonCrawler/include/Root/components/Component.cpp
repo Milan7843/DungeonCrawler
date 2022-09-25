@@ -1,6 +1,6 @@
 #include "Component.h"
 
-#include "Transform.h"
+#include "Root/Transform.h"
 
 void Component::setTransform(Transform* transform)
 {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Root/Component.h" // Base class
+#include "Root/components/Component.h" // Base class
 
 #include <box2d/b2_body.h>
 #include <glm/glm.hpp>

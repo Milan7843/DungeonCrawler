@@ -1,6 +1,5 @@
 #pragma once
 
-#include <Root/Script.h>
 #include <Root/Logger.h>
 #include <Root/Transform.h>
 

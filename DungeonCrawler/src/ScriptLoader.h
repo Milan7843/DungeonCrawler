@@ -2,7 +2,7 @@
 
 #include "scripts/MyScript.h"
 
-#include <Root/Script.h>
+#include <Root/components/Script.h>
 #include <Root/Root.h>
 
 void loadScripts();

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Root/Component.h" // Base class
+#include "Root/components/Component.h"
 #include "Root/Logger.h"
 #include "Root/engine/RootEngine.h"
 

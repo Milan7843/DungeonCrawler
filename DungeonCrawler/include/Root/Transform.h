@@ -1,10 +1,8 @@
 #pragma once
 
-#include "Root/Component.h"
-
 #include "Root/Logger.h"
 #include "Root/Root.h"
-#include "Root/Rigidbody.h"
+#include "Root/Components.h"
 
 #include <glm/glm.hpp>
 #include <glm/trigonometric.hpp>
