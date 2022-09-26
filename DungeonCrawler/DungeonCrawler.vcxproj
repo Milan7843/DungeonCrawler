@@ -235,7 +235,6 @@
     <ClCompile Include="include\Root\engine\ComponentEngine.cpp" />
     <ClCompile Include="include\Root\components\Animator.cpp" />
     <ClCompile Include="include\Root\components\Collider.cpp" />
-    <ClCompile Include="include\Root\Gradient.cpp" />
     <ClCompile Include="include\Root\rendering\Camera.cpp" />
     <ClCompile Include="include\Root\components\Component.cpp" />
     <ClCompile Include="include\imgui\imgui.cpp" />

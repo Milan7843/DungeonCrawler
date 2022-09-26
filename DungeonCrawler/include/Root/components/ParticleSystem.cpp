@@ -1,5 +1,7 @@
 #include "ParticleSystem.h"
 
+#include "Root/Transform.h"
+
 std::shared_ptr<ParticleSystem> ParticleSystem::create(std::shared_ptr<Transform> transform)
 {
 	ParticleSystem* particleSystem = new ParticleSystem();

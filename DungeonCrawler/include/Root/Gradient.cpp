@@ -1,16 +1,5 @@
 #include "Gradient.h"
 
-float interpolate(float v1, float v2, float t)
-{
-	float t2{ (1.0f - cos(t * glm::pi<float>())) / 2.0f };
-	return(v1 * (1.0f - t2) + v2 * t2);
-}
-
-float map(float s, float a1, float a2, float b1, float b2)
-{
-	return b1 + (s - a1) * (b2 - b1) / (a2 - a1);
-}
-
 template<class T>
 Gradient<T>::Gradient(std::vector<GradientPoint<T>> points);
 

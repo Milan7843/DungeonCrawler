@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Root/components/Component.h" // Base class
-#include "Root/Transform.h"
 #include "Root/Gradient.h"
 
 #include <glm/glm.hpp>
@@ -9,6 +8,8 @@
 #include <memory>
 
 #define ParticleSystemPointer std::shared_ptr<ParticleSystem>
+
+class Transform;
 
 struct Particle
 {
@@ -35,6 +36,8 @@ class ParticleSystem : public Component
 public:
 
 	static std::shared_ptr<ParticleSystem> create(std::shared_ptr<Transform> transform);
+
+	~ParticleSystem();
 
 	void start() override;
 
@@ -94,13 +97,12 @@ public:
 private:
 
 	ParticleSystem();
-	~ParticleSystem();
 
-	bool looping;
+	bool looping{ true };
 	SimulationSpace simulationSpace { WORLD_SPACE };
-	float emissionTime;
+	float emissionTime{ 3.0f };
 
-	unsigned int textureID;
+	unsigned int textureID{ 0 };
 
 	EmissionMode emissionMode{ ARC_EMISSION };
 	float emissionRadius{ 1.0f };
@@ -110,7 +112,6 @@ private:
 	float maxLifeTime{ 1.0f };
 	float minRotationEmissionVelocity{ 0.0f };
 	float maxRotationEmissionVelocity{ 0.0f };
-	float maxLifeTime{ 1.0f };
 	float drag{ 0.1f };
 	glm::vec2 wind{ 0.0f, 0.0f };
 

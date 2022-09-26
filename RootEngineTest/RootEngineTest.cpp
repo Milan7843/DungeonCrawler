@@ -20,9 +20,9 @@ namespace RootEngineTest
 			};
 			Gradient<float> gradient(points);
 
-			Assert::AreEqual(0.0f, gradient.evaluate(0.0f));
-			Assert::AreEqual(1.0f, gradient.evaluate(1.0f));
-			Assert::AreEqual(0.5f, gradient.evaluate(0.5f));
+			Assert::AreEqual(0.0f, gradient.sample(0.0f));
+			Assert::AreEqual(1.0f, gradient.sample(1.0f));
+			Assert::AreEqual(0.5f, gradient.sample(0.5f));
 		}
 
 		TEST_METHOD(ThreePointTest)
@@ -33,9 +33,9 @@ namespace RootEngineTest
 			};
 			Gradient<float> gradient(points);
 
-			Assert::AreEqual(0.0f, gradient.evaluate(0.0f));
-			Assert::AreEqual(1.0f, gradient.evaluate(1.0f));
-			Assert::AreEqual(0.6f, gradient.evaluate(0.5f));
+			Assert::AreEqual(0.0f, gradient.sample(0.0f));
+			Assert::AreEqual(1.0f, gradient.sample(1.0f));
+			Assert::AreEqual(0.6f, gradient.sample(0.5f));
 		}
 
 		TEST_METHOD(LessThanSmallestTest)
@@ -45,8 +45,8 @@ namespace RootEngineTest
 			};
 			Gradient<float> gradient(points);
 
-			Assert::AreEqual(0.3f, gradient.evaluate(0.0f));
-			Assert::AreEqual(0.3f, gradient.evaluate(-1.0f));
+			Assert::AreEqual(0.3f, gradient.sample(0.0f));
+			Assert::AreEqual(0.3f, gradient.sample(-1.0f));
 		}
 
 		TEST_METHOD(GreaterThanGreatestTest)
@@ -56,9 +56,9 @@ namespace RootEngineTest
 			};
 			Gradient<float> gradient(points);
 
-			Assert::AreEqual(0.7f, gradient.evaluate(1.2f));
-			Assert::AreEqual(0.7f, gradient.evaluate(1.3f));
-			Assert::AreEqual(0.7f, gradient.evaluate(10.0f));
+			Assert::AreEqual(0.7f, gradient.sample(1.2f));
+			Assert::AreEqual(0.7f, gradient.sample(1.3f));
+			Assert::AreEqual(0.7f, gradient.sample(10.0f));
 		}
 	};
 }
