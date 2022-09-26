@@ -224,7 +224,7 @@
     <ClInclude Include="include\Root\engine\PhysicsEngine.h" />
     <ClInclude Include="include\Root\components\Rigidbody.h" />
     <ClInclude Include="include\Root\components\ParticleSystem.h" />
-    <ClInclude Include="Random.h" />
+    <ClInclude Include="include\Root\Random.h" />
     <ClInclude Include="src\ScriptLoader.h" />
     <ClInclude Include="src\scripts\MyComponentScript.h" />
     <ClInclude Include="src\scripts\MyScript.h" />
@@ -267,7 +267,7 @@
     <ClCompile Include="include\Root\engine\PhysicsEngine.cpp" />
     <ClCompile Include="include\Root\components\Rigidbody.cpp" />
     <ClCompile Include="include\Root\components\ParticleSystem.cpp" />
-    <ClCompile Include="Random.cpp" />
+    <ClCompile Include="include\Root\Random.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="include\Root\Transform.cpp" />

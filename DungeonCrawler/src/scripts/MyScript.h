@@ -25,4 +25,5 @@ private:
 	TransformPointer weapon;
 	TransformPointer cat;
 	TransformPointer cat2;
+	ParticleSystemPointer particleSystem;
 };

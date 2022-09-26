@@ -279,7 +279,7 @@
     <ClInclude Include="include\Root\Gradient.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Random.h">
+    <ClInclude Include="include\Root\Random.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -413,7 +413,7 @@
     <ClCompile Include="include\Root\components\ParticleSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Random.cpp">
+    <ClCompile Include="include\Root\Random.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -82,7 +82,7 @@ public:
 			return points[0].value;
 
 		unsigned int i{ 0 };
-		for (GradientPoint& gradientPoint : points)
+		for (GradientPoint<T>& gradientPoint : points)
 		{
 			// Found the right side point
 			if (samplePoint < gradientPoint.point)
@@ -100,14 +100,14 @@ public:
 		}
 
 		// No right side was found: return the value of the right-most gradient point
-		return points.back()->value;
+		return points.back().value;
 	}
 
 private:
 	std::vector<GradientPoint<T>> points;
 
 	// Helper functions
-	float interpolate(float v1, float v2, float t)
+	T interpolate(T v1, T v2, float t)
 	{
 		float t2{ (1.0f - cos(t * glm::pi<float>())) / 2.0f };
 		return(v1 * (1.0f - t2) + v2 * t2);

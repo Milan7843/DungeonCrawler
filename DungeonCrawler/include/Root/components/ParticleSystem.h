@@ -11,9 +11,14 @@
 
 class Transform;
 
-struct Particle
+struct ParticleDrawData
 {
 	glm::vec2 position;
+	glm::vec3 color;
+};
+
+struct ParticleUpdateData
+{
 	glm::vec2 velocity;
 	float aliveTime;
 	float lifeTime;
@@ -98,6 +103,18 @@ private:
 
 	ParticleSystem();
 
+	void writeDataToVAO();
+
+	void emitParticle();
+
+	glm::vec2 getRandomDirection();
+
+	unsigned int VAO{ 0 };
+	unsigned int VBO{ 0 };
+
+	std::vector<ParticleDrawData> particleDrawData;
+	std::vector<ParticleUpdateData> particleUpdateData;
+
 	bool looping{ true };
 	SimulationSpace simulationSpace { WORLD_SPACE };
 	float emissionTime{ 3.0f };
@@ -106,13 +123,17 @@ private:
 
 	EmissionMode emissionMode{ ARC_EMISSION };
 	float emissionRadius{ 1.0f };
+	float arcModeMinAngle{ 0.0f };
+	float arcModeMaxAngle{ 360.0f };
+	float orthogonalModeAngle{ 0.0f };
 
 	glm::vec2 gravity{ 0.0f, -1.0f };
 	float minLifeTime{ 1.0f };
 	float maxLifeTime{ 1.0f };
+	float minEmissionVelocity{ 1.0f };
+	float maxEmissionVelocity{ 1.0f };
 	float minRotationEmissionVelocity{ 0.0f };
 	float maxRotationEmissionVelocity{ 0.0f };
-	float drag{ 0.1f };
 	glm::vec2 wind{ 0.0f, 0.0f };
 
 	Gradient<float> sizeOverLifeTimeGradient{ Gradient(1.0f) };
