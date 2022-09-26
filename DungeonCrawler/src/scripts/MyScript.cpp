@@ -56,7 +56,7 @@ void MyScript::start()
 	SpriteRenderer::create(wall, "src/sprites/Wiskunde.png");
 	Rigidbody::create(wall, b2_staticBody);
 
-	TransformPointer particleSystemTransform = Transform::create(glm::vec2(3.0f, 2.0f));
+	TransformPointer particleSystemTransform = Transform::create(glm::vec2(2.0f, 1.0f));
 	particleSystem = ParticleSystem::create(particleSystemTransform);
 }
 

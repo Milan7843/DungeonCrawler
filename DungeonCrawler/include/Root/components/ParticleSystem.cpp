@@ -2,12 +2,14 @@
 
 #include "Root/Transform.h"
 #include "Root/Random.h"
+#include "Root/engine/RootEngine.h"
 
 std::shared_ptr<ParticleSystem> ParticleSystem::create(std::shared_ptr<Transform> transform)
 {
 	ParticleSystem* particleSystem = new ParticleSystem();
 	std::shared_ptr<ParticleSystem> pointer{ particleSystem };
 	transform->addComponent(pointer);
+    particleSystem->emitParticle();
 	return pointer;
 }
 
@@ -15,7 +17,22 @@ ParticleSystem::ParticleSystem()
 {
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
-    emitParticle();
+
+    // Making sure everything gets put on this specific VAO
+    glBindVertexArray(VAO);
+
+    // Binding the buffer
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+    // Letting OpenGL know how to interpret the data:
+    // vec2 for position
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    // vec3 for color
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+
+    // Unbinding
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
 }
 
 ParticleSystem::~ParticleSystem()
@@ -26,14 +43,50 @@ ParticleSystem::~ParticleSystem()
 
 void ParticleSystem::start()
 {
+
 }
 
 void ParticleSystem::update()
 {
+    // Updating particle data
+    for (unsigned int i{ 0 }; i < particleDrawData.size(); i++)
+    {
+        float lifePoint = particleUpdateData[i].aliveTime / particleUpdateData[i].lifeTime;
+
+        // Gravity
+        particleUpdateData[i].velocity += gravity * Time::getDeltaTime();
+        // Wind
+        particleUpdateData[i].velocity += wind * Time::getDeltaTime();
+        // Drag
+        particleUpdateData[i].velocity *= (1.0f - dragOverLifeTimeGradient.sample(lifePoint) * Time::getDeltaTime());
+        // Applying velocity
+        particleDrawData[i].position += particleUpdateData[i].velocity * Time::getDeltaTime();
+
+        particleUpdateData[i].aliveTime += Time::getDeltaTime();
+
+        if (particleUpdateData[i].aliveTime > particleUpdateData[i].lifeTime)
+        {
+            emitParticle(i);
+        }
+    }
+
+    // Emitting new particles
+    if (particlesEmittedThisRun / glm::max(currentEmissionTime, 0.0001f) < emissionRate)
+        emitParticle();
+
+    currentEmissionTime += Time::getDeltaTime();
+
 }
 
 void ParticleSystem::render(float renderDepth)
 {
+    RootEngine::getParticleRenderShader()->use();
+    RootEngine::getParticleRenderShader()->setMat4("model", transform->getModelMatrix());
+
+    RootEngine::getParticleRenderShader()->setMat4("projection", Root::getActiveCamera()->getProjectionMatrix());
+    //RootEngine::getParticleRenderShader()->setInt("sprite", 0);
+    RootEngine::getParticleRenderShader()->setFloat("renderDepth", renderDepth / 10000.0f);
+
     writeDataToVAO();
 
     glBindVertexArray(VAO);
@@ -60,13 +113,7 @@ void ParticleSystem::writeDataToVAO()
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
     // Putting the draw data into the buffer
-    glBufferData(GL_ARRAY_BUFFER, sizeof(particleDrawData), particleDrawData.data(), GL_STATIC_DRAW);
-
-    // Letting OpenGL know how to interpret the data:
-    // vec2 for position
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-    // vec3 for color
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glBufferData(GL_ARRAY_BUFFER, particleDrawData.size() * sizeof(ParticleDrawData), particleDrawData.data(), GL_STATIC_DRAW);
     glEnableVertexAttribArray(0);
 
     // Unbinding
@@ -76,6 +123,7 @@ void ParticleSystem::writeDataToVAO()
 
 void ParticleSystem::emitParticle()
 {
+    std::cout << "Emitting" << particleDrawData.size() << std::endl;
     glm::vec2 position{ transform->getPosition() };
     glm::vec2 velocity{ getRandomDirection() * Random::between(minEmissionVelocity, maxEmissionVelocity) };
     glm::vec3 color{ colorOverLifeTimeGradient.sample(0.0f) };
@@ -90,6 +138,28 @@ void ParticleSystem::emitParticle()
             0.0f,
             lifeTime
         });
+
+    particlesEmittedThisRun++;
+}
+
+void ParticleSystem::emitParticle(unsigned int index)
+{
+    glm::vec2 position{ transform->getPosition() };
+    glm::vec2 velocity{ getRandomDirection() * Random::between(minEmissionVelocity, maxEmissionVelocity) };
+    glm::vec3 color{ colorOverLifeTimeGradient.sample(0.0f) };
+    float lifeTime{ Random::between(minLifeTime, maxLifeTime) };
+
+    particleDrawData[index] = {
+            position,
+            color
+        };
+    particleUpdateData[index] = {
+            velocity,
+            0.0f,
+            lifeTime
+        };
+
+    particlesEmittedThisRun++;
 }
 
 glm::vec2 ParticleSystem::getRandomDirection()

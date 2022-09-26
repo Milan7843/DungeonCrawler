@@ -14,6 +14,7 @@ namespace RootEngine
         std::vector<std::shared_ptr<Script>> scripts;
 
         Shader* spriteRenderShader;
+        Shader* particleRenderShader;
 
         Camera* activeCamera{ nullptr };
         GLFWwindow* window{ nullptr };
@@ -80,6 +81,11 @@ namespace RootEngine
         spriteRenderShader = new Shader(
             "include/Root/shaders/default_shader_source/spriteVertex.shader",
             "include/Root/shaders/default_shader_source/spriteFragment.shader");
+
+        particleRenderShader = new Shader(
+            "include/Root/shaders/default_shader_source/particleVertex.shader",
+            "include/Root/shaders/default_shader_source/particleFragment.shader",
+            "include/Root/shaders/default_shader_source/particleGeometry.shader");
 
         // Shader textRenderShader("src/shaders/textVertex.shader", "src/shaders/textFragment.shader");
 
@@ -166,6 +172,11 @@ namespace RootEngine
     Shader* getSpriteRenderShader()
     {
         return spriteRenderShader;
+    }
+
+    Shader* getParticleRenderShader()
+    {
+        return particleRenderShader;
     }
 
 

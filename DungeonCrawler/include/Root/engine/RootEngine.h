@@ -69,6 +69,13 @@ namespace RootEngine
 	Shader* getSpriteRenderShader();
 
 	/**
+	 * Get a pointer to the shader used for particle rendering.
+	 *
+	 * \returns a pointer to the shader used for particle rendering.
+	 */
+	Shader* getParticleRenderShader();
+
+	/**
 	 * Add a script to the scene.
 	 *
 	 * \param script: the script to add to the scene.

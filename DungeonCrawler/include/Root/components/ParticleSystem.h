@@ -106,6 +106,7 @@ private:
 	void writeDataToVAO();
 
 	void emitParticle();
+	void emitParticle(unsigned int index);
 
 	glm::vec2 getRandomDirection();
 
@@ -118,6 +119,9 @@ private:
 	bool looping{ true };
 	SimulationSpace simulationSpace { WORLD_SPACE };
 	float emissionTime{ 3.0f };
+	float emissionRate{ 6.0f }; // In emmissions per second
+	float currentEmissionTime{ 0.0f };
+	float particlesEmittedThisRun{ 0 };
 
 	unsigned int textureID{ 0 };
 
@@ -136,8 +140,10 @@ private:
 	float maxRotationEmissionVelocity{ 0.0f };
 	glm::vec2 wind{ 0.0f, 0.0f };
 
+	unsigned int particleLimit{ 25 };
+
 	Gradient<float> sizeOverLifeTimeGradient{ Gradient(1.0f) };
-	Gradient<float> dragOverLifeTimeGradient{ Gradient(1.0f) };
+	Gradient<float> dragOverLifeTimeGradient{ Gradient(0.03f) };
 	Gradient<glm::vec3> colorOverLifeTimeGradient{ Gradient(glm::vec3(1.0f)) };
 };
 
