@@ -27,8 +27,10 @@ ParticleSystem::ParticleSystem()
     // Letting OpenGL know how to interpret the data:
     // vec2 for position
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
     // vec3 for color
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(2 * sizeof(float)));
+    glEnableVertexAttribArray(1);
 
     // Unbinding
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -61,6 +63,9 @@ void ParticleSystem::update()
         particleUpdateData[i].velocity *= (1.0f - dragOverLifeTimeGradient.sample(lifePoint) * Time::getDeltaTime());
         // Applying velocity
         particleDrawData[i].position += particleUpdateData[i].velocity * Time::getDeltaTime();
+
+        // Setting particle color
+        particleDrawData[i].color = colorOverLifeTimeGradient.sample(lifePoint);
 
         particleUpdateData[i].aliveTime += Time::getDeltaTime();
 
@@ -114,7 +119,6 @@ void ParticleSystem::writeDataToVAO()
 
     // Putting the draw data into the buffer
     glBufferData(GL_ARRAY_BUFFER, particleDrawData.size() * sizeof(ParticleDrawData), particleDrawData.data(), GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
 
     // Unbinding
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -178,37 +182,4 @@ glm::vec2 ParticleSystem::getRandomDirection()
     }
 
     return glm::vec2(glm::cos(glm::radians(emissionAngle)), glm::sin(glm::radians(emissionAngle)));
-}
-
-void ParticleSystem::setConstantSizeOverLifeTime(float size)
-{
-	std::vector<GradientPoint<float>> colorGradientPoints{ { 0.0f, size} };
-	this->sizeOverLifeTimeGradient = Gradient<float>(colorGradientPoints);
-}
-
-void ParticleSystem::setSizeOverLifeTimeGradient(Gradient<float> sizeOverLifeTimeGradient)
-{
-	this->sizeOverLifeTimeGradient = sizeOverLifeTimeGradient;
-}
-
-void ParticleSystem::setConstantDragOverLifeTime(float drag)
-{
-	std::vector<GradientPoint<float>> colorGradientPoints{ { 0.0f, drag} };
-	this->dragOverLifeTimeGradient = Gradient<float>(colorGradientPoints);
-}
-
-void ParticleSystem::setDragOverLifeTimeGradient(Gradient<float> dragOverLifeTimeGradient)
-{
-	this->dragOverLifeTimeGradient = dragOverLifeTimeGradient;
-}
-
-void ParticleSystem::setConstantColorOverLifeTime(glm::vec3 color)
-{
-	std::vector<GradientPoint<glm::vec3>> colorGradientPoints{{ 0.0f, color}};
-	this->colorOverLifeTimeGradient = Gradient<glm::vec3>(colorGradientPoints);
-}
-
-void ParticleSystem::setColorOverLifeTimeGradient(Gradient<glm::vec3> colorOverLifeTimeGradient)
-{
-	this->colorOverLifeTimeGradient = colorOverLifeTimeGradient;
 }

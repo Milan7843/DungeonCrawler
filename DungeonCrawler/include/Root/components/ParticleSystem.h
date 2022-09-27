@@ -99,6 +99,139 @@ public:
 	 */
 	void setColorOverLifeTimeGradient(Gradient<glm::vec3> colorOverLifeTimeGradient);
 
+	/**
+	 * Set whether this particle system should loop after being done.
+	 * 
+	 * \param looping: whether the particle emission should loop.
+	 */
+	void setLooping(bool looping);
+
+	/**
+	 * Set the particle limit.
+	 *
+	 * \param particleLimit: the new particle limit.
+	 */
+	void setParticleLimit(unsigned int particleLimit);
+
+	/**
+	 * Set the emission duration per loop.
+	 * 
+	 * \param emissionTime: the new emission duration.
+	 */
+	void setEmissionDuration(float emissionDuration);
+
+	/**
+	 * Set the emission rate (number of particles emitted per second).
+	 * 
+	 * \param emissionRate; the new emission rate.
+	 */
+	void setEmissionRate(float emissionRate);
+
+	/**
+	 * Set the emission radius (distance from position a particle can spawn).
+	 *
+	 * \param emissionRadius: the new emission radius.
+	 */
+	void setEmissionRadius(float emissionRadius);
+
+	/**
+	 * Set the minimum angle for arc emission mode.
+	 * 
+	 * \param arcModeMinAngle: the minimum angle.
+	 */
+	void setArcEmissionModeMinAngle(float arcModeMinAngle);
+
+	/**
+	 * Set the maximum angle for arc emission mode.
+	 *
+	 * \param arcModeMaxAngle: the maximum angle.
+	 */
+	void setArcEmissionModeMaxAngle(float arcModeMaxAngle);
+
+	/**
+	 * Set the angle for orthogonal emission mode.
+	 *
+	 * \param orthogonalModeAngle: the new angle.
+	 */
+	void setOrthogonalModeAngle(float orthogonalModeAngle);
+
+	/**
+	 * Set the gravity (acceleration of the particles per second).
+	 *
+	 * \param gravity: the new gravity.
+	 */
+	void setGravity(glm::vec2 gravity);
+
+	/**
+	 * Set the wind (acceleration of the particles per second).
+	 *
+	 * \param gravity: the new wind.
+	 */
+	void setWind(glm::vec2 wind);
+
+	/**
+	 * Set the minimum particle life time.
+	 * 
+	 * \param minLifeTime: the new minimum life time.
+	 */
+	void setMinLifeTime(float minLifeTime);
+
+	/**
+	 * Set the maximum particle life time.
+	 *
+	 * \param maxLifeTime: the new maximum life time.
+	 */
+	void setMaxLifeTime(float maxLifeTime);
+
+	/**
+	 * Set the particle life time.
+	 *
+	 * \param lifeTime: the new life time for all particles.
+	 */
+	void setLifeTime(float lifeTime);
+
+	/**
+	 * Set the minimum particle emission velocity.
+	 *
+	 * \param minEmissionVelocity: the new minimum emission velocity.
+	 */
+	void setMinEmissionVelocity(float minEmissionVelocity);
+
+	/**
+	 * Set the maximum particle emission velocity.
+	 *
+	 * \param maxEmissionVelocity: the new maximum emission velocity.
+	 */
+	void setMaxEmissionVelocity(float maxEmissionVelocity);
+
+	/**
+	 * Set the particle emission velocity.
+	 *
+	 * \param emissionVelocity: the new emission velocity for all particles.
+	 */
+	void setEmissionVelocity(float emissionVelocity);
+
+	/**
+	 * Set the minimum particle rotation emission velocity.
+	 *
+	 * \param minRotationEmissionVelocity: the new minimum rotation emission velocity.
+	 */
+	void setMinRotationEmissionVelocity(float minRotationEmissionVelocity);
+
+	/**
+	 * Set the maximum particle rotation emission velocity.
+	 *
+	 * \param maxRotationEmissionVelocity: the new maximum rotation emission velocity.
+	 */
+	void setMaxRotationEmissionVelocity(float maxRotationEmissionVelocity);
+
+	/**
+	 * Set the particle rotation emission velocity.
+	 *
+	 * \param maxRotationEmissionVelocity: the new rotation emission velocity for all particles.
+	 */
+	void setRotationEmissionVelocity(float rotationEmissionVelocity);
+
 private:
 
 	ParticleSystem();
@@ -118,7 +251,7 @@ private:
 
 	bool looping{ true };
 	SimulationSpace simulationSpace { WORLD_SPACE };
-	float emissionTime{ 3.0f };
+	float emissionDuration{ 3.0f };
 	float emissionRate{ 6.0f }; // In emmissions per second
 	float currentEmissionTime{ 0.0f };
 	float particlesEmittedThisRun{ 0 };
@@ -132,8 +265,8 @@ private:
 	float orthogonalModeAngle{ 0.0f };
 
 	glm::vec2 gravity{ 0.0f, -1.0f };
-	float minLifeTime{ 1.0f };
-	float maxLifeTime{ 1.0f };
+	float minLifeTime{ 3.0f };
+	float maxLifeTime{ 3.0f };
 	float minEmissionVelocity{ 1.0f };
 	float maxEmissionVelocity{ 1.0f };
 	float minRotationEmissionVelocity{ 0.0f };

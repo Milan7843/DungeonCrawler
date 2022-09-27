@@ -232,6 +232,7 @@
     <ClInclude Include="include\Root\engine\TransformEngine.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\Root\components\ParticleSystemGettersAndSetters.cpp" />
     <ClCompile Include="include\Root\engine\ComponentEngine.cpp" />
     <ClCompile Include="include\Root\components\Animator.cpp" />
     <ClCompile Include="include\Root\components\Collider.cpp" />

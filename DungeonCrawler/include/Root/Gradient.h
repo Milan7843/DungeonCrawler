@@ -92,8 +92,8 @@ public:
 					return gradientPoint.value;
 
 				// Otherwise find the left side and interpolate
-				float t = map(samplePoint, points[i].point, gradientPoint.point, 0.0f, 1.0f);
-				return interpolate(points[i].value, gradientPoint.value, t);
+				float t = map(samplePoint, points[i-1].point, gradientPoint.point, 0.0f, 1.0f);
+				return interpolate(points[i-1].value, gradientPoint.value, t);
 			}
 
 			i++;

@@ -58,6 +58,14 @@ void MyScript::start()
 
 	TransformPointer particleSystemTransform = Transform::create(glm::vec2(2.0f, 1.0f));
 	particleSystem = ParticleSystem::create(particleSystemTransform);
+	Gradient<glm::vec3> gradient = Gradient<glm::vec3>(std::vector<GradientPoint<glm::vec3>>{ 
+		{ 0.0f, glm::vec3(1.0f) },
+		{ 0.5f, glm::vec3(0.1f, 0.9f, 0.6f) },
+		{ 1.0f, glm::vec3(0.9f, 0.2f, 0.8f) } });
+	Gradient<glm::vec3> gradient2 = Gradient<glm::vec3>(std::vector<GradientPoint<glm::vec3>>{
+		{ 0.0f, glm::vec3(1.0f) },
+		{ 1.0f, glm::vec3(0.3f) } });
+	particleSystem->setColorOverLifeTimeGradient(gradient2);
 }
 
 void MyScript::update()
