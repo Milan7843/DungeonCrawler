@@ -70,6 +70,7 @@ void MyScript::start()
 	});
 	particleSystem->setColorOverLifeTimeGradient(colorGradient);
 	particleSystem->setSizeOverLifeTimeGradient(sizeGradient);
+	particleSystem->setSprite("src/sprites/cutie_cat.png");
 	particleSystem->play();
 }
 

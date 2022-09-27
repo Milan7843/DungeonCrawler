@@ -2,8 +2,12 @@
 
 #include "Root/components/Component.h" // Base class
 #include "Root/Gradient.h"
+#include <stbi_utility/TextureData.h>
 
 #include <glm/glm.hpp>
+
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 #include <memory>
 
@@ -120,6 +124,13 @@ public:
 	 * \param particleLimit: the new particle limit.
 	 */
 	void setParticleLimit(unsigned int particleLimit);
+
+	/**
+	 * Set the sprite for this particle system.
+	 * 
+	 * \param spritePath: the path to the sprite.
+	 */
+	void setSprite(const char* spritePath);
 
 	/**
 	 * Set the emission mode.
@@ -269,14 +280,15 @@ private:
 	bool emitting{ false };
 	SimulationSpace simulationSpace { WORLD_SPACE };
 	float emissionDuration{ 3.0f };
-	float emissionRate{ 6.0f }; // In emmissions per second
+	float emissionRate{ 6.0f }; // In emissions per second
 	float currentEmissionTime{ 0.0f };
 	float particlesEmittedThisRun{ 0 };
 
+	bool useTexture{ false };
 	unsigned int textureID{ 0 };
 
-	EmissionMode emissionMode{ ORTHOGONAL_EMISSION };
-	float emissionRadius{ 1.0f };
+	EmissionMode emissionMode{ ARC_EMISSION };
+	float emissionRadius{ 0.2f };
 	float arcModeMinAngle{ 0.0f };
 	float arcModeMaxAngle{ 360.0f };
 	float orthogonalModeAngle{ 0.0f };
@@ -285,7 +297,7 @@ private:
 	float minLifeTime{ 3.0f };
 	float maxLifeTime{ 3.0f };
 	float minEmissionVelocity{ 1.0f };
-	float maxEmissionVelocity{ 1.0f };
+	float maxEmissionVelocity{ 1.2f };
 	float minRotationEmissionVelocity{ 0.0f };
 	float maxRotationEmissionVelocity{ 0.0f };
 	glm::vec2 wind{ 0.0f, 0.0f };

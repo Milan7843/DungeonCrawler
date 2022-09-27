@@ -101,10 +101,15 @@ void ParticleSystem::render(float renderDepth)
     RootEngine::getParticleRenderShader()->setMat4("model", transform->getModelMatrix());
 
     RootEngine::getParticleRenderShader()->setMat4("projection", Root::getActiveCamera()->getProjectionMatrix());
-    //RootEngine::getParticleRenderShader()->setInt("sprite", 0);
+    RootEngine::getParticleRenderShader()->setInt("sprite", 0);
     RootEngine::getParticleRenderShader()->setFloat("renderDepth", renderDepth / 10000.0f);
+    RootEngine::getParticleRenderShader()->setBool("useTexture", useTexture);
 
     writeDataToVAO();
+
+    // Binding the sprite
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, textureID);
 
     glBindVertexArray(VAO);
 
