@@ -15,6 +15,7 @@ struct ParticleDrawData
 {
 	glm::vec2 position;
 	glm::vec3 color;
+	glm::vec2 size;
 };
 
 struct ParticleUpdateData
@@ -50,8 +51,15 @@ public:
 
 	void render(float renderDepth) override;
 
+	/**
+	 * Start a new emission period which will last 'emissionDuration' seconds.
+	 * Calling this function during active emission will reset the timer.
+	 */
 	void play();
 
+	/**
+	 * Stop the current emission.
+	 */
 	void stop();
 
 	/**
@@ -59,7 +67,7 @@ public:
 	 * 
 	 * \param size: the particle size.
 	 */
-	void setConstantSizeOverLifeTime(float size);
+	void setConstantSizeOverLifeTime(glm::vec2 size);
 
 	/**
 	 * Set the particle size which changes over its lifetime.
@@ -67,7 +75,7 @@ public:
 	 *
 	 * \param sizeOverLifeTimeGradient: the particle size gradient.
 	 */
-	void setSizeOverLifeTimeGradient(Gradient<float> sizeOverLifeTimeGradient);
+	void setSizeOverLifeTimeGradient(Gradient<glm::vec2> sizeOverLifeTimeGradient);
 
 	/**
 	 * Set the particle drag which stays constant over its lifetime.
@@ -112,6 +120,13 @@ public:
 	 * \param particleLimit: the new particle limit.
 	 */
 	void setParticleLimit(unsigned int particleLimit);
+
+	/**
+	 * Set the emission mode.
+	 * 
+	 * \param mode: the new emission mode.
+	 */
+	void setEmissionMode(EmissionMode mode);
 
 	/**
 	 * Set the emission duration per loop.
@@ -239,9 +254,10 @@ private:
 	void writeDataToVAO();
 
 	void emitParticle();
-	void emitParticle(unsigned int index);
 
 	glm::vec2 getRandomDirection();
+
+	glm::vec2 getRandomPosition(glm::vec2 velocity);
 
 	unsigned int VAO{ 0 };
 	unsigned int VBO{ 0 };
@@ -250,6 +266,7 @@ private:
 	std::vector<ParticleUpdateData> particleUpdateData;
 
 	bool looping{ true };
+	bool emitting{ false };
 	SimulationSpace simulationSpace { WORLD_SPACE };
 	float emissionDuration{ 3.0f };
 	float emissionRate{ 6.0f }; // In emmissions per second
@@ -258,7 +275,7 @@ private:
 
 	unsigned int textureID{ 0 };
 
-	EmissionMode emissionMode{ ARC_EMISSION };
+	EmissionMode emissionMode{ ORTHOGONAL_EMISSION };
 	float emissionRadius{ 1.0f };
 	float arcModeMinAngle{ 0.0f };
 	float arcModeMaxAngle{ 360.0f };
@@ -275,7 +292,7 @@ private:
 
 	unsigned int particleLimit{ 25 };
 
-	Gradient<float> sizeOverLifeTimeGradient{ Gradient(1.0f) };
+	Gradient<glm::vec2> sizeOverLifeTimeGradient{ Gradient(glm::vec2(1.0f)) };
 	Gradient<float> dragOverLifeTimeGradient{ Gradient(0.03f) };
 	Gradient<glm::vec3> colorOverLifeTimeGradient{ Gradient(glm::vec3(1.0f)) };
 };

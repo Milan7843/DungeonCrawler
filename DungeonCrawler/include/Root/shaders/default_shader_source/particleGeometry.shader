@@ -6,7 +6,12 @@ layout(triangle_strip, max_vertices = 6) out;
 out vec2 FragIn_TexCoords;
 out vec3 FragIn_BaseColor;
 
+uniform mat4 projection;
+uniform mat4 model;
+uniform float renderDepth;
+
 in vec3 baseColor[];
+in vec2 particleSize[];
 
 vec2 offsets[] = {
 	vec2( 0.5, 0.5),
@@ -23,7 +28,9 @@ void main()
 	{
 		FragIn_TexCoords = offsets[i] + vec2(0.5, 0.5);
 		FragIn_BaseColor = baseColor[0];
-		gl_Position = gl_in[0].gl_Position + vec4(offsets[i], 0.0f, 0.0f) * 0.04;
+		gl_Position = gl_in[0].gl_Position + projection * model * vec4(offsets[i].x * particleSize[0].x, offsets[i].y * particleSize[0].y, 0.0, 1.0);
+		// Depth
+		gl_Position.z = renderDepth;
 		EmitVertex();
 		if (i == 2 || i == 5)
 		{

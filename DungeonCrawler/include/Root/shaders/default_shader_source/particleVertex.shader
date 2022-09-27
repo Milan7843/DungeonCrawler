@@ -2,8 +2,10 @@
 
 layout(location = 0) in vec2 position;
 layout(location = 1) in vec3 color;
+layout(location = 2) in vec2 size;
 
 out vec3 baseColor;
+out vec2 particleSize;
 
 uniform mat4 projection;
 uniform mat4 model;
@@ -18,4 +20,6 @@ void main()
     gl_Position.z = renderDepth;
 
     baseColor = color;
+
+    particleSize = size;
 }

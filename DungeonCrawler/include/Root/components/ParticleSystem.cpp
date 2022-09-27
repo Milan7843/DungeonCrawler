@@ -9,7 +9,6 @@ std::shared_ptr<ParticleSystem> ParticleSystem::create(std::shared_ptr<Transform
 	ParticleSystem* particleSystem = new ParticleSystem();
 	std::shared_ptr<ParticleSystem> pointer{ particleSystem };
 	transform->addComponent(pointer);
-    particleSystem->emitParticle();
 	return pointer;
 }
 
@@ -26,11 +25,14 @@ ParticleSystem::ParticleSystem()
 
     // Letting OpenGL know how to interpret the data:
     // vec2 for position
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
     // vec3 for color
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(2 * sizeof(float)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(2 * sizeof(float)));
     glEnableVertexAttribArray(1);
+    // vec2 for size
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(5 * sizeof(float)));
+    glEnableVertexAttribArray(2);
 
     // Unbinding
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -45,7 +47,6 @@ ParticleSystem::~ParticleSystem()
 
 void ParticleSystem::start()
 {
-
 }
 
 void ParticleSystem::update()
@@ -66,21 +67,32 @@ void ParticleSystem::update()
 
         // Setting particle color
         particleDrawData[i].color = colorOverLifeTimeGradient.sample(lifePoint);
+        particleDrawData[i].size = sizeOverLifeTimeGradient.sample(lifePoint);
 
+        // Increasing alive time
         particleUpdateData[i].aliveTime += Time::getDeltaTime();
 
+        // Erasing a particle if it is too old
         if (particleUpdateData[i].aliveTime > particleUpdateData[i].lifeTime)
         {
-            emitParticle(i);
+            particleUpdateData.erase(particleUpdateData.begin() + i);
+            particleDrawData.erase(particleDrawData.begin() + i);
         }
     }
 
     // Emitting new particles
-    if (particlesEmittedThisRun / glm::max(currentEmissionTime, 0.0001f) < emissionRate)
-        emitParticle();
+    if (emitting)
+    {
+        while (particlesEmittedThisRun / glm::max(currentEmissionTime, 0.0001f) < emissionRate)
+            emitParticle();
+    }
 
     currentEmissionTime += Time::getDeltaTime();
 
+    if (currentEmissionTime > emissionDuration && !looping)
+    {
+        emitting = false;
+    }
 }
 
 void ParticleSystem::render(float renderDepth)
@@ -103,10 +115,12 @@ void ParticleSystem::render(float renderDepth)
 
 void ParticleSystem::play()
 {
+    emitting = true;
 }
 
 void ParticleSystem::stop()
 {
+    emitting = false;
 }
 
 void ParticleSystem::writeDataToVAO()
@@ -128,40 +142,26 @@ void ParticleSystem::writeDataToVAO()
 void ParticleSystem::emitParticle()
 {
     std::cout << "Emitting" << particleDrawData.size() << std::endl;
-    glm::vec2 position{ transform->getPosition() };
-    glm::vec2 velocity{ getRandomDirection() * Random::between(minEmissionVelocity, maxEmissionVelocity) };
+
+    glm::vec2 direction{ getRandomDirection() };
+    glm::vec2 position{ transform->getPosition() + getRandomPosition(direction) };
     glm::vec3 color{ colorOverLifeTimeGradient.sample(0.0f) };
+    glm::vec2 size{ sizeOverLifeTimeGradient.sample(0.0f) };
+
     float lifeTime{ Random::between(minLifeTime, maxLifeTime) };
+
+    float velocity{ Random::between(minEmissionVelocity, maxEmissionVelocity) };
 
     particleDrawData.push_back({
             position,
-            color
+            color,
+            size
         });
     particleUpdateData.push_back({
-            velocity,
+            direction * velocity,
             0.0f,
             lifeTime
         });
-
-    particlesEmittedThisRun++;
-}
-
-void ParticleSystem::emitParticle(unsigned int index)
-{
-    glm::vec2 position{ transform->getPosition() };
-    glm::vec2 velocity{ getRandomDirection() * Random::between(minEmissionVelocity, maxEmissionVelocity) };
-    glm::vec3 color{ colorOverLifeTimeGradient.sample(0.0f) };
-    float lifeTime{ Random::between(minLifeTime, maxLifeTime) };
-
-    particleDrawData[index] = {
-            position,
-            color
-        };
-    particleUpdateData[index] = {
-            velocity,
-            0.0f,
-            lifeTime
-        };
 
     particlesEmittedThisRun++;
 }
@@ -182,4 +182,18 @@ glm::vec2 ParticleSystem::getRandomDirection()
     }
 
     return glm::vec2(glm::cos(glm::radians(emissionAngle)), glm::sin(glm::radians(emissionAngle)));
+}
+
+glm::vec2 ParticleSystem::getRandomPosition(glm::vec2 direction)
+{
+    switch (emissionMode)
+    {
+        case ARC_EMISSION:
+            return direction * 2.0f * emissionRadius * Random::between(0, 1);
+
+        case ORTHOGONAL_EMISSION:
+            // Creating a counter clockwise perpendicular vector to the direction
+            glm::vec2 orthogonalVector(-direction.y, direction.x);
+            return orthogonalVector * 2.0f * emissionRadius * Random::between(-1, 1);
+    }
 }

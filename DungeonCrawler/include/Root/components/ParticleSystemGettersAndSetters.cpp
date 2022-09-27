@@ -1,12 +1,12 @@
 #include "ParticleSystem.h"
 
-void ParticleSystem::setConstantSizeOverLifeTime(float size)
+void ParticleSystem::setConstantSizeOverLifeTime(glm::vec2 size)
 {
-    std::vector<GradientPoint<float>> colorGradientPoints{ { 0.0f, size} };
-    this->sizeOverLifeTimeGradient = Gradient<float>(colorGradientPoints);
+    std::vector<GradientPoint<glm::vec2>> sizeGradientPoints{ { 0.0f, size} };
+    this->sizeOverLifeTimeGradient = Gradient<glm::vec2>(sizeGradientPoints);
 }
 
-void ParticleSystem::setSizeOverLifeTimeGradient(Gradient<float> sizeOverLifeTimeGradient)
+void ParticleSystem::setSizeOverLifeTimeGradient(Gradient<glm::vec2> sizeOverLifeTimeGradient)
 {
     this->sizeOverLifeTimeGradient = sizeOverLifeTimeGradient;
 }
@@ -41,6 +41,11 @@ void ParticleSystem::setLooping(bool looping)
 void ParticleSystem::setParticleLimit(unsigned int particleLimit)
 {
     this->particleLimit = particleLimit;
+}
+
+void ParticleSystem::setEmissionMode(EmissionMode mode)
+{
+    this->emissionMode = mode;
 }
 
 void ParticleSystem::setEmissionDuration(float emissionDuration)
