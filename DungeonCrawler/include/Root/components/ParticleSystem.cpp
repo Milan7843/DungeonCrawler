@@ -11,7 +11,6 @@ std::shared_ptr<ParticleSystem> ParticleSystem::create(std::shared_ptr<Transform
 	transform->addComponent(pointer);
 	return pointer;
 }
-
 ParticleSystem::ParticleSystem()
 {
     glGenVertexArrays(1, &VAO);
@@ -25,14 +24,17 @@ ParticleSystem::ParticleSystem()
 
     // Letting OpenGL know how to interpret the data:
     // vec2 for position
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
     // vec3 for color
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(2 * sizeof(float)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(2 * sizeof(float)));
     glEnableVertexAttribArray(1);
     // vec2 for size
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(5 * sizeof(float)));
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(5 * sizeof(float)));
     glEnableVertexAttribArray(2);
+    // float for rotation
+    glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(7 * sizeof(float)));
+    glEnableVertexAttribArray(3);
 
     // Unbinding
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -43,6 +45,7 @@ ParticleSystem::~ParticleSystem()
 {
     glDeleteBuffers(1, &VBO);
     glDeleteVertexArrays(1, &VAO);
+    Logger::destructorMessage("Particle system destroyed.");
 }
 
 void ParticleSystem::start()
@@ -61,9 +64,24 @@ void ParticleSystem::update()
         // Wind
         particleUpdateData[i].velocity += wind * Time::getDeltaTime();
         // Drag
-        particleUpdateData[i].velocity *= (1.0f - dragOverLifeTimeGradient.sample(lifePoint) * Time::getDeltaTime());
+        particleUpdateData[i].velocity
+            *= (1.0f - dragOverLifeTimeGradient.sample(lifePoint)
+            * Time::getDeltaTime());
         // Applying velocity
         particleDrawData[i].position += particleUpdateData[i].velocity * Time::getDeltaTime();
+        // Applying angular velocity
+        if (letRotationFollowVelocity)
+        {
+            particleDrawData[i].rotation
+                = glm::degrees(
+                    glm::atan(particleUpdateData[i].velocity.y, particleUpdateData[i].velocity.x));
+        }
+        else
+        {
+            particleDrawData[i].rotation
+                += particleUpdateData[i].rotationVelocity
+                * Time::getDeltaTime();
+        }
 
         // Setting particle color
         particleDrawData[i].color = colorOverLifeTimeGradient.sample(lifePoint);
@@ -98,11 +116,14 @@ void ParticleSystem::update()
 void ParticleSystem::render(float renderDepth)
 {
     RootEngine::getParticleRenderShader()->use();
-    RootEngine::getParticleRenderShader()->setMat4("model", transform->getModelMatrix());
+    RootEngine::getParticleRenderShader()
+        ->setMat4("model", transform->getModelMatrix());
 
-    RootEngine::getParticleRenderShader()->setMat4("projection", Root::getActiveCamera()->getProjectionMatrix());
+    RootEngine::getParticleRenderShader()
+        ->setMat4("projection", Root::getActiveCamera()->getProjectionMatrix());
     RootEngine::getParticleRenderShader()->setInt("sprite", 0);
-    RootEngine::getParticleRenderShader()->setFloat("renderDepth", renderDepth / 10000.0f);
+    RootEngine::getParticleRenderShader()
+        ->setFloat("renderDepth", renderDepth / 10000.0f);
     RootEngine::getParticleRenderShader()->setBool("useTexture", useTexture);
 
     writeDataToVAO();
@@ -121,6 +142,8 @@ void ParticleSystem::render(float renderDepth)
 void ParticleSystem::play()
 {
     emitting = true;
+    float currentEmissionTime = 0.0f;
+    float particlesEmittedThisRun = 0.0f;
 }
 
 void ParticleSystem::stop()
@@ -137,7 +160,10 @@ void ParticleSystem::writeDataToVAO()
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
     // Putting the draw data into the buffer
-    glBufferData(GL_ARRAY_BUFFER, particleDrawData.size() * sizeof(ParticleDrawData), particleDrawData.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER,
+        particleDrawData.size() * sizeof(ParticleDrawData),
+        particleDrawData.data(),
+        GL_STATIC_DRAW);
 
     // Unbinding
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -156,16 +182,21 @@ void ParticleSystem::emitParticle()
     float lifeTime{ Random::between(minLifeTime, maxLifeTime) };
 
     float velocity{ Random::between(minEmissionVelocity, maxEmissionVelocity) };
+    float rotationVelocity{ 
+        Random::between(minRotationEmissionVelocity, maxRotationEmissionVelocity) };
+    float rotation{ Random::between(minEmissionRotation, maxEmissionRotation) };
 
     particleDrawData.push_back({
             position,
             color,
-            size
+            size,
+            rotation
         });
     particleUpdateData.push_back({
             direction * velocity,
             0.0f,
-            lifeTime
+            lifeTime,
+            rotationVelocity
         });
 
     particlesEmittedThisRun++;

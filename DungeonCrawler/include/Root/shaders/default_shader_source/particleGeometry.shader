@@ -12,6 +12,7 @@ uniform float renderDepth;
 
 in vec3 baseColor[];
 in vec2 particleSize[];
+in float particleRotation[];
 
 vec2 offsets[] = {
 	vec2( 0.5, 0.5),
@@ -24,11 +25,18 @@ vec2 offsets[] = {
 
 void main()
 {
+	float rotationRadians = 0.0174532925 * particleRotation[0];
+
+	float cr = cos(rotationRadians);
+	float sr = sin(rotationRadians);
+	mat2 rotationMatrix = mat2(cr, sr, -sr, cr);
+
 	for (int i = 0; i < 6; i++)
 	{
 		FragIn_TexCoords = offsets[i] + vec2(0.5, 0.5);
 		FragIn_BaseColor = baseColor[0];
-		gl_Position = gl_in[0].gl_Position + projection * model * vec4(offsets[i].x * particleSize[0].x, offsets[i].y * particleSize[0].y, 0.0, 1.0);
+		gl_Position = gl_in[0].gl_Position
+			+ projection * model * vec4(rotationMatrix * vec2(offsets[i].x * particleSize[0].x, offsets[i].y * particleSize[0].y), 0.0, 1.0);
 		// Depth
 		gl_Position.z = renderDepth;
 		EmitVertex();

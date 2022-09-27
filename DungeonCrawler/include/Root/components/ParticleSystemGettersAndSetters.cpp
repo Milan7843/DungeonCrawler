@@ -169,3 +169,24 @@ void ParticleSystem::setRotationEmissionVelocity(float rotationEmissionVelocity)
     setMinRotationEmissionVelocity(rotationEmissionVelocity);
     setMaxRotationEmissionVelocity(rotationEmissionVelocity);
 }
+
+void ParticleSystem::setMinEmissionRotation(float minEmissionRotation)
+{
+    this->minEmissionRotation = minEmissionRotation;
+}
+
+void ParticleSystem::setMaxEmissionRotation(float maxEmissionRotation)
+{
+    this->maxEmissionRotation = maxEmissionRotation;
+}
+
+void ParticleSystem::setEmissionRotation(float emissionRotation)
+{
+    setMinEmissionRotation(emissionRotation);
+    setMaxEmissionRotation(emissionRotation);
+}
+
+void ParticleSystem::setRotationFollowVelocity(bool letRotationFollowVelocity)
+{
+    this->letRotationFollowVelocity = letRotationFollowVelocity;
+}

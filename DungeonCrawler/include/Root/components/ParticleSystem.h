@@ -20,6 +20,7 @@ struct ParticleDrawData
 	glm::vec2 position;
 	glm::vec3 color;
 	glm::vec2 size;
+	float rotation;
 };
 
 struct ParticleUpdateData
@@ -27,6 +28,7 @@ struct ParticleUpdateData
 	glm::vec2 velocity;
 	float aliveTime;
 	float lifeTime;
+	float rotationVelocity;
 };
 
 enum SimulationSpace
@@ -258,6 +260,35 @@ public:
 	 */
 	void setRotationEmissionVelocity(float rotationEmissionVelocity);
 
+	/**
+	 * Set the minimum particle emission rotation at emission (degrees).
+	 *
+	 * \param minEmissionRotation: the new minimum rotation.
+	 */
+	void setMinEmissionRotation(float minEmissionRotation);
+
+	/**
+	 * Set the maximum particle emission rotation at emission (degrees).
+	 *
+	 * \param maxEmissionRotation: the new maximum rotation.
+	 */
+	void setMaxEmissionRotation(float maxEmissionRotation);
+
+	/**
+	 * Set the particle emission rotation (degrees).
+	 *
+	 * \param emissionRotation: the new rotation for all particles at emission.
+	 */
+	void setEmissionRotation(float emissionRotation);
+
+	/**
+	 * Set the rotation to follow the velocity.
+	 * Overwrites all other rotation input.
+	 * 
+	 * \param letRotationFollowVelocity: whether to make the rotation folow the velocity.
+	 */
+	void setRotationFollowVelocity(bool letRotationFollowVelocity);
+
 private:
 
 	ParticleSystem();
@@ -298,8 +329,11 @@ private:
 	float maxLifeTime{ 3.0f };
 	float minEmissionVelocity{ 1.0f };
 	float maxEmissionVelocity{ 1.2f };
-	float minRotationEmissionVelocity{ 0.0f };
-	float maxRotationEmissionVelocity{ 0.0f };
+	float minRotationEmissionVelocity{ -360.0f };
+	float maxRotationEmissionVelocity{ 360.0f };
+	float minEmissionRotation{ 0.0f };
+	float maxEmissionRotation{ 360.0f };
+	bool letRotationFollowVelocity{ false };
 	glm::vec2 wind{ 0.0f, 0.0f };
 
 	unsigned int particleLimit{ 25 };

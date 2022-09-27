@@ -61,7 +61,7 @@ void MyScript::start()
 	Gradient<glm::vec3> colorGradient = Gradient<glm::vec3>(std::vector<GradientPoint<glm::vec3>>{ 
 		{ 0.0f, glm::vec3(1.0f) },
 		{ 0.5f, glm::vec3(0.1f, 0.9f, 0.6f) },
-		{ 1.0f, glm::vec3(0.9f, 0.2f, 0.8f) } });
+		{ 0.9f, glm::vec3(0.9f, 0.2f, 0.8f) } });
 	Gradient<glm::vec2> sizeGradient = Gradient<glm::vec2>(std::vector<GradientPoint<glm::vec2>>{
 		{ 0.0f, glm::vec2(0.0f) },
 		{ 0.1f, glm::vec2(1.0f) },
