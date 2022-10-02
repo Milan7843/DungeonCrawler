@@ -196,7 +196,8 @@ namespace RendererEngine
     {
         for (ScreenSpaceEffectPointer& screenSpaceEffect : screenSpaceEffects)
         {
-            runScreenSpaceEffect(screenSpaceEffect);
+            if (screenSpaceEffect->isEnabled())
+                runScreenSpaceEffect(screenSpaceEffect);
         }
     }
 
