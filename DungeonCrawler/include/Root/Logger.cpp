@@ -9,7 +9,7 @@ void Logger::log(const char* message)
 {
     // White text on black background
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-    write(message);
+    write((std::string("[LOG]       ") + message).c_str());
 }
 
 void Logger::logWarning(std::string message)
@@ -21,7 +21,7 @@ void Logger::logWarning(const char* message)
 {
     // Yellow text on black background
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
-    write((std::string("[WARNING] ") + message).c_str());
+    write((std::string("[WARNING]   ") + message).c_str());
 }
 
 void Logger::logError(std::string message)
@@ -33,7 +33,7 @@ void Logger::logError(const char* message)
 {
     // Red text on black background
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
-    write((std::string("[ERROR] ") + message).c_str());
+    write((std::string("[ERROR]     ") + message).c_str());
 }
 
 void Logger::destructorMessage(std::string message)
@@ -45,7 +45,7 @@ void Logger::destructorMessage(const char* message)
 {
     // White text on black background
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-    write(message);
+    write((std::string("[DESTROYED] ") + message + ".").c_str());
 }
 
 void Logger::write(const char* message)

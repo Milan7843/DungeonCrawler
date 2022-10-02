@@ -6,7 +6,7 @@ Gradient<T>::Gradient(std::vector<GradientPoint<T>> points);
 template<class T>
 Gradient<T>::~Gradient()
 {
-	Logger::destructorMessage("Gradient destroyed.");
+	Logger::destructorMessage("Gradient");
 }
 
 template<class T>

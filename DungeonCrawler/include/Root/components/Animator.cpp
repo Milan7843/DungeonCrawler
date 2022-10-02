@@ -2,7 +2,7 @@
 
 Animator::~Animator()
 {
-	Logger::destructorMessage("Animator destroyed.");
+	Logger::destructorMessage("Animator");
 }
 
 std::shared_ptr<Animator> Animator::create()

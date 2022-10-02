@@ -4,7 +4,7 @@
 
 ScreenSpaceEffect::~ScreenSpaceEffect()
 {
-	Logger::destructorMessage("Destroyed screen space effect.");
+	Logger::destructorMessage("Screen space effect");
 }
 
 ScreenSpaceEffectPointer ScreenSpaceEffect::create(const std::string& shaderPath)

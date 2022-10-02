@@ -14,7 +14,7 @@ Camera::~Camera()
 	if (RootEngine::getActiveCamera() == this)
 		RootEngine::setActiveCamera(nullptr);
 
-	Logger::destructorMessage("Camera destroyed");
+	Logger::destructorMessage("Camera");
 }
 
 std::shared_ptr<Camera> Camera::create(std::shared_ptr<Transform> transform, float cameraHeight)

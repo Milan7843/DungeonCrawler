@@ -45,7 +45,7 @@ ParticleSystem::~ParticleSystem()
 {
     glDeleteBuffers(1, &VBO);
     glDeleteVertexArrays(1, &VAO);
-    Logger::destructorMessage("Particle system destroyed.");
+    Logger::destructorMessage("Particle system");
 }
 
 void ParticleSystem::start()

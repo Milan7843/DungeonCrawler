@@ -60,8 +60,7 @@ void Transform::updateTransformMatrices()
 
 Transform::~Transform()
 {
-	std::cout << this->toString() << std::endl;
-	Logger::destructorMessage("Transform destroyed");
+	Logger::destructorMessage("Transform");
 }
 
 std::shared_ptr<Transform> Transform::create(glm::vec2 position, float rotation, glm::vec2 scale, float renderDepth)

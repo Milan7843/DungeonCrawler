@@ -62,7 +62,7 @@ public:
 
 	~Gradient()
 	{
-		Logger::destructorMessage("Gradient destroyed.");
+		Logger::destructorMessage("Gradient");
 	}
 
 	/**
