@@ -12,6 +12,9 @@ namespace RendererEngine
         unsigned int squareVAO{ 0 };
         unsigned int screenRectVAO{ 0 };
 
+        unsigned int savedScreenWidth{ 0 };
+        unsigned int savedScreenHeight{ 0 };
+
         std::vector<ScreenSpaceEffectPointer> screenSpaceEffects;
 
         Shader* screenTextureShader;
@@ -144,7 +147,7 @@ namespace RendererEngine
     void initialise(unsigned int width, unsigned int height)
     {
         glGenFramebuffers(1, &mainFrameBuffer);
-        setFrameBufferTexture(width, height);
+        setTextureSize(width, height);
 
         screenTextureShader = new Shader(
             "include/Root/shaders/default_shader_source/screenSpaceVertex.shader",
@@ -169,6 +172,7 @@ namespace RendererEngine
 
         screenTextureShader->use();
         screenTextureShader->setInt("baseTexture", 0);
+        screenTextureShader->setVector2("windowSize", savedScreenWidth, savedScreenHeight);
 
         glBindVertexArray(getScreenRectVAO());
 
@@ -196,8 +200,15 @@ namespace RendererEngine
         }
     }
 
-    void setFrameBufferTexture(unsigned int width, unsigned int height)
+    void setTextureSize(unsigned int width, unsigned int height)
     {
+        // If the screen size didn't change, don't continue this function
+        if (savedScreenWidth == width && savedScreenHeight == height)
+            return;
+
+        savedScreenWidth = width;
+        savedScreenHeight = height;
+
         // Generating the source texture, not linked to the framebuffer
         glGenTextures(1, &screenSourceTexture);
         glBindTexture(GL_TEXTURE_2D, screenSourceTexture);

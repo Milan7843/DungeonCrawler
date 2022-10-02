@@ -116,6 +116,7 @@ namespace RootEngine
 
             // Getting viewport size
             glfwGetWindowSize(window, (int*)&WINDOW_SIZE_X, (int*)&WINDOW_SIZE_Y);
+            RendererEngine::setTextureSize(WINDOW_SIZE_X, WINDOW_SIZE_Y);
 
             // Updating the input engine
             InputEngine::update();

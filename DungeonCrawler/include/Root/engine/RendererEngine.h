@@ -40,7 +40,10 @@ namespace RendererEngine
 	 */
 	void runScreenSpaceEffects();
 
-	void setFrameBufferTexture(unsigned int width, unsigned int height);
+	/**
+	 * Set the resolution used for rendering the textures.
+	 */
+	void setTextureSize(unsigned int width, unsigned int height);
 
 	/**
 	 * Get the index of a vertex array object which holds information to draw a square.
