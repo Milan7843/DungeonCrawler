@@ -226,6 +226,7 @@
     <ClInclude Include="include\Root\components\ParticleSystem.h" />
     <ClInclude Include="include\Root\Random.h" />
     <ClInclude Include="include\Root\rendering\ScreenSpaceEffect.h" />
+    <ClInclude Include="include\Root\engine\RendererEngine.h" />
     <ClInclude Include="src\ScriptLoader.h" />
     <ClInclude Include="src\scripts\MyComponentScript.h" />
     <ClInclude Include="src\scripts\MyScript.h" />
@@ -237,6 +238,7 @@
     <ClCompile Include="include\Root\engine\ComponentEngine.cpp" />
     <ClCompile Include="include\Root\components\Animator.cpp" />
     <ClCompile Include="include\Root\components\Collider.cpp" />
+    <ClCompile Include="include\Root\engine\RendererEngine.cpp" />
     <ClCompile Include="include\Root\rendering\Camera.cpp" />
     <ClCompile Include="include\Root\components\Component.cpp" />
     <ClCompile Include="include\imgui\imgui.cpp" />

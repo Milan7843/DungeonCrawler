@@ -93,7 +93,7 @@ namespace RootEngine
         // makes sure objects get drawn on top of each other in the correct order
         glEnable(GL_DEPTH_TEST);
 
-        Renderer::initialise(WINDOW_SIZE_X, WINDOW_SIZE_Y);
+        RendererEngine::initialise(WINDOW_SIZE_X, WINDOW_SIZE_Y);
 
         InputEngine::initialise();
 
@@ -136,7 +136,7 @@ namespace RootEngine
             // Rendering
 
             // Starting a new frame for rendering
-            Renderer::newFrame();
+            RendererEngine::newFrame();
 
             glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -144,9 +144,9 @@ namespace RootEngine
             // Calling all component render() functions
             ComponentEngine::renderComponents();
 
-            Renderer::runScreenSpaceEffects();
+            RendererEngine::runScreenSpaceEffects();
 
-            Renderer::displayFrame();
+            RendererEngine::displayFrame();
 
             InputEngine::newFrame();
 
@@ -170,7 +170,7 @@ namespace RootEngine
 
         terminateRoot();
 
-        Renderer::terminate();
+        RendererEngine::terminate();
 
         Logger::stop();
 
