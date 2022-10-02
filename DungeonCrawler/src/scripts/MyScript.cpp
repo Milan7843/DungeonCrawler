@@ -72,6 +72,9 @@ void MyScript::start()
 	particleSystem->setSizeOverLifeTimeGradient(sizeGradient);
 	particleSystem->setSprite("src/sprites/cutie_cat.png");
 	particleSystem->play();
+
+
+	Renderer::addScreenSpaceEffect(ScreenSpaceEffect::create("src/shaders/screenSpaceFragment.shader"));
 }
 
 void MyScript::update()

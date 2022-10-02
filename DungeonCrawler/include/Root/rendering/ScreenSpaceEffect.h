@@ -27,14 +27,18 @@ public:
 
 	void run();
 
-	ScreenSpaceEffectPointer create(const std::string& shaderPath);
+	static ScreenSpaceEffectPointer create(const std::string& shaderPath);
 
 	void setEnabled(bool enabled);
 
 private:
 
 	// Private constructor: use create()
-	ScreenSpaceEffect();
+	ScreenSpaceEffect(const std::string& shaderPath);
+
+	ScreenSpaceEffectPointer self;
+
+	const char* vertexShaderPath{"include/Root/shaders/default_shader_source/screenSpaceVertex.shader"};
 
 	bool enabled{ true };
 

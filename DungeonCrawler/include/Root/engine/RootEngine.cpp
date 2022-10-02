@@ -93,7 +93,7 @@ namespace RootEngine
         // makes sure objects get drawn on top of each other in the correct order
         glEnable(GL_DEPTH_TEST);
 
-        Renderer::initialise();
+        Renderer::initialise(WINDOW_SIZE_X, WINDOW_SIZE_Y);
 
         InputEngine::initialise();
 
@@ -134,11 +134,19 @@ namespace RootEngine
             //processInput(window);
 
             // Rendering
+
+            // Starting a new frame for rendering
+            Renderer::newFrame();
+
             glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             // Calling all component render() functions
             ComponentEngine::renderComponents();
+
+            Renderer::runScreenSpaceEffects();
+
+            Renderer::displayFrame();
 
             InputEngine::newFrame();
 
@@ -161,6 +169,8 @@ namespace RootEngine
         //physicsSimulation.join();
 
         terminateRoot();
+
+        Renderer::terminate();
 
         Logger::stop();
 
