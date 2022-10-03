@@ -4,6 +4,8 @@
 #include "Root/Random.h"
 #include "Root/engine/RootEngine.h"
 
+#include <Root/Math.h>
+
 std::shared_ptr<ParticleSystem> ParticleSystem::create(std::shared_ptr<Transform> transform)
 {
 	ParticleSystem* particleSystem = new ParticleSystem();
@@ -67,8 +69,10 @@ void ParticleSystem::update()
         particleUpdateData[i].velocity
             *= (1.0f - dragOverLifeTimeGradient.sample(lifePoint)
             * Time::getDeltaTime());
+        
         // Applying velocity
         particleDrawData[i].position += particleUpdateData[i].velocity * Time::getDeltaTime();
+
         // Applying angular velocity
         if (letRotationFollowVelocity)
         {

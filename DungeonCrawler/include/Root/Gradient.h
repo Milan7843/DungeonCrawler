@@ -7,6 +7,8 @@
 #include <vector>
 #include <algorithm>
 
+#include <Root/Math.h>
+
 /**
  * A struct that holds data for a gradient point.
  * 
@@ -92,8 +94,8 @@ public:
 					return gradientPoint.value;
 
 				// Otherwise find the left side and interpolate
-				float t = map(samplePoint, points[i-1].point, gradientPoint.point, 0.0f, 1.0f);
-				return interpolate(points[i-1].value, gradientPoint.value, t);
+				float t = Math::map(samplePoint, points[i-1].point, gradientPoint.point, 0.0f, 1.0f);
+				return Math::cerp(points[i-1].value, gradientPoint.value, t);
 			}
 
 			i++;
@@ -105,18 +107,6 @@ public:
 
 private:
 	std::vector<GradientPoint<T>> points;
-
-	// Helper functions
-	T interpolate(T v1, T v2, float t)
-	{
-		float t2{ (1.0f - cos(t * glm::pi<float>())) / 2.0f };
-		return(v1 * (1.0f - t2) + v2 * t2);
-	}
-
-	float map(float s, float a1, float a2, float b1, float b2)
-	{
-		return b1 + (s - a1) * (b2 - b1) / (a2 - a1);
-	}
 
 	static bool gradientSorter(GradientPoint<T> const& lhs, GradientPoint<T> const& rhs)
 	{

@@ -186,6 +186,7 @@
     <ClInclude Include="include\box2d\b2_world_callbacks.h" />
     <ClInclude Include="include\box2d\box2d.h" />
     <ClInclude Include="include\Root\Gradient.h" />
+    <ClInclude Include="include\Root\Math.h" />
     <ClInclude Include="include\Root\rendering\Camera.h" />
     <ClInclude Include="include\Root\components\Component.h" />
     <ClInclude Include="include\GLFW\glfw3.h" />
@@ -239,6 +240,7 @@
     <ClCompile Include="include\Root\components\Animator.cpp" />
     <ClCompile Include="include\Root\components\Collider.cpp" />
     <ClCompile Include="include\Root\engine\RendererEngine.cpp" />
+    <ClCompile Include="include\Root\Math.cpp" />
     <ClCompile Include="include\Root\rendering\Camera.cpp" />
     <ClCompile Include="include\Root\components\Component.cpp" />
     <ClCompile Include="include\imgui\imgui.cpp" />
