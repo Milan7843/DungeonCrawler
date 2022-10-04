@@ -141,6 +141,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\scripts\CollisionCallbackHandler.h" />
+    <ClInclude Include="include\Root\CollisionListener.h" />
     <ClInclude Include="include\Root\Components.h" />
     <ClInclude Include="include\Root\engine\ComponentEngine.h" />
     <ClInclude Include="include\Root\components\Animator.h" />
@@ -235,6 +237,8 @@
     <ClInclude Include="include\Root\engine\TransformEngine.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\scripts\CollisionCallbackHandler.cpp" />
+    <ClCompile Include="include\Root\CollisionListener.cpp" />
     <ClCompile Include="include\Root\components\ParticleSystemGettersAndSetters.cpp" />
     <ClCompile Include="include\Root\engine\ComponentEngine.cpp" />
     <ClCompile Include="include\Root\components\Animator.cpp" />

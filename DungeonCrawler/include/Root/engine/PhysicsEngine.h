@@ -2,6 +2,8 @@
 
 #include "Root/engine/RootEngine.h"
 
+#include <Root/CollisionListener.h>
+
 #include <box2d/box2d.h>
 
 #include <iostream>
@@ -18,6 +20,8 @@ namespace PhysicsEngine
 	void step(float deltaTima);
 
 	void setGravity(float x, float y);
+
+	void setCollisionListener(CollisionListener* contactListener);
 
 	b2Body* addBody(b2BodyDef* definition);
 };

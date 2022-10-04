@@ -1,7 +1,9 @@
 #include "MyScript.h"
 
 MyScript::MyScript()
+	: collisionCallbackHandler()
 {
+	Physics::setCollisionListener(&collisionCallbackHandler);
 }
 
 MyScript::~MyScript()

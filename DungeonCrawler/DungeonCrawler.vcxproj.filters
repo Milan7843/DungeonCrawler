@@ -291,6 +291,12 @@
     <ClInclude Include="include\Root\Math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Root\CollisionListener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scripts\CollisionCallbackHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\imgui\imgui.cpp">
@@ -435,6 +441,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="include\Root\Math.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Root\CollisionListener.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scripts\CollisionCallbackHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

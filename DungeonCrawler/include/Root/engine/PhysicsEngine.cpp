@@ -53,6 +53,11 @@ namespace PhysicsEngine
 		world.SetGravity(b2Vec2(x, y));
 	}
 
+	void setCollisionListener(CollisionListener* contactListener)
+	{
+		world.SetContactListener(contactListener);
+	}
+
 	b2Body* addBody(b2BodyDef* definition)
 	{
 		body = world.CreateBody(definition);

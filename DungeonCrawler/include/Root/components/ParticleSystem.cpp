@@ -176,8 +176,6 @@ void ParticleSystem::writeDataToVAO()
 
 void ParticleSystem::emitParticle()
 {
-    std::cout << "Emitting" << particleDrawData.size() << std::endl;
-
     glm::vec2 direction{ getRandomDirection() };
     glm::vec2 position{ transform->getPosition() + getRandomPosition(direction) };
     glm::vec3 color{ colorOverLifeTimeGradient.sample(0.0f) };
