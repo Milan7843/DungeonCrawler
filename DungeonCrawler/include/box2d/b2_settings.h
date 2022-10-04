@@ -26,6 +26,12 @@
 #include "b2_types.h"
 #include "b2_api.h"
 
+
+/* START OF CUSTOM ROOT CODE */
+//#include <Root/components/Rigidbody.h>
+class Rigidbody;
+/* END OF CUSTOM ROOT CODE */
+
 /// @file
 /// Settings that can be overriden for your application
 ///
@@ -60,7 +66,10 @@ struct B2_API b2BodyUserData
 	b2BodyUserData()
 	{
 		pointer = 0;
+		rigidbody = nullptr;
 	}
+
+	Rigidbody* rigidbody;
 
 	/// For legacy compatibility
 	uintptr_t pointer;

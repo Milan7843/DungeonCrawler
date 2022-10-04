@@ -15,6 +15,7 @@ void MyScript::start()
 {
 	// Adding an object to the scene
 	transform = Transform::create();
+	transform->setName("player");
 
 	// Adding a script to this object
 	std::shared_ptr<MyComponentScript> myComponentScript = std::shared_ptr<MyComponentScript>(new MyComponentScript());
@@ -55,6 +56,7 @@ void MyScript::start()
 	// Creating a wall
 	//TransformPointer wall = Transform::create(glm::vec2(5.0f, 0.0f), 0.0f, glm::vec2(1.0f, 5.0f));
 	TransformPointer wall = Transform::create(glm::vec2(0.0f, -3.0f), 0.0f, glm::vec2(6.0f, 0.5f));
+	wall->setName("Wall");
 	SpriteRenderer::create(wall, "src/sprites/Wiskunde.png");
 	Rigidbody::create(wall, b2_staticBody);
 

@@ -6,3 +6,8 @@ void Component::setTransform(Transform* transform)
 {
 	this->transform = transform;
 }
+
+Transform* Component::getTransform()
+{
+	return transform;
+}

@@ -3,6 +3,8 @@
 #include <Root/Logger.h>
 #include <Root/CollisionListener.h>
 
+#include <Root/components/Rigidbody.h>
+
 
 class CollisionCallbackHandler : public CollisionListener
 {

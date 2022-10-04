@@ -72,6 +72,22 @@ public:
 	void setParent(std::shared_ptr<Transform> parent, bool alsoAddChild = true);
 
 	/**
+	 * Set this transform's name.
+	 * Any transform's name starts out as empty ("").
+	 * 
+	 * \param name: the new name.
+	 */
+	void setName(std::string name);
+
+	/**
+	 * Get this transform's name.
+	 * Any transform's name starts out as empty ("").
+	 *
+	 * \returns name: the name.
+	 */
+	std::string getName();
+
+	/**
 	 * Get the parent of this transform.
 	 * 
 	 * \returns the parent of this transform, or NULL if it does not have one.
@@ -336,6 +352,8 @@ private:
 	glm::vec2 position;
 	float rotation;
 	glm::vec2 scale;
+
+	std::string name{};
 
 	float renderDepth{ -1.0f };
 

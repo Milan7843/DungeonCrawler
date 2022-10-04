@@ -30,7 +30,8 @@ Rigidbody::Rigidbody(std::shared_ptr<Transform> transform, float linearDamping, 
 	fixtureDef.friction = 0.3f;
 
 	body = PhysicsEngine::addBody(&bodyDef);
-	body->CreateFixture(&fixtureDef);
+	body->GetUserData().rigidbody = this;
+	b2Fixture* fixture{ body->CreateFixture(&fixtureDef) };
 }
 
 std::shared_ptr<Rigidbody> Rigidbody::create(

@@ -100,7 +100,7 @@ std::string Transform::toString()
 {
 	std::stringstream stream;
 	// Writing this object to the stream
-	stream << "[Transform]"
+	stream << "[Transform] " << name
 		<< "\n > position: (" << position.x << ", " << position.y << ")"
 		<< "\n > rotation: " << rotation
 		<< "\n > scale: (" << scale.x << ", " << scale.y << ")"
@@ -138,6 +138,16 @@ void Transform::setParent(std::shared_ptr<Transform> parent, bool alsoAddChild)
 	// Possibly adding child to new parent
 	if (alsoAddChild && parent != NULL)
 		parent->addChild(this->self, false);
+}
+
+void Transform::setName(std::string name)
+{
+	this->name = name;
+}
+
+std::string Transform::getName()
+{
+	return name;
 }
 
 std::shared_ptr<Transform> Transform::getParent()

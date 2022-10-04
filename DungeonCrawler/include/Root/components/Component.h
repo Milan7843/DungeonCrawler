@@ -32,11 +32,18 @@ public:
 	virtual void render(float renderDepth) {}
 
 	/**
-	 * Set the point to the transform of this component.
+	 * Set the pointer to the transform of this component.
 	 * 
 	 * \param transform: a pointer to the transform which this component belongs to.
 	 */
 	void setTransform(Transform* transform);
+
+	/**
+	 * Get the pointer to the transform which this component belongs to.
+	 *
+	 * \returns the pointer to the transform which this component belongs to.
+	 */
+	Transform* getTransform();
 
 	/**
 	 * Get a string representing this Component.

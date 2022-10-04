@@ -1,6 +1,9 @@
 #pragma once
 
 #include <box2d/b2_world_callbacks.h>
+#include <box2d/b2_contact.h>
+#include <box2d/b2_body.h>
+#include <box2d/b2_settings.h>
 
 /**
  * A class that should be the base class of your collision callback handler.
