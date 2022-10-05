@@ -57,8 +57,10 @@ void MyScript::start()
 	//TransformPointer wall = Transform::create(glm::vec2(5.0f, 0.0f), 0.0f, glm::vec2(1.0f, 5.0f));
 	TransformPointer wall = Transform::create(glm::vec2(0.0f, -3.0f), 0.0f, glm::vec2(6.0f, 0.5f));
 	wall->setName("Wall");
-	SpriteRenderer::create(wall, "src/sprites/Wiskunde.png");
+	SpriteRendererPointer wallSpriteRenderer = SpriteRenderer::create(wall, "src/sprites/Wiskunde.png");
 	Rigidbody::create(wall, b2_staticBody);
+
+
 
 	TransformPointer particleSystemTransform = Transform::create(glm::vec2(2.0f, 1.0f));
 	particleSystem = ParticleSystem::create(particleSystemTransform);

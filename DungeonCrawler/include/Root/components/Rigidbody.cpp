@@ -44,9 +44,6 @@ Rigidbody::Rigidbody(std::shared_ptr<Transform> transform, float linearDamping, 
 
 	fixtureData->mFixture = fixture;
 	fixtureData->rigidbody = this;
-
-	Rigidbody* rb = reinterpret_cast<FixtureData*>(fixture->GetUserData().pointer)->rigidbody;
-	rb;
 }
 
 std::shared_ptr<Rigidbody> Rigidbody::create(

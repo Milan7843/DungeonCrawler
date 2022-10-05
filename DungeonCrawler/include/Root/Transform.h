@@ -228,6 +228,34 @@ public:
 	void addComponent(std::shared_ptr<Component> component);
 
 	/**
+	 * Remove a specific component from this transform.
+	 * 
+	 * \param component: the component to remove.
+	 * \returns whether a component was succesfully found and removed.
+	 */
+	bool removeComponent(std::shared_ptr<Component> component);
+
+	/**
+	 * Remove a component of a specific type from this transform.
+	 * 
+	 * \returns whether a component was succesfully found and removed.
+	 */
+	template <class T>
+	void removeComponentOfType()
+	{
+		for (unsigned int i{ 0 }; i < components.size(); i++)
+		{
+			if (typeid(components[i]) == typeid(T))
+			{
+				components.erase(components.begin() + i);
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * Add a component of type T to this transform.
 	 */
 	/*

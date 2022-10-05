@@ -6,6 +6,7 @@ SpriteRenderer::SpriteRenderer()
 
 SpriteRenderer::~SpriteRenderer()
 {
+	Logger::destructorMessage("Sprite renderer");
 }
 
 std::shared_ptr<SpriteRenderer> SpriteRenderer::create(std::shared_ptr<Transform> transform, const char* spritePath)

@@ -4,12 +4,6 @@
 
 void CollisionCallbackHandler::BeginContact(b2Contact* contact)
 {
-	//std::string name1 = contact->GetFixtureA()->GetBody()->GetUserData().rigidbody->getTransform()->getName();
-	//std::string name2 = contact->GetFixtureB()->GetBody()->GetUserData().rigidbody->getTransform()->getName();
-
-
-	FixtureData* fixtureData = reinterpret_cast<FixtureData*>(contact->GetFixtureA()->GetBody()->GetUserData().pointer);
-
 	Rigidbody* rb1{ reinterpret_cast<FixtureData*>(contact->GetFixtureA()->GetUserData().pointer)->rigidbody };
 	Rigidbody* rb2{ reinterpret_cast<FixtureData*>(contact->GetFixtureB()->GetUserData().pointer)->rigidbody };
 

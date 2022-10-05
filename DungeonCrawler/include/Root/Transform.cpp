@@ -288,6 +288,20 @@ void Transform::addComponent(std::shared_ptr<Component> component)
 	component->setTransform(this);
 }
 
+bool Transform::removeComponent(std::shared_ptr<Component> component)
+{
+	for (unsigned int i{ 0 }; i < components.size(); i++)
+	{
+		if (components[i] == component)
+		{
+			components.erase(components.begin() + i);
+			return true;
+		}
+	}
+
+	return false;
+}
+
 std::shared_ptr<Rigidbody> Transform::getAttachedRigidbody()
 {
 	return attachedRigidbody;
