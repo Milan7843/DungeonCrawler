@@ -11,6 +11,9 @@
 
 class Transform;
 
+// TODO change this to somehow only be in Transform.h
+#define TransformPointer Transform*
+
 // User data
 struct FixtureData
 {
@@ -50,7 +53,7 @@ public:
 	 * \param enabled:			does this body start out enabled?
 	 */
 	static std::shared_ptr<Rigidbody> create(
-		std::shared_ptr<Transform> transform,
+		TransformPointer transform,
 		b2BodyType type = b2_staticBody,
 		float gravityScale = 1.0f,
 		bool fixedRotation = false,
@@ -79,7 +82,7 @@ public:
 
 private:
 
-	Rigidbody(std::shared_ptr<Transform> transform, float linearDamping, float angularDamping, bool allowSleep, bool awake, bool fixedRotation, bool bullet, b2BodyType type, bool enabled, float gravityScale);
+	Rigidbody(TransformPointer transform, float linearDamping, float angularDamping, bool allowSleep, bool awake, bool fixedRotation, bool bullet, b2BodyType type, bool enabled, float gravityScale);
 
 	FixtureData* fixtureData;
 

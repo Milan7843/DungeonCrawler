@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Root/Root.h"
+
 #include "Root/components/Component.h" // Base class
 #include "Root/Gradient.h"
 #include <stbi_utility/TextureData.h>
@@ -47,7 +49,7 @@ class ParticleSystem : public Component
 {
 public:
 
-	static std::shared_ptr<ParticleSystem> create(std::shared_ptr<Transform> transform);
+	static std::shared_ptr<ParticleSystem> create(TransformPointer transform);
 
 	~ParticleSystem();
 

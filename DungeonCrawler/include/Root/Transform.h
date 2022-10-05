@@ -12,7 +12,7 @@
 #include <typeinfo>
 #include <typeindex>
 
-#define TransformPointer std::shared_ptr<Transform>
+#define TransformPointer Transform*
 
 /**
  * Class which holds values for a 2D transformation.
@@ -36,7 +36,7 @@ public:
 	 * If this is not set or -1, the render depth of the parent will be used.
 	 * The render depth is a scale from 0 (closest) to 10000 (furthest).
 	 */
-	static std::shared_ptr<Transform> create(
+	static TransformPointer create(
 		glm::vec2 position = glm::vec2(0.0f), // Initialize position to (0, 0)
 		float rotation = 0.0f, // Initialize rotation to no rotation
 		glm::vec2 scale = glm::vec2(1.0f), // Initialize scale to no scaling
@@ -69,7 +69,7 @@ public:
 	 * \param parent: a shared_ptr to the transform that will be the parent.
 	 * If this is NULL, the transform will have no parent
 	 */
-	void setParent(std::shared_ptr<Transform> parent, bool alsoAddChild = true);
+	void setParent(Transform* parent, bool alsoAddChild = true);
 
 	/**
 	 * Set this transform's name.
@@ -92,7 +92,7 @@ public:
 	 * 
 	 * \returns the parent of this transform, or NULL if it does not have one.
 	 */
-	std::shared_ptr<Transform> getParent();
+	Transform* getParent();
 
 	/**
 	 * Add a child to this transform.
@@ -103,7 +103,7 @@ public:
 	 *
 	 * \param child: a TransformPointer to the child.
 	 */
-	void addChild(std::shared_ptr<Transform> child, bool alsoSetParent = true);
+	void addChild(Transform* child, bool alsoSetParent = true);
 
 	/**
 	 * Remove a child from this transform with the given shared_ptr.
@@ -112,7 +112,7 @@ public:
 	 * \param childToRemove: a TransformPointer to the child that should be removed.
 	 * \returns whether a child was removed succesfully.
 	 */
-	bool removeChild(std::shared_ptr<Transform> childToRemove);
+	bool removeChild(Transform* childToRemove);
 
 	/**
 	 * Remove all children from this transform with the given shared_ptr.
@@ -141,7 +141,7 @@ public:
 	 *
 	 * \returns the children of this transform.
 	 */
-	std::vector<std::shared_ptr<Transform>>& getChildren();
+	std::vector<Transform*>& getChildren();
 
 	/**
 	 * Get all components attached to this transform.
@@ -397,7 +397,6 @@ private:
 	std::vector<std::shared_ptr<Component>> components;
 	std::shared_ptr<Rigidbody> attachedRigidbody{ nullptr };
 
-	std::shared_ptr<Transform> parent = NULL;
-	std::vector<std::shared_ptr<Transform>> children;
-	std::shared_ptr<Transform> self;
+	Transform* parent = nullptr;
+	std::vector<Transform*> children;
 };

@@ -63,13 +63,12 @@ Transform::~Transform()
 	Logger::destructorMessage("Transform");
 }
 
-std::shared_ptr<Transform> Transform::create(glm::vec2 position, float rotation, glm::vec2 scale, float renderDepth)
+TransformPointer Transform::create(glm::vec2 position, float rotation, glm::vec2 scale, float renderDepth)
 {
 	Transform* transform = new Transform(position, rotation, scale, renderDepth);
 	std::shared_ptr<Transform> pointer{ transform };
 	Root::addTransform(pointer);
-	transform->self = pointer;
-	return pointer;
+	return transform;
 }
 
 void Transform::render(float parentRenderDepth, float renderDepthOffset)
@@ -83,13 +82,13 @@ void Transform::render(float parentRenderDepth, float renderDepthOffset)
 
 
 	// Calling render() on each component attached to this Transform
-	for (std::shared_ptr<Component>& component : getComponents())
+	for (ComponentPointer component : getComponents())
 	{
 		renderDepthOffset -= 0.001f;
 		component->render(usedRenderDepth + renderDepthOffset);
 	}
 	// Then rendering each child
-	for (std::shared_ptr<Transform>& child : children)
+	for (Transform* child : children)
 	{
 		renderDepthOffset -= 0.001f;
 		child->render(usedRenderDepth, renderDepthOffset);
@@ -114,7 +113,7 @@ std::string Transform::toString()
 
 	stream << "\n > children: [\n";
 
-	for (TransformPointer child : children)
+	for (Transform* child : children)
 	{
 		stream << " >" << child->toString() << "\n";
 	}
@@ -125,19 +124,19 @@ std::string Transform::toString()
 }
 
 
-void Transform::setParent(std::shared_ptr<Transform> parent, bool alsoAddChild)
+void Transform::setParent(Transform* parent, bool alsoAddChild)
 {
 	// Check if the transform already had a parent, 
 	// and remove it as a child from that parent if it did
 	if (this->parent != NULL)
-		this->parent->removeChild(this->self);
+		this->parent->removeChild(this);
 
 	// Setting new parent
 	this->parent = parent;
 
 	// Possibly adding child to new parent
 	if (alsoAddChild && parent != NULL)
-		parent->addChild(this->self, false);
+		parent->addChild(this);
 }
 
 void Transform::setName(std::string name)
@@ -150,19 +149,19 @@ std::string Transform::getName()
 	return name;
 }
 
-std::shared_ptr<Transform> Transform::getParent()
+Transform* Transform::getParent()
 {
 	return parent;
 }
 
-void Transform::addChild(std::shared_ptr<Transform> child, bool alsoSetParent)
+void Transform::addChild(Transform* child, bool alsoSetParent)
 {
 	children.push_back(child);
 	if (alsoSetParent)
-		child->setParent(std::shared_ptr<Transform>(this), false);
+		child->setParent(this, false);
 }
 
-bool Transform::removeChild(std::shared_ptr<Transform> childToRemove)
+bool Transform::removeChild(Transform* childToRemove)
 {
 	for (unsigned int i{ 0 }; i < children.size(); i++)
 	{
@@ -201,7 +200,7 @@ float Transform::getRenderDepth()
 	return renderDepth;
 }
 
-std::vector<std::shared_ptr<Transform>>& Transform::getChildren()
+std::vector<Transform*>& Transform::getChildren()
 {
 	return children;
 }

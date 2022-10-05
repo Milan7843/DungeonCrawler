@@ -239,7 +239,7 @@ namespace RootEngine
     void terminateRoot()
     {
         // Removing all links between transforms
-        for (TransformPointer transform : transforms)
+        for (std::shared_ptr<Transform> transform : transforms)
         {
             transform->setParent(NULL);
             transform->removeAllChildren();

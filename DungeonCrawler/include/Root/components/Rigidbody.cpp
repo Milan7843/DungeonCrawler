@@ -1,11 +1,10 @@
 #include "Rigidbody.h"
 
 #include "Root/engine/PhysicsEngine.h"
-#include "Root/Transform.h"
 
 #include <box2d/b2_settings.h>
 
-Rigidbody::Rigidbody(std::shared_ptr<Transform> transform, float linearDamping, float angularDamping, bool allowSleep, bool awake, bool fixedRotation, bool bullet, b2BodyType type, bool enabled, float gravityScale)
+Rigidbody::Rigidbody(TransformPointer transform, float linearDamping, float angularDamping, bool allowSleep, bool awake, bool fixedRotation, bool bullet, b2BodyType type, bool enabled, float gravityScale)
 {
 	glm::vec2 position{ transform->getPosition() };
 
@@ -47,7 +46,7 @@ Rigidbody::Rigidbody(std::shared_ptr<Transform> transform, float linearDamping, 
 }
 
 std::shared_ptr<Rigidbody> Rigidbody::create(
-	std::shared_ptr<Transform> transform,
+	TransformPointer transform,
 	b2BodyType type,
 	float gravityScale,
 	bool fixedRotation,

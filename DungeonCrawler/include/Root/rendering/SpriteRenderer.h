@@ -28,7 +28,7 @@ public:
 	 * 
 	 * \param transform: the transform to add this component to.
 	 */
-	static std::shared_ptr<SpriteRenderer> create(std::shared_ptr<Transform>transform, const char* spritePath);
+	static std::shared_ptr<SpriteRenderer> create(TransformPointer transform, const char* spritePath);
 
 	/**
 	 * Get a string representing this Component.

@@ -17,7 +17,7 @@ Camera::~Camera()
 	Logger::destructorMessage("Camera");
 }
 
-std::shared_ptr<Camera> Camera::create(std::shared_ptr<Transform> transform, float cameraHeight)
+std::shared_ptr<Camera> Camera::create(TransformPointer transform, float cameraHeight)
 {
 	Camera* camera = new Camera(cameraHeight);
 	std::shared_ptr<Camera> pointer{ camera };
