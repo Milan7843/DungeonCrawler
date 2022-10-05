@@ -210,6 +210,12 @@ public:
 	/// Dump this fixture to the log file.
 	void Dump(int32 bodyIndex);
 
+
+	b2FixtureUserData& GetUserDataRef()
+	{
+		return m_userData;
+	}
+
 protected:
 
 	friend class b2Body;

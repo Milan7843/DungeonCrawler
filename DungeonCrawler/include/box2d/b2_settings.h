@@ -58,18 +58,13 @@ class Rigidbody;
 /// this too much because b2BlockAllocator has a maximum object size.
 #define b2_maxPolygonVertices	8
 
-// User data
-
 /// You can define this to inject whatever data you want in b2Body
 struct B2_API b2BodyUserData
 {
 	b2BodyUserData()
 	{
 		pointer = 0;
-		rigidbody = nullptr;
 	}
-
-	Rigidbody* rigidbody;
 
 	/// For legacy compatibility
 	uintptr_t pointer;

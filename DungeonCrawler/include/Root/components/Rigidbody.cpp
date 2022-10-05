@@ -3,6 +3,8 @@
 #include "Root/engine/PhysicsEngine.h"
 #include "Root/Transform.h"
 
+#include <box2d/b2_settings.h>
+
 Rigidbody::Rigidbody(std::shared_ptr<Transform> transform, float linearDamping, float angularDamping, bool allowSleep, bool awake, bool fixedRotation, bool bullet, b2BodyType type, bool enabled, float gravityScale)
 {
 	glm::vec2 position{ transform->getPosition() };
@@ -20,6 +22,8 @@ Rigidbody::Rigidbody(std::shared_ptr<Transform> transform, float linearDamping, 
 	bodyDef.enabled = enabled;
 	bodyDef.gravityScale = gravityScale;
 
+	body = PhysicsEngine::addBody(&bodyDef);
+
 	b2PolygonShape shape;
 	glm::vec2 size = transform->getScale();
 	shape.SetAsBox(size.x * 0.5f, size.y * 0.5f);
@@ -29,9 +33,20 @@ Rigidbody::Rigidbody(std::shared_ptr<Transform> transform, float linearDamping, 
 	fixtureDef.density = 1.0f;
 	fixtureDef.friction = 0.3f;
 
-	body = PhysicsEngine::addBody(&bodyDef);
-	body->GetUserData().rigidbody = this;
+	// Creating a fixture data
+	fixtureData = new FixtureData;
+
 	b2Fixture* fixture{ body->CreateFixture(&fixtureDef) };
+
+	// Assigning the user data pointer of the fixture
+	uintptr_t ptr = reinterpret_cast<uintptr_t>(fixtureData);
+	fixture->GetUserDataRef().pointer = ptr;
+
+	fixtureData->mFixture = fixture;
+	fixtureData->rigidbody = this;
+
+	Rigidbody* rb = reinterpret_cast<FixtureData*>(fixture->GetUserData().pointer)->rigidbody;
+	rb;
 }
 
 std::shared_ptr<Rigidbody> Rigidbody::create(
@@ -55,6 +70,8 @@ std::shared_ptr<Rigidbody> Rigidbody::create(
 
 Rigidbody::~Rigidbody()
 {
+	delete fixtureData;
+	Logger::destructorMessage("Rigidbody");
 }
 
 void Rigidbody::update()

@@ -11,6 +11,13 @@
 
 class Transform;
 
+// User data
+struct FixtureData
+{
+	Rigidbody* rigidbody;
+	b2Fixture* mFixture{};
+};
+
 class Rigidbody : public Component
 {
 public:
@@ -73,6 +80,8 @@ public:
 private:
 
 	Rigidbody(std::shared_ptr<Transform> transform, float linearDamping, float angularDamping, bool allowSleep, bool awake, bool fixedRotation, bool bullet, b2BodyType type, bool enabled, float gravityScale);
+
+	FixtureData* fixtureData;
 
 	b2Body* body;
 };
