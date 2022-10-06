@@ -255,6 +255,7 @@ namespace RootEngine
             transform->setParent(NULL);
             transform->removeAllChildren();
         }
+        transforms.clear();
     }
 
     bool isPhysicsSimulationActive()
