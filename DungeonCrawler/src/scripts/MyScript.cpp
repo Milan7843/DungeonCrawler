@@ -97,31 +97,7 @@ void MyScript::update()
 	*/
 
 	if (Input::getKeyPressed(KEY_F)) {
-		//cat2->setPosition(cat->localPointToWorldPoint(glm::vec2(0.0f, 0.0f)));
-		//cat->setPosition(weapon->worldPointToLocalPoint(glm::vec2(1.0f, 0.0f)));
-		//glm::vec2 r = cat->localPointToWorldPoint(glm::vec2(0.0f, 0.0f));
-		//std::cout << cat2->getPosition().x << ", " << cat2->getPosition().y << std::endl;
-		//std::cout << r.x << ", " << r.y << std::endl;
-		/*
-		std::cout << transform->toString() << std::endl;
-		std::cout << weapon->toString()<< std::endl;
-		std::cout << "Mouse position: "
-			<< Input::getMousePosition().x << ", "
-			<< Input::getMousePosition().y << std::endl;
-
-
-		std::cout << "Mouse delta: "
-			<< Input::getMouseDelta().x << ", "
-			<< Input::getMouseDelta().y << std::endl;
-
-		std::cout << "World mouse position: "
-			<< Input::getMouseWorldPosition().x << ", "
-			<< Input::getMouseWorldPosition().y << std::endl;
-
-		std::cout << "World transform position: "
-			<< transform->position.x << ", "
-			<< transform->position.y << std::endl;
-		*/
+		cat2->destroy();
 	}
 
 	//std::cout << transform->getLocalPosition().x << ", " << transform->getLocalPosition().y << std::endl;

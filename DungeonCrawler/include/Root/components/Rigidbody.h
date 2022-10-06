@@ -7,7 +7,7 @@
 
 #include <memory>
 
-#define RigidbodyPointer std::shared_ptr<Rigidbody>
+#define RigidbodyPointer Rigidbody*
 
 class Transform;
 
@@ -52,7 +52,7 @@ public:
 	 * \param awake:			is this body initially awake or sleeping?
 	 * \param enabled:			does this body start out enabled?
 	 */
-	static std::shared_ptr<Rigidbody> create(
+	static RigidbodyPointer create(
 		TransformPointer transform,
 		b2BodyType type = b2_staticBody,
 		float gravityScale = 1.0f,

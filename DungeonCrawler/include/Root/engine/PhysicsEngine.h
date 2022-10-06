@@ -24,6 +24,8 @@ namespace PhysicsEngine
 	void setCollisionListener(CollisionListener* contactListener);
 
 	b2Body* addBody(b2BodyDef* definition);
+
+	void destroyBody(b2Body* bodyToDestroy);
 };
 
 

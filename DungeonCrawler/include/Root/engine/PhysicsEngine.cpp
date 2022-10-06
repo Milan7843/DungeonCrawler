@@ -63,4 +63,12 @@ namespace PhysicsEngine
 		body = world.CreateBody(definition);
 		return body;
 	}
+
+	void destroyBody(b2Body* bodyToDestroy)
+	{
+		if (!world.IsLocked())
+			world.DestroyBody(bodyToDestroy);
+		else
+			Logger::logError("Cannot destroy body during physics timestep");
+	}
 };

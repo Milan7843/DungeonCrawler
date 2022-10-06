@@ -5,7 +5,7 @@ Animator::~Animator()
 	Logger::destructorMessage("Animator");
 }
 
-std::shared_ptr<Animator> Animator::create()
+AnimatorPointer Animator::create()
 {
-	return std::shared_ptr<Animator>();
+	return nullptr;
 }

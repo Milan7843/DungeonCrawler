@@ -13,7 +13,7 @@
 
 #include <memory>
 
-#define ParticleSystemPointer std::shared_ptr<ParticleSystem>
+#define ParticleSystemPointer ParticleSystem*
 
 class Transform;
 
@@ -49,7 +49,7 @@ class ParticleSystem : public Component
 {
 public:
 
-	static std::shared_ptr<ParticleSystem> create(TransformPointer transform);
+	static ParticleSystemPointer create(TransformPointer transform);
 
 	~ParticleSystem();
 

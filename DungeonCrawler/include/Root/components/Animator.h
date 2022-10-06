@@ -5,7 +5,7 @@
 
 #include <memory>
 
-#define AnimatorPointer std::shared_ptr<Animator>
+#define AnimatorPointer Animator*
 
 class Animator : public Component
 {
@@ -18,7 +18,7 @@ public:
 	Animator();
 	~Animator();
 
-	std::shared_ptr<Animator> create();
+	AnimatorPointer create();
 
 private:
 

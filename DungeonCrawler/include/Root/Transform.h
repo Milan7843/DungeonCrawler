@@ -43,6 +43,14 @@ public:
 		float renderDepth = 0.0f); // Initialize render depth to 0
 
 	/**
+	 * Destroy this transform.
+	 * Will invalidate any pointers to this transform.
+	 * Will also destroy all children, but not the parent.
+	 * Any attached components without a reference will also be destroyed.
+	 */
+	void destroy();
+
+	/**
 	 * Render this Transform.
 	 * Should not be called by the user.
 	 * 
@@ -155,7 +163,7 @@ public:
 	 * 
 	 * \returns the attached rigidbody or nullptr if no rigidbody is attached.
 	 */
-	std::shared_ptr<Rigidbody> getAttachedRigidbody();
+	RigidbodyPointer getAttachedRigidbody();
 
 	/**
 	 * Get a matrix which correctly transforms world space points to local space.
@@ -234,6 +242,14 @@ public:
 	 * \returns whether a component was succesfully found and removed.
 	 */
 	bool removeComponent(std::shared_ptr<Component> component);
+
+	/**
+	 * Remove a specific component from this transform.
+	 *
+	 * \param component: the component to remove.
+	 * \returns whether a component was succesfully found and removed.
+	 */
+	bool removeComponent(ComponentPointer component);
 
 	/**
 	 * Remove a component of a specific type from this transform.
@@ -395,7 +411,7 @@ private:
 	void updateTransformMatrices();
 
 	std::vector<std::shared_ptr<Component>> components;
-	std::shared_ptr<Rigidbody> attachedRigidbody{ nullptr };
+	RigidbodyPointer attachedRigidbody{ nullptr };
 
 	Transform* parent = nullptr;
 	std::vector<Transform*> children;

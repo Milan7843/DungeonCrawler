@@ -9,13 +9,13 @@ SpriteRenderer::~SpriteRenderer()
 	Logger::destructorMessage("Sprite renderer");
 }
 
-std::shared_ptr<SpriteRenderer> SpriteRenderer::create(TransformPointer transform, const char* spritePath)
+SpriteRendererPointer SpriteRenderer::create(TransformPointer transform, const char* spritePath)
 {
 	SpriteRenderer* spriteRenderer = new SpriteRenderer();
 	std::shared_ptr<SpriteRenderer> pointer{ spriteRenderer };
 	pointer->setSprite(spritePath);
 	transform->addComponent(pointer);
-	return pointer;
+	return spriteRenderer;
 }
 
 std::string SpriteRenderer::toString()

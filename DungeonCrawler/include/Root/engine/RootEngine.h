@@ -97,6 +97,13 @@ namespace RootEngine
 	void addTransform(std::shared_ptr<Transform> transform);
 
 	/**
+	 * Remove a transform from the scene.
+	 *
+	 * \param transformToRemove: the transform to remove from the scene.
+	 */
+	void removeTransform(Transform* transformToRemove);
+
+	/**
 	 * Get all transforms currently in the scene.
 	 *
 	 * \returns all transforms currently in the scene.

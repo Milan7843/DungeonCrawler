@@ -6,12 +6,12 @@
 
 #include <Root/Math.h>
 
-std::shared_ptr<ParticleSystem> ParticleSystem::create(TransformPointer transform)
+ParticleSystemPointer ParticleSystem::create(TransformPointer transform)
 {
 	ParticleSystem* particleSystem = new ParticleSystem();
 	std::shared_ptr<ParticleSystem> pointer{ particleSystem };
 	transform->addComponent(pointer);
-	return pointer;
+	return particleSystem;
 }
 ParticleSystem::ParticleSystem()
 {

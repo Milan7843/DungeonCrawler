@@ -45,7 +45,7 @@ Rigidbody::Rigidbody(TransformPointer transform, float linearDamping, float angu
 	fixtureData->rigidbody = this;
 }
 
-std::shared_ptr<Rigidbody> Rigidbody::create(
+RigidbodyPointer Rigidbody::create(
 	TransformPointer transform,
 	b2BodyType type,
 	float gravityScale,
@@ -61,12 +61,16 @@ std::shared_ptr<Rigidbody> Rigidbody::create(
 	Rigidbody* rigidbody = new Rigidbody(transform, linearDamping, angularDamping, allowSleep, awake, fixedRotation, bullet, type, enabled, gravityScale);
 	std::shared_ptr<Rigidbody> pointer{ rigidbody };
 	transform->addComponent(pointer);
-	return pointer;
+	return rigidbody;
 }
 
 Rigidbody::~Rigidbody()
 {
+	// Removing the body from box2d
+	PhysicsEngine::destroyBody(this->body);
+	// Deleting the fixture data created on the heap
 	delete fixtureData;
+	// Indicating the rigidbody got destroyed
 	Logger::destructorMessage("Rigidbody");
 }
 
@@ -80,9 +84,6 @@ void Rigidbody::updateTransform()
 	this->transform->setPosition(glm::vec2(position.x, position.y));
 
 	this->transform->setRotation(glm::degrees(body->GetAngle()));
-
-	//std::cout << position.x << ", " << position.y << std::endl;
-	//std::cout << transform->getPosition().x << ", " << transform->getPosition().y << std::endl;
 }
 
 void Rigidbody::setPosition(glm::vec2 position, bool alsoSetTransformPosition)

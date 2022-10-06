@@ -1,6 +1,6 @@
 #pragma once
 
-#define ComponentPointer std::shared_ptr<Component>
+#define ComponentPointer Component*
 
 #include <string>
 

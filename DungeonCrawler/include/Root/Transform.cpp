@@ -1,5 +1,7 @@
 #include "Transform.h"
 
+#include "Root/engine/RootEngine.h"
+
 Transform::Transform(glm::vec2 position, float rotation, glm::vec2 scale, float renderDepth)
 	: position(position)
 	, rotation(rotation)
@@ -71,6 +73,16 @@ TransformPointer Transform::create(glm::vec2 position, float rotation, glm::vec2
 	return transform;
 }
 
+void Transform::destroy()
+{
+	// First removing each child
+	for (Transform* child : children)
+	{
+		child->destroy();
+	}
+	RootEngine::removeTransform(this);
+}
+
 void Transform::render(float parentRenderDepth, float renderDepthOffset)
 {
 	// Either use own renderdepth
@@ -82,7 +94,7 @@ void Transform::render(float parentRenderDepth, float renderDepthOffset)
 
 
 	// Calling render() on each component attached to this Transform
-	for (ComponentPointer component : getComponents())
+	for (std::shared_ptr<Component> component : getComponents())
 	{
 		renderDepthOffset -= 0.001f;
 		component->render(usedRenderDepth + renderDepthOffset);
@@ -106,7 +118,7 @@ std::string Transform::toString()
 		<< "\n > components: ["
 		<< "\n";
 
-	for (ComponentPointer component : components)
+	for (std::shared_ptr<Component> component : components)
 	{
 		stream << " >" << component->toString() << "\n";
 	}
@@ -279,7 +291,7 @@ void Transform::addComponent(std::shared_ptr<Component> component)
 		}
 		else
 		{
-			attachedRigidbody = std::static_pointer_cast<Rigidbody>(component);
+			attachedRigidbody = (RigidbodyPointer)component.get();
 		}
 	}
 
@@ -301,7 +313,21 @@ bool Transform::removeComponent(std::shared_ptr<Component> component)
 	return false;
 }
 
-std::shared_ptr<Rigidbody> Transform::getAttachedRigidbody()
+bool Transform::removeComponent(ComponentPointer component)
+{
+	for (unsigned int i{ 0 }; i < components.size(); i++)
+	{
+		if (components[i].get() == component)
+		{
+			components.erase(components.begin() + i);
+			return true;
+		}
+	}
+
+	return false;
+}
+
+RigidbodyPointer Transform::getAttachedRigidbody()
 {
 	return attachedRigidbody;
 }

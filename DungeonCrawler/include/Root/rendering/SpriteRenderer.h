@@ -12,7 +12,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#define SpriteRendererPointer std::shared_ptr<SpriteRenderer>
+#define SpriteRendererPointer SpriteRenderer*
 
 /**
  * Component for rendering sprites.
@@ -28,7 +28,7 @@ public:
 	 * 
 	 * \param transform: the transform to add this component to.
 	 */
-	static std::shared_ptr<SpriteRenderer> create(TransformPointer transform, const char* spritePath);
+	static SpriteRendererPointer create(TransformPointer transform, const char* spritePath);
 
 	/**
 	 * Get a string representing this Component.

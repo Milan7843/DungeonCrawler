@@ -206,6 +206,17 @@ namespace RootEngine
         transforms.push_back(transform);
     }
 
+    void removeTransform(Transform* transformToRemove)
+    {
+        for (unsigned int i{ 0 }; i < transforms.size(); i++)
+        {
+            if (transforms[i].get() == transformToRemove)
+            {
+                transforms.erase(transforms.begin() + i);
+            }
+        }
+    }
+
     std::vector<std::shared_ptr<Transform>>& getTransforms()
     {
         return transforms;
