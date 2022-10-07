@@ -148,7 +148,7 @@ void Transform::setParent(Transform* parent, bool alsoAddChild)
 
 	// Possibly adding child to new parent
 	if (alsoAddChild && parent != NULL)
-		parent->addChild(this);
+		parent->addChild(this, false);
 }
 
 void Transform::setName(std::string name)
