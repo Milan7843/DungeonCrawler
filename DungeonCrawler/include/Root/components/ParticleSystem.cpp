@@ -111,9 +111,38 @@ void ParticleSystem::update()
 
     currentEmissionTime += Time::getDeltaTime();
 
-    if (currentEmissionTime > emissionDuration && !looping)
+    // Check for finished:
+    if (currentEmissionTime > emissionDuration)
     {
-        emitting = false;
+        switch (onFinish)
+        {
+            case STOP:
+                emitting = false;
+                break;
+
+            case REPEAT:
+                // Just keep going
+                play();
+                break;
+
+            case DESTROY_SELF:
+                // Stop emitting right away
+                emitting = false;
+                // And wait for each particle to go away,
+                // when they are all gone, destroy self
+                if (this->particleDrawData.size() == 0)
+                    this->transform->removeComponent(this);
+                break;
+
+            case DESTROY_TRANSFORM:
+                // Stop emitting right away
+                emitting = false;
+                // And wait for each particle to go away,
+                // when they are all gone, destroy the parent transform
+                if (this->particleDrawData.size() == 0)
+                    this->transform->destroy();
+                break;
+        }
     }
 }
 

@@ -45,6 +45,14 @@ enum EmissionMode
 	ORTHOGONAL_EMISSION
 };
 
+enum OnFinish
+{
+	STOP,
+	REPEAT,
+	DESTROY_SELF,
+	DESTROY_TRANSFORM
+};
+
 class ParticleSystem : public Component
 {
 public:
@@ -116,11 +124,16 @@ public:
 	void setColorOverLifeTimeGradient(Gradient<glm::vec3> colorOverLifeTimeGradient);
 
 	/**
-	 * Set whether this particle system should loop after being done.
+	 * Set what this particle system should do when done.
+	 * Options :
+		STOP,
+		REPEAT,
+		DESTROY_SELF,
+		DESTROY_TRANSFORM
 	 * 
-	 * \param looping: whether the particle emission should loop.
+	 * \param onFinish: what this particle system should do when done.
 	 */
-	void setLooping(bool looping);
+	void setOnFinish(OnFinish onFinish);
 
 	/**
 	 * Set the particle limit.
@@ -309,7 +322,6 @@ private:
 	std::vector<ParticleDrawData> particleDrawData;
 	std::vector<ParticleUpdateData> particleUpdateData;
 
-	bool looping{ true };
 	bool emitting{ false };
 	SimulationSpace simulationSpace { WORLD_SPACE };
 	float emissionDuration{ 3.0f };
@@ -339,6 +351,8 @@ private:
 	glm::vec2 wind{ 0.0f, 0.0f };
 
 	unsigned int particleLimit{ 25 };
+
+	OnFinish onFinish{ STOP };
 
 	Gradient<glm::vec2> sizeOverLifeTimeGradient{ Gradient(glm::vec2(1.0f)) };
 	Gradient<float> dragOverLifeTimeGradient{ Gradient(0.03f) };

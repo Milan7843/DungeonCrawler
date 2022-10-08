@@ -45,7 +45,7 @@ void Logger::destructorMessage(const char* message)
 {
     // White text on black background
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-    write((std::string("[DESTROYED] ") + message + ".").c_str());
+    write((std::string("[DESTROYED] ") + message).c_str());
 }
 
 void Logger::write(const char* message)

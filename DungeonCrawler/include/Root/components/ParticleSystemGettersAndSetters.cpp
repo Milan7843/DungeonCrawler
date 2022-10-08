@@ -33,9 +33,9 @@ void ParticleSystem::setColorOverLifeTimeGradient(Gradient<glm::vec3> colorOverL
     this->colorOverLifeTimeGradient = colorOverLifeTimeGradient;
 }
 
-void ParticleSystem::setLooping(bool looping)
+void ParticleSystem::setOnFinish(OnFinish onFinish)
 {
-    this->looping = looping;
+    this->onFinish = onFinish;
 }
 
 void ParticleSystem::setParticleLimit(unsigned int particleLimit)
