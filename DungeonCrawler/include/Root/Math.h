@@ -5,6 +5,8 @@
 
 #include <Root/Time.h>
 
+#include <Root/Logger.h>
+
 namespace Math
 {
 	/**
@@ -108,4 +110,27 @@ namespace Math
 	 * \return the start value + some offset towards the target.
 	 */
 	glm::vec2 smoothMove(glm::vec2 value, glm::vec2 target, float speed, float maxVelocity);
+
+	/**
+	 * Rotate from a current value to a target
+	 * Does not modify the input value.
+	 *
+	 * \param value: the current rotation.
+	 * \param target: the target rotation.
+	 * \param speed: the speed at which to move in degrees per second.
+	 * \return the start value + some rotation towards the target.
+	 */
+	float rotate(float value, float target, float speed);
+
+	/**
+	 * Smoothly rotate from a current value to a target
+	 * Does not modify the input value.
+	 *
+	 * \param value: the current rotation.
+	 * \param target: the target rotation.
+	 * \param speed: the speed at which to rotate in degrees per second per degree.
+	 * \param maxVelocity: the maximum velocity in degrees per second.
+	 * \return the start value + some rotation towards the target.
+	 */
+	float smoothRotate(float value, float target, float speed, float maxVelocity);
 };

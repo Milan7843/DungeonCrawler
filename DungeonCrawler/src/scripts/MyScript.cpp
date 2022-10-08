@@ -85,7 +85,9 @@ void MyScript::start()
 
 void MyScript::update()
 {
-	weapon->setRotation(transform->lookAt(Input::getMouseWorldPosition()));
+	//weapon->setRotation(transform->lookAt(Input::getMouseWorldPosition()));
+	float requestedRotation = transform->lookAt(Input::getMouseWorldPosition());
+	weapon->setRotation(Math::smoothRotate(weapon->getRotation(), requestedRotation, 5.0f, 240.0f));
 	//transform->setRotation(transform->lookAt(Input::getMouseWorldPosition()));
 	
 	/*
