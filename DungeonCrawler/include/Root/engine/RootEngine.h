@@ -111,6 +111,14 @@ namespace RootEngine
 	std::vector<std::shared_ptr<Transform>>& getTransforms();
 
 	/**
+	 * Get a transform by its name.
+	 * 
+	 * \returns a TransformPointer to a transform with the given name if it was found,
+	 * nullptr otherwise.
+	 */
+	TransformPointer getTransformByName(std::string& name);
+
+	/**
 	 * Set a camera as the one used for all rendering.
 	 *
 	 * \param camera: a pointer to the camera to be used for future rendering.

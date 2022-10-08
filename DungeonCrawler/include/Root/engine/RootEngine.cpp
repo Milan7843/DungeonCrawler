@@ -222,6 +222,19 @@ namespace RootEngine
         return transforms;
     }
 
+    TransformPointer getTransformByName(std::string& name)
+    {
+        // Comparing each transform's name with the input name
+        for (std::shared_ptr<Transform>& transform : transforms)
+        {
+            // If it matches, return its pointer
+            if (transform->getName() == name)
+                return transform.get();
+        }
+        // If no transform was found with teh given name, return a nullptr
+        return nullptr;
+    }
+
     void setActiveCamera(Camera* camera)
     {
         activeCamera = camera;

@@ -77,6 +77,14 @@ namespace Root
 	void addTransform(std::shared_ptr<Transform> transform);
 
 	/**
+	 * Get a transform by its name.
+	 *
+	 * \returns a TransformPointer to a transform with the given name if it was found,
+	 * nullptr otherwise.
+	 */
+	TransformPointer getTransformByName(std::string& name);
+
+	/**
 	 * Get the camera currently actively used for rendering.
 	 *
 	 * \returns the currently active camera.

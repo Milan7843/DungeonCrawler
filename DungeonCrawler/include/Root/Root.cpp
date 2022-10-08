@@ -27,6 +27,11 @@ namespace Root
         RootEngine::addTransform(transform);
     }
 
+    TransformPointer getTransformByName(std::string& name)
+    {
+        return RootEngine::getTransformByName(name);
+    }
+
     Camera* getActiveCamera()
     {
         return RootEngine::getActiveCamera();
