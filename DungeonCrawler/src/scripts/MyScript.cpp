@@ -49,7 +49,7 @@ void MyScript::start()
 	Rigidbody::create(cat2, b2_dynamicBody, 1.0f, false, false);
 	
 	// Adding a camera to the scene
-	TransformPointer cameraTransform = Transform::create();
+	cameraTransform = Transform::create();
 	CameraPointer camera = Camera::create(cameraTransform, 8.0f);
 
 
@@ -96,8 +96,9 @@ void MyScript::update()
 		<< r[0][3] << " " << r[1][3] << " " << r[2][3] << " " << r[3][3] << std::endl;
 	*/
 
-	if (Input::getKeyPressed(KEY_F)) {
-		cat2->destroy();
+	if (Input::getKey(KEY_F)) {
+		cameraTransform->setPosition(
+			Math::move(cameraTransform->getPosition(), transform->getPosition(), 4.0f));
 	}
 
 	//std::cout << transform->getLocalPosition().x << ", " << transform->getLocalPosition().y << std::endl;

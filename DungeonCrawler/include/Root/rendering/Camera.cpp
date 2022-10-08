@@ -61,7 +61,9 @@ glm::vec2 Camera::worldToScreenPosition(glm::vec2 worldPosition)
 
 	return glm::vec2(
 		glm::vec4(worldPosition.x, worldPosition.y, 0.0f, 1.0f)
-		* this->getProjectionMatrix());
+		* this->transform->getInverseTransformMatrix()
+		* this->getProjectionMatrix()
+	);
 }
 
 glm::vec2 Camera::screenToWorldPosition(glm::vec2 screenPosition)
@@ -82,6 +84,9 @@ glm::vec2 Camera::screenToWorldPosition(glm::vec2 screenPosition)
 	float aspectRatio{ (float)RootEngine::getScreenWidth() / (float)RootEngine::getScreenHeight() };
 	screenPosition.x *= aspectRatio;
 	glm::vec2 worldPosition = screenPosition * (cameraHeight / 2.0f);
+
+	worldPosition = glm::vec2(this->transform->getTransformMatrix()
+		* glm::vec4(worldPosition.x, worldPosition.y, 0.0f, 1.0f));
 
 	return worldPosition;
 }

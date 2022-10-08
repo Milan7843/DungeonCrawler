@@ -36,6 +36,7 @@ void SpriteRenderer::render(float renderDepth)
 	// Setting shader variables
 	spriteRenderShader->use();
 	spriteRenderShader->setMat4("model", transform->getModelMatrix());
+	spriteRenderShader->setMat4("view", Root::getActiveCamera()->getTransform()->getInverseTransformMatrix());
 
 	spriteRenderShader->setMat4("projection", Root::getActiveCamera()->getProjectionMatrix());
 	spriteRenderShader->setInt("sprite", 0);

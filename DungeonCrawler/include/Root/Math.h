@@ -3,6 +3,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/constants.hpp>
 
+#include <Root/Time.h>
+
 namespace Math
 {
 	/**
@@ -60,4 +62,50 @@ namespace Math
 	{
 		return b1 + (value - a1) * (b2 - b1) / (a2 - a1);
 	}
+
+	/**
+	 * Move a float to a target.
+	 * Does not modify the input value.
+	 *
+	 * \param value: the start value.
+	 * \param target: the target value.
+	 * \param speed: the speed at which to move in units per second..
+	 * \return the start value + some offset towards the target.
+	 */
+	float move(float value, float target, float speed);
+
+	/**
+	 * Move a vec2 to a target.
+	 * Does not modify the input value.
+	 *
+	 * \param value: the start value.
+	 * \param target: the target value.
+	 * \param speed: the speed at which to move in units per second.
+	 * \return the start value + some offset towards the target.
+	 */
+	glm::vec2 move(glm::vec2 value, glm::vec2 target, float speed);
+
+	/**
+	 * Smoothly move a float to a target.
+	 * Does not modify the input value.
+	 *
+	 * \param value: the start value.
+	 * \param target: the target value.
+	 * \param speed: the speed multiplier (calculated speed is linear with distance).
+	 * \param maxVelocity: the maximum velocity in units per second.
+	 * \return the start value + some offset towards the target.
+	 */
+	float smoothMove(float value, float target, float speed, float maxVelocity);
+
+	/**
+	 * Smoothly move a vec2 to a target.
+	 * Does not modify the input value.
+	 *
+	 * \param value: the start value.
+	 * \param target: the target value.
+	 * \param speed: the speed multiplier (calculated speed is linear with distance).
+	 * \param maxVelocity: the maximum velocity in units per second.
+	 * \return the start value + some offset towards the target.
+	 */
+	glm::vec2 smoothMove(glm::vec2 value, glm::vec2 target, float speed, float maxVelocity);
 };

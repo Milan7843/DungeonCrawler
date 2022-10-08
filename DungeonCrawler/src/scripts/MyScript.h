@@ -25,6 +25,7 @@ public:
 private:
 	TransformPointer transform;
 	TransformPointer weapon;
+	TransformPointer cameraTransform;
 	TransformPointer cat;
 	TransformPointer cat2;
 	ParticleSystemPointer particleSystem;
