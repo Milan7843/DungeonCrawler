@@ -5,8 +5,6 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DungeonCrawler", "DungeonCrawler\DungeonCrawler.vcxproj", "{BB2330F2-C7EC-4562-8F86-E9DFB7E67D10}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RootEngineTest", "RootEngineTest\RootEngineTest.vcxproj", "{D02F0D5D-6A64-41B8-B4CA-F785B00FDDDC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -23,14 +21,6 @@ Global
 		{BB2330F2-C7EC-4562-8F86-E9DFB7E67D10}.Release|x64.Build.0 = Release|x64
 		{BB2330F2-C7EC-4562-8F86-E9DFB7E67D10}.Release|x86.ActiveCfg = Release|Win32
 		{BB2330F2-C7EC-4562-8F86-E9DFB7E67D10}.Release|x86.Build.0 = Release|Win32
-		{D02F0D5D-6A64-41B8-B4CA-F785B00FDDDC}.Debug|x64.ActiveCfg = Debug|x64
-		{D02F0D5D-6A64-41B8-B4CA-F785B00FDDDC}.Debug|x64.Build.0 = Debug|x64
-		{D02F0D5D-6A64-41B8-B4CA-F785B00FDDDC}.Debug|x86.ActiveCfg = Debug|Win32
-		{D02F0D5D-6A64-41B8-B4CA-F785B00FDDDC}.Debug|x86.Build.0 = Debug|Win32
-		{D02F0D5D-6A64-41B8-B4CA-F785B00FDDDC}.Release|x64.ActiveCfg = Release|x64
-		{D02F0D5D-6A64-41B8-B4CA-F785B00FDDDC}.Release|x64.Build.0 = Release|x64
-		{D02F0D5D-6A64-41B8-B4CA-F785B00FDDDC}.Release|x86.ActiveCfg = Release|Win32
-		{D02F0D5D-6A64-41B8-B4CA-F785B00FDDDC}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
