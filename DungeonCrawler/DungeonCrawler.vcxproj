@@ -72,11 +72,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(ProjectDir)/src;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)/include</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)/libs</LibraryPath>
+    <LibraryPath>C:\Git\Root\x64\Debug;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)/libs</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(ProjectDir)/src;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)/include</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)/libs</LibraryPath>
+    <LibraryPath>C:\Git\Root\x64\Debug;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)/libs</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -114,11 +114,12 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+      <AdditionalIncludeDirectories>C:\Git\Root\Root\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>box2d.lib;freetype.lib;glfw3.lib;opengl32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Root.lib;box2d.lib;freetype.lib;glfw3.lib;opengl32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -131,162 +132,29 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+      <AdditionalIncludeDirectories>C:\Git\Root\Root\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>box2d.lib;freetype.lib;glfw3.lib;opengl32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Root.lib;box2d.lib;freetype.lib;glfw3.lib;opengl32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\scripts\CollisionCallbackHandler.h" />
-    <ClInclude Include="include\Root\CollisionListener.h" />
-    <ClInclude Include="include\Root\Components.h" />
-    <ClInclude Include="include\Root\engine\ComponentEngine.h" />
-    <ClInclude Include="include\Root\components\Animator.h" />
-    <ClInclude Include="include\Root\components\Collider.h" />
-    <ClInclude Include="include\box2d\b2_api.h" />
-    <ClInclude Include="include\box2d\b2_block_allocator.h" />
-    <ClInclude Include="include\box2d\b2_body.h" />
-    <ClInclude Include="include\box2d\b2_broad_phase.h" />
-    <ClInclude Include="include\box2d\b2_chain_shape.h" />
-    <ClInclude Include="include\box2d\b2_circle_shape.h" />
-    <ClInclude Include="include\box2d\b2_collision.h" />
-    <ClInclude Include="include\box2d\b2_common.h" />
-    <ClInclude Include="include\box2d\b2_contact.h" />
-    <ClInclude Include="include\box2d\b2_contact_manager.h" />
-    <ClInclude Include="include\box2d\b2_distance.h" />
-    <ClInclude Include="include\box2d\b2_distance_joint.h" />
-    <ClInclude Include="include\box2d\b2_draw.h" />
-    <ClInclude Include="include\box2d\b2_dynamic_tree.h" />
-    <ClInclude Include="include\box2d\b2_edge_shape.h" />
-    <ClInclude Include="include\box2d\b2_fixture.h" />
-    <ClInclude Include="include\box2d\b2_friction_joint.h" />
-    <ClInclude Include="include\box2d\b2_gear_joint.h" />
-    <ClInclude Include="include\box2d\b2_growable_stack.h" />
-    <ClInclude Include="include\box2d\b2_joint.h" />
-    <ClInclude Include="include\box2d\b2_math.h" />
-    <ClInclude Include="include\box2d\b2_motor_joint.h" />
-    <ClInclude Include="include\box2d\b2_mouse_joint.h" />
-    <ClInclude Include="include\box2d\b2_polygon_shape.h" />
-    <ClInclude Include="include\box2d\b2_prismatic_joint.h" />
-    <ClInclude Include="include\box2d\b2_pulley_joint.h" />
-    <ClInclude Include="include\box2d\b2_revolute_joint.h" />
-    <ClInclude Include="include\box2d\b2_rope.h" />
-    <ClInclude Include="include\box2d\b2_settings.h" />
-    <ClInclude Include="include\box2d\b2_shape.h" />
-    <ClInclude Include="include\box2d\b2_stack_allocator.h" />
-    <ClInclude Include="include\box2d\b2_timer.h" />
-    <ClInclude Include="include\box2d\b2_time_of_impact.h" />
-    <ClInclude Include="include\box2d\b2_time_step.h" />
-    <ClInclude Include="include\box2d\b2_types.h" />
-    <ClInclude Include="include\box2d\b2_weld_joint.h" />
-    <ClInclude Include="include\box2d\b2_wheel_joint.h" />
-    <ClInclude Include="include\box2d\b2_world.h" />
-    <ClInclude Include="include\box2d\b2_world_callbacks.h" />
-    <ClInclude Include="include\box2d\box2d.h" />
-    <ClInclude Include="include\Root\Gradient.h" />
-    <ClInclude Include="include\Root\Math.h" />
-    <ClInclude Include="include\Root\rendering\Camera.h" />
-    <ClInclude Include="include\Root\components\Component.h" />
-    <ClInclude Include="include\GLFW\glfw3.h" />
-    <ClInclude Include="include\GLFW\glfw3native.h" />
-    <ClInclude Include="include\imgui\imconfig.h" />
-    <ClInclude Include="include\imgui\imgui.h" />
-    <ClInclude Include="include\imgui\imgui_impl_glfw.h" />
-    <ClInclude Include="include\imgui\imgui_impl_opengl3.h" />
-    <ClInclude Include="include\imgui\imgui_impl_opengl3_loader.h" />
-    <ClInclude Include="include\imgui\imgui_internal.h" />
-    <ClInclude Include="include\imgui\imgui_stdlib.h" />
-    <ClInclude Include="include\imgui\imstb_rectpack.h" />
-    <ClInclude Include="include\imgui\imstb_textedit.h" />
-    <ClInclude Include="include\imgui\imstb_truetype.h" />
-    <ClInclude Include="include\Root\Logger.h" />
-    <ClInclude Include="include\Root\rendering\Renderer.h" />
-    <ClInclude Include="include\Root\Root.h" />
-    <ClInclude Include="include\Root\shaders\AbstractShader.h" />
-    <ClInclude Include="include\Root\shaders\ComputeShader.h" />
-    <ClInclude Include="include\Root\shaders\Shader.h" />
-    <ClInclude Include="include\Root\rendering\SpriteRenderer.h" />
-    <ClInclude Include="include\simplegui\Image.h" />
-    <ClInclude Include="include\simplegui\Item.h" />
-    <ClInclude Include="include\simplegui\Rectangle.h" />
-    <ClInclude Include="include\simplegui\SimpleGUI.h" />
-    <ClInclude Include="include\simpleprofiler\Profiler.h" />
-    <ClInclude Include="include\simpletext\SimpleText.h" />
-    <ClInclude Include="include\stb_image\stbi_image.h" />
-    <ClInclude Include="include\Root\components\Script.h" />
-    <ClInclude Include="include\Root\Transform.h" />
-    <ClInclude Include="include\Root\Time.h" />
-    <ClInclude Include="include\Root\engine\RootEngine.h" />
-    <ClInclude Include="include\Root\Input.h" />
-    <ClInclude Include="include\Root\engine\InputEngine.h" />
-    <ClInclude Include="include\Root\Physics.h" />
-    <ClInclude Include="include\Root\engine\PhysicsEngine.h" />
-    <ClInclude Include="include\Root\components\Rigidbody.h" />
-    <ClInclude Include="include\Root\components\ParticleSystem.h" />
-    <ClInclude Include="include\Root\Random.h" />
-    <ClInclude Include="include\Root\rendering\ScreenSpaceEffect.h" />
-    <ClInclude Include="include\Root\engine\RendererEngine.h" />
     <ClInclude Include="src\ScriptLoader.h" />
     <ClInclude Include="src\scripts\MyComponentScript.h" />
     <ClInclude Include="src\scripts\MyScript.h" />
-    <ClInclude Include="include\stbi_utility\TextureData.h" />
-    <ClInclude Include="include\Root\engine\TransformEngine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\scripts\CollisionCallbackHandler.cpp" />
-    <ClCompile Include="include\Root\CollisionListener.cpp" />
-    <ClCompile Include="include\Root\components\ParticleSystemGettersAndSetters.cpp" />
-    <ClCompile Include="include\Root\engine\ComponentEngine.cpp" />
-    <ClCompile Include="include\Root\components\Animator.cpp" />
-    <ClCompile Include="include\Root\components\Collider.cpp" />
-    <ClCompile Include="include\Root\engine\RendererEngine.cpp" />
-    <ClCompile Include="include\Root\Math.cpp" />
-    <ClCompile Include="include\Root\rendering\Camera.cpp" />
-    <ClCompile Include="include\Root\components\Component.cpp" />
-    <ClCompile Include="include\imgui\imgui.cpp" />
-    <ClCompile Include="include\imgui\imgui_demo.cpp" />
-    <ClCompile Include="include\imgui\imgui_draw.cpp" />
-    <ClCompile Include="include\imgui\imgui_impl_glfw.cpp" />
-    <ClCompile Include="include\imgui\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="include\imgui\imgui_stdlib.cpp" />
-    <ClCompile Include="include\imgui\imgui_tables.cpp" />
-    <ClCompile Include="include\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="include\Root\Logger.cpp" />
-    <ClCompile Include="include\Root\rendering\Renderer.cpp" />
-    <ClCompile Include="include\Root\rendering\SpriteRenderer.cpp" />
-    <ClCompile Include="include\Root\Root.cpp" />
-    <ClCompile Include="include\Root\shaders\AbstractShader.cpp" />
-    <ClCompile Include="include\Root\shaders\ComputeShader.cpp" />
-    <ClCompile Include="include\Root\shaders\Shader.cpp" />
-    <ClCompile Include="include\Root\Time.cpp" />
-    <ClCompile Include="include\simplegui\Image.cpp" />
-    <ClCompile Include="include\simplegui\Item.cpp" />
-    <ClCompile Include="include\simplegui\Rectangle.cpp" />
-    <ClCompile Include="include\simplegui\SimpleGUI.cpp" />
-    <ClCompile Include="include\simpleprofiler\Profiler.cpp" />
-    <ClCompile Include="include\simpletext\SimpleText.cpp" />
-    <ClCompile Include="include\Root\components\Script.cpp" />
-    <ClCompile Include="include\Root\engine\RootEngine.cpp" />
-    <ClCompile Include="include\Root\Input.cpp" />
-    <ClCompile Include="include\Root\engine\InputEngine.cpp" />
-    <ClCompile Include="include\Root\Physics.cpp" />
-    <ClCompile Include="include\Root\engine\PhysicsEngine.cpp" />
-    <ClCompile Include="include\Root\components\Rigidbody.cpp" />
-    <ClCompile Include="include\Root\components\ParticleSystem.cpp" />
-    <ClCompile Include="include\Root\Random.cpp" />
-    <ClCompile Include="include\Root\rendering\ScreenSpaceEffect.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="include\Root\Transform.cpp" />
     <ClCompile Include="src\ScriptLoader.cpp" />
     <ClCompile Include="src\scripts\MyComponentScript.cpp" />
     <ClCompile Include="src\scripts\MyScript.cpp" />
-    <ClCompile Include="include\stbi_utility\TextureData.cpp" />
-    <ClCompile Include="include\Root\engine\TransformEngine.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
