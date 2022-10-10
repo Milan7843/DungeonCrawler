@@ -103,6 +103,14 @@ void MyScript::update()
 		cameraTransform->setPosition(
 			Math::move(cameraTransform->getPosition(), transform->getPosition(), 4.0f));
 	}
+	if (Input::getKey(KEY_Z))
+	{
+		cameraTransform->rotate(-30.0f * Time::getDeltaTime());
+	}
+	if (Input::getKey(KEY_X))
+	{
+		cameraTransform->rotate(30.0f * Time::getDeltaTime());
+	}
 
 	//std::cout << transform->getLocalPosition().x << ", " << transform->getLocalPosition().y << std::endl;
 
