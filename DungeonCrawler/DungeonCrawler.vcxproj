@@ -143,12 +143,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\scripts\GUIScript.h" />
     <ClInclude Include="src\scripts\CollisionCallbackHandler.h" />
     <ClInclude Include="src\ScriptLoader.h" />
     <ClInclude Include="src\scripts\MyComponentScript.h" />
     <ClInclude Include="src\scripts\MyScript.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\scripts\GUIScript.cpp" />
     <ClCompile Include="src\scripts\CollisionCallbackHandler.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
