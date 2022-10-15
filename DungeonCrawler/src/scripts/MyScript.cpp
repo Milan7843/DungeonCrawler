@@ -62,7 +62,7 @@ void MyScript::start()
 
 
 
-	TransformPointer particleSystemTransform = Transform::create(glm::vec2(2.0f, 1.0f));
+	particleSystemTransform = Transform::create(glm::vec2(2.0f, 1.0f));
 	particleSystem = ParticleSystem::create(particleSystemTransform);
 	Gradient<glm::vec3> colorGradient = Gradient<glm::vec3>(std::vector<GradientPoint<glm::vec3>>{ 
 		{ 0.0f, glm::vec3(1.0f) },
@@ -86,6 +86,19 @@ void MyScript::start()
 	Renderer::Bloom::setThreshold(0.7f);
 	Renderer::Bloom::setIntensity(0.5f);
 	Renderer::setMSAAQualityLevel(2);
+
+
+
+	Gradient<glm::vec2> particleSystemMoveAnimationGradient = Gradient<glm::vec2>(std::vector<GradientPoint<glm::vec2>>{
+		{ 0.0f, glm::vec2(2.0f, 1.0f) },
+		{ 0.1f, glm::vec2(1.0f, 1.0f) },
+		{ 0.8f, glm::vec2(2.0f, 2.0f) },
+		{ 1.0f, glm::vec2(0.0f, 1.0f) },
+		{ 1.5f, glm::vec2(2.0f, 1.0f) }
+	});
+	ValueAnimation<glm::vec2>* particleSystemMoveAnimation
+		= ValueAnimation<glm::vec2>::create(&particleSystemAnimation, &particleSystemPosition, particleSystemMoveAnimationGradient);
+	particleSystemMoveAnimation->setDuration(1.5f);
 }
 
 void MyScript::update()
@@ -95,6 +108,14 @@ void MyScript::update()
 	weapon->setRotation(Math::smoothRotate(weapon->getRotation(), requestedRotation, 5.0f, 240.0f));
 	//transform->setRotation(transform->lookAt(Input::getMouseWorldPosition()));
 	
+	particleSystemAnimation.update();
+	particleSystemTransform->setPosition(particleSystemPosition);
+
+	if (Input::getKeyPressed(KEY_B))
+	{
+		particleSystemAnimation.play();
+	}
+
 	/*
 	std::cout
 		<< r[0][0] << " " << r[1][0] << " " << r[2][0] << " " << r[3][0] << "\n"
