@@ -82,6 +82,8 @@ void MyScript::start()
 
 
 	Renderer::addScreenSpaceEffect(ScreenSpaceEffect::create("src/shaders/screenSpaceFragment.shader"));
+	Renderer::Bloom::setEnabled(true);
+	Renderer::Bloom::setThreshold(0.5f);
 }
 
 void MyScript::update()
