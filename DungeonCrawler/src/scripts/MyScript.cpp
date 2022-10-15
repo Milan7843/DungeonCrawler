@@ -23,8 +23,9 @@ void MyScript::start()
 	Rigidbody::create(transform, b2_dynamicBody, 0.0f, true, false);
 
 	// Adding a sprite renderer to the object
-	SpriteRendererPointer spriteRenderer = SpriteRenderer::create(transform, "src/sprites/cutie_cat.png");
+	SpriteRendererPointer spriteRenderer = SpriteRenderer::create(transform, "src/sprites/test_sprite_sheet.png", true, 4, 2);
 	transform->setRenderDepth(1.0f);
+	spriteRenderer->setSpriteSheetColumnIndex(1);
 
 	
 	weapon = Transform::create();
