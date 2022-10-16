@@ -1,5 +1,7 @@
 #include "MyScript.h"
 
+#include <functional>
+
 MyScript::MyScript()
 	: collisionCallbackHandler()
 {
@@ -97,8 +99,13 @@ void MyScript::start()
 		{ 1.0f, glm::vec2(0.0f, 1.0f) },
 		{ 1.5f, glm::vec2(2.0f, 1.0f) }
 	});
+	/*
 	ValueAnimation<glm::vec2>* particleSystemMoveAnimation
 		= ValueAnimation<glm::vec2>::create(&particleSystemAnimation, &particleSystemPosition, particleSystemMoveAnimationGradient);
+	*/
+	SetterValueAnimation<glm::vec2, Transform>* particleSystemMoveAnimation
+		= SetterValueAnimation<glm::vec2, Transform>::create(&particleSystemAnimation, particleSystemTransform, &Transform::setPosition, particleSystemMoveAnimationGradient);
+
 	particleSystemMoveAnimation->setDuration(1.5f);
 }
 
@@ -110,7 +117,6 @@ void MyScript::update()
 	//transform->setRotation(transform->lookAt(Input::getMouseWorldPosition()));
 	
 	particleSystemAnimation.update();
-	particleSystemTransform->setPosition(particleSystemPosition);
 
 	if (Input::getKeyPressed(KEY_B))
 	{

@@ -13,6 +13,7 @@
 #include <Root/Input.h>
 #include <Root/animation/Animation.h>
 #include <Root/animation/ValueAnimation.h>
+#include <Root/animation/SetterValueAnimation.h>
 
 class MyScript : public Script
 {
@@ -34,6 +35,5 @@ private:
 	TransformPointer particleSystemTransform;
 	CollisionCallbackHandler collisionCallbackHandler;
 
-	glm::vec2 particleSystemPosition = glm::vec2(2.0f, 1.0f);
 	Animation particleSystemAnimation;
 };
