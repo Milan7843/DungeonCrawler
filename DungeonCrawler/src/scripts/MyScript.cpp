@@ -28,6 +28,7 @@ void MyScript::start()
 	SpriteRendererPointer spriteRenderer = SpriteRenderer::create(transform, "src/sprites/test_sprite_sheet.png", true, 4, 2);
 	transform->setRenderDepth(1.0f);
 	spriteRenderer->setSpriteSheetColumnIndex(1);
+	spriteRenderer->setSpriteSheetRowIndex(1);
 
 	
 	weapon = Transform::create();
@@ -104,9 +105,21 @@ void MyScript::start()
 		= ValueAnimation<glm::vec2>::create(&particleSystemAnimation, &particleSystemPosition, particleSystemMoveAnimationGradient);
 	*/
 	SetterValueAnimation<glm::vec2, Transform>* particleSystemMoveAnimation
-		= SetterValueAnimation<glm::vec2, Transform>::create(&particleSystemAnimation, particleSystemTransform, &Transform::setPosition, particleSystemMoveAnimationGradient);
+		= SetterValueAnimation<glm::vec2, Transform>::create(
+			&particleSystemAnimation,
+			particleSystemTransform,
+			&Transform::setPosition,
+			particleSystemMoveAnimationGradient);
 
 	particleSystemMoveAnimation->setDuration(1.5f);
+
+	SetterValueAnimation<unsigned int, SpriteRenderer>* playerSpriteAnimation
+		= SetterValueAnimation<unsigned int, SpriteRenderer>::create(
+			&particleSystemAnimation,
+			spriteRenderer,
+			&SpriteRenderer::setSpriteSheetColumnIndex,
+			Gradient<unsigned int>::spriteIndexGradient(0, 3, 2.0f));
+	playerSpriteAnimation->setDuration(2.0f);
 }
 
 void MyScript::update()
