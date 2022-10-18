@@ -11,7 +11,7 @@
 #include <Root/Logger.h>
 #include <Root/Transform.h>
 #include <Root/Input.h>
-#include <Root/animation/Animation.h>
+#include <Root/animation/AnimationHandler.h>
 #include <Root/animation/ValueAnimation.h>
 #include <Root/animation/SetterValueAnimation.h>
 
@@ -25,8 +25,11 @@ public:
 
 	void update() override;
 
+	void createPlayerAnimator();
+
 private:
 	TransformPointer transform;
+	SpriteRendererPointer playerSpriteRenderer;
 	TransformPointer weapon;
 	TransformPointer cameraTransform;
 	TransformPointer cat;
@@ -34,6 +37,4 @@ private:
 	ParticleSystemPointer particleSystem;
 	TransformPointer particleSystemTransform;
 	CollisionCallbackHandler collisionCallbackHandler;
-
-	Animation particleSystemAnimation;
 };

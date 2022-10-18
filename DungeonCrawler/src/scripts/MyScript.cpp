@@ -25,11 +25,8 @@ void MyScript::start()
 	Rigidbody::create(transform, b2_dynamicBody, 0.0f, true, false);
 
 	// Adding a sprite renderer to the object
-	SpriteRendererPointer spriteRenderer = SpriteRenderer::create(transform, "src/sprites/test_sprite_sheet.png", true, 4, 2);
+	playerSpriteRenderer = SpriteRenderer::create(transform, "src/sprites/test_sprite_sheet_directions.png", true, 4, 4);
 	transform->setRenderDepth(1.0f);
-	spriteRenderer->setSpriteSheetColumnIndex(1);
-	spriteRenderer->setSpriteSheetRowIndex(1);
-
 	
 	weapon = Transform::create();
 	weapon->setScale(glm::vec2(0.8f, 0.4f));
@@ -91,35 +88,7 @@ void MyScript::start()
 	Renderer::Bloom::setIntensity(0.5f);
 	Renderer::setMSAAQualityLevel(2);
 
-
-
-	Gradient<glm::vec2> particleSystemMoveAnimationGradient = Gradient<glm::vec2>(std::vector<GradientPoint<glm::vec2>>{
-		{ 0.0f, glm::vec2(2.0f, 1.0f) },
-		{ 0.1f, glm::vec2(1.0f, 1.0f) },
-		{ 0.8f, glm::vec2(2.0f, 2.0f) },
-		{ 1.0f, glm::vec2(0.0f, 1.0f) },
-		{ 1.5f, glm::vec2(2.0f, 1.0f) }
-	});
-	/*
-	ValueAnimation<glm::vec2>* particleSystemMoveAnimation
-		= ValueAnimation<glm::vec2>::create(&particleSystemAnimation, &particleSystemPosition, particleSystemMoveAnimationGradient);
-	*/
-	SetterValueAnimation<glm::vec2, Transform>* particleSystemMoveAnimation
-		= SetterValueAnimation<glm::vec2, Transform>::create(
-			&particleSystemAnimation,
-			particleSystemTransform,
-			&Transform::setPosition,
-			particleSystemMoveAnimationGradient);
-
-	particleSystemMoveAnimation->setDuration(1.5f);
-
-	SetterValueAnimation<unsigned int, SpriteRenderer>* playerSpriteAnimation
-		= SetterValueAnimation<unsigned int, SpriteRenderer>::create(
-			&particleSystemAnimation,
-			spriteRenderer,
-			&SpriteRenderer::setSpriteSheetColumnIndex,
-			Gradient<unsigned int>::spriteIndexGradient(0, 3, 2.0f));
-	playerSpriteAnimation->setDuration(2.0f);
+	createPlayerAnimator();
 }
 
 void MyScript::update()
@@ -128,13 +97,6 @@ void MyScript::update()
 	float requestedRotation = transform->lookAt(Input::getMouseWorldPosition());
 	weapon->setRotation(Math::smoothRotate(weapon->getRotation(), requestedRotation, 5.0f, 240.0f));
 	//transform->setRotation(transform->lookAt(Input::getMouseWorldPosition()));
-	
-	particleSystemAnimation.update();
-
-	if (Input::getKeyPressed(KEY_B))
-	{
-		particleSystemAnimation.play();
-	}
 
 	/*
 	std::cout
@@ -183,4 +145,144 @@ void MyScript::update()
 	{
 		transform->rotate(30.0f * Time::getDeltaTime());
 	}
+}
+
+void MyScript::createPlayerAnimator()
+{
+	float arrowAnimationDuration{ 2.0f };
+
+	// Creating an animation for the up direction
+	Animation playerMoveUpAnimation;
+
+	// Creating a setter value animation (a sub-animation which sets a value via a setter),
+	// which is added to the particle system animation
+	SetterValueAnimation<unsigned int, SpriteRenderer>* playerMoveUpSetColumnIndexAnimation
+		= SetterValueAnimation<unsigned int, SpriteRenderer>::create(
+			&playerMoveUpAnimation,
+			playerSpriteRenderer,
+			&SpriteRenderer::setSpriteSheetColumnIndex,
+			Gradient<unsigned int>::spriteIndexGradient(0, 3, arrowAnimationDuration));
+	playerMoveUpSetColumnIndexAnimation->setDuration(arrowAnimationDuration);
+
+	SetterValueAnimation<unsigned int, SpriteRenderer>* playerMoveUpSetRowIndexAnimation
+		= SetterValueAnimation<unsigned int, SpriteRenderer>::create(
+			&playerMoveUpAnimation,
+			playerSpriteRenderer,
+			&SpriteRenderer::setSpriteSheetRowIndex,
+			Gradient<unsigned int>(0)); // Row index 0 for up
+	playerMoveUpSetRowIndexAnimation->setDuration(arrowAnimationDuration);
+
+
+	// Creating an animation for the up direction
+	Animation playerMoveRightAnimation;
+
+	// Creating a setter value animation (a sub-animation which sets a value via a setter),
+	// which is added to the particle system animation
+	SetterValueAnimation<unsigned int, SpriteRenderer>* playerMoveRightSetColumnIndexAnimation
+		= SetterValueAnimation<unsigned int, SpriteRenderer>::create(
+			&playerMoveRightAnimation,
+			playerSpriteRenderer,
+			&SpriteRenderer::setSpriteSheetColumnIndex,
+			Gradient<unsigned int>::spriteIndexGradient(0, 3, arrowAnimationDuration));
+	playerMoveRightSetColumnIndexAnimation->setDuration(arrowAnimationDuration);
+
+	SetterValueAnimation<unsigned int, SpriteRenderer>* playerMoveRightSetRowIndexAnimation
+		= SetterValueAnimation<unsigned int, SpriteRenderer>::create(
+			&playerMoveRightAnimation,
+			playerSpriteRenderer,
+			&SpriteRenderer::setSpriteSheetRowIndex,
+			Gradient<unsigned int>(1)); // Row index 1 for right
+	playerMoveRightSetRowIndexAnimation->setDuration(arrowAnimationDuration);
+
+
+	// Creating an animation for the down direction
+	Animation playerMoveDownAnimation;
+
+	// Creating a setter value animation (a sub-animation which sets a value via a setter),
+	// which is added to the particle system animation
+	SetterValueAnimation<unsigned int, SpriteRenderer>* playerMoveDownSetColumnIndexAnimation
+		= SetterValueAnimation<unsigned int, SpriteRenderer>::create(
+			&playerMoveDownAnimation,
+			playerSpriteRenderer,
+			&SpriteRenderer::setSpriteSheetColumnIndex,
+			Gradient<unsigned int>::spriteIndexGradient(0, 3, arrowAnimationDuration));
+	playerMoveDownSetColumnIndexAnimation->setDuration(arrowAnimationDuration);
+
+	SetterValueAnimation<unsigned int, SpriteRenderer>* playerMoveDownSetRowIndexAnimation
+		= SetterValueAnimation<unsigned int, SpriteRenderer>::create(
+			&playerMoveDownAnimation,
+			playerSpriteRenderer,
+			&SpriteRenderer::setSpriteSheetRowIndex,
+			Gradient<unsigned int>(2)); // Row index 2 for down
+	playerMoveDownSetRowIndexAnimation->setDuration(arrowAnimationDuration);
+
+
+	// Creating an animation for the left direction
+	Animation playerMoveLeftAnimation;
+
+	// Creating a setter value animation (a sub-animation which sets a value via a setter),
+	// which is added to the particle system animation
+	SetterValueAnimation<unsigned int, SpriteRenderer>* playerMoveLeftSetColumnIndexAnimation
+		= SetterValueAnimation<unsigned int, SpriteRenderer>::create(
+			&playerMoveLeftAnimation,
+			playerSpriteRenderer,
+			&SpriteRenderer::setSpriteSheetColumnIndex,
+			Gradient<unsigned int>::spriteIndexGradient(0, 3, arrowAnimationDuration));
+	playerMoveLeftSetColumnIndexAnimation->setDuration(arrowAnimationDuration);
+
+	SetterValueAnimation<unsigned int, SpriteRenderer>* playerMoveLeftSetRowIndexAnimation
+		= SetterValueAnimation<unsigned int, SpriteRenderer>::create(
+			&playerMoveLeftAnimation,
+			playerSpriteRenderer,
+			&SpriteRenderer::setSpriteSheetRowIndex,
+			Gradient<unsigned int>(3)); // Row index 3 for left
+	playerMoveLeftSetRowIndexAnimation->setDuration(arrowAnimationDuration);
+
+
+	// Creating an animator to add the animations to
+	Animator playerAnimator;
+
+	playerAnimator.addAnimation(playerMoveUpAnimation, "up");
+	playerAnimator.addAnimation(playerMoveRightAnimation, "right", true);
+	playerAnimator.addAnimation(playerMoveDownAnimation, "down");
+	playerAnimator.addAnimation(playerMoveLeftAnimation, "left");
+
+	// Creating links from up to the others
+	playerAnimator.createLink("up", "right");
+	playerAnimator.createLink("up", "down");
+	playerAnimator.createLink("up", "left");
+	playerAnimator.addConditionToLink("up", "left", "left", true);
+	playerAnimator.addConditionToLink("up", "right", "right", true);
+	playerAnimator.addConditionToLink("up", "down", "down", true);
+
+	// Creating links from right to the others
+	playerAnimator.createLink("right", "up");
+	playerAnimator.createLink("right", "down");
+	playerAnimator.createLink("right", "left");
+	playerAnimator.addConditionToLink("right", "up", "up", true);
+	playerAnimator.addConditionToLink("right", "left", "left", true);
+	playerAnimator.addConditionToLink("right", "down", "down", true);
+
+	// Creating links from down to the others
+	playerAnimator.createLink("down", "up");
+	playerAnimator.createLink("down", "right");
+	playerAnimator.createLink("down", "left");
+	playerAnimator.addConditionToLink("down", "up", "up", true);
+	playerAnimator.addConditionToLink("down", "right", "right", true);
+	playerAnimator.addConditionToLink("down", "left", "left", true);
+
+	// Creating links from left to the others
+	playerAnimator.createLink("left", "up");
+	playerAnimator.createLink("left", "right");
+	playerAnimator.createLink("left", "down");
+	playerAnimator.addConditionToLink("left", "up", "up", true);
+	playerAnimator.addConditionToLink("left", "right", "right", true);
+	playerAnimator.addConditionToLink("left", "down", "down", true);
+
+	playerAnimator.addParameter("up", false);
+	playerAnimator.addParameter("right", true);
+	playerAnimator.addParameter("down", false);
+	playerAnimator.addParameter("left", false);
+
+	AnimationHandler::addAnimator(playerAnimator, "player_sprite");
 }
