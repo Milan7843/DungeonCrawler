@@ -28,7 +28,7 @@ void MyScript::start()
 	playerSpriteRenderer = SpriteRenderer::create(transform, "src/sprites/test_sprite_sheet_directions.png", true, 4, 4);
 	transform->setRenderDepth(1.0f);
 	
-	weapon = Transform::create();
+	weapon = Transform::create(glm::vec2(1.0f, 0.0f));
 	weapon->setScale(glm::vec2(0.8f, 0.4f));
 	weapon->setParent(transform);
 
@@ -83,7 +83,7 @@ void MyScript::start()
 
 
 	Renderer::addScreenSpaceEffect(ScreenSpaceEffect::create("src/shaders/screenSpaceFragment.shader"));
-	Renderer::Bloom::setEnabled(true);
+	//Renderer::Bloom::setEnabled(true);
 	Renderer::Bloom::setThreshold(0.7f);
 	Renderer::Bloom::setIntensity(0.5f);
 	Renderer::setMSAAQualityLevel(2);
@@ -94,7 +94,7 @@ void MyScript::start()
 void MyScript::update()
 {
 	//weapon->setRotation(transform->lookAt(Input::getMouseWorldPosition()));
-	float requestedRotation = transform->lookAt(Input::getMouseWorldPosition());
+	float requestedRotation = weapon->lookAt(weapon->worldPointToParentLocalPoint(Input::getMouseWorldPosition()));
 	weapon->setRotation(Math::smoothRotate(weapon->getRotation(), requestedRotation, 5.0f, 240.0f));
 	//transform->setRotation(transform->lookAt(Input::getMouseWorldPosition()));
 
@@ -145,11 +145,16 @@ void MyScript::update()
 	{
 		transform->rotate(30.0f * Time::getDeltaTime());
 	}
+
+	AnimationHandler::setAnimatorParameter("player_sprite", "up", Input::getKey(KEY_W));
+	AnimationHandler::setAnimatorParameter("player_sprite", "down", Input::getKey(KEY_S));
+	AnimationHandler::setAnimatorParameter("player_sprite", "left", Input::getKey(KEY_A));
+	AnimationHandler::setAnimatorParameter("player_sprite", "right", Input::getKey(KEY_D));
 }
 
 void MyScript::createPlayerAnimator()
 {
-	float arrowAnimationDuration{ 2.0f };
+	float arrowAnimationDuration{ 1.0f };
 
 	// Creating an animation for the up direction
 	Animation playerMoveUpAnimation;
@@ -169,7 +174,7 @@ void MyScript::createPlayerAnimator()
 			&playerMoveUpAnimation,
 			playerSpriteRenderer,
 			&SpriteRenderer::setSpriteSheetRowIndex,
-			Gradient<unsigned int>(0)); // Row index 0 for up
+			Gradient<unsigned int>(3)); // Row index 3 for up
 	playerMoveUpSetRowIndexAnimation->setDuration(arrowAnimationDuration);
 
 
@@ -191,7 +196,7 @@ void MyScript::createPlayerAnimator()
 			&playerMoveRightAnimation,
 			playerSpriteRenderer,
 			&SpriteRenderer::setSpriteSheetRowIndex,
-			Gradient<unsigned int>(1)); // Row index 1 for right
+			Gradient<unsigned int>(2)); // Row index 2 for right
 	playerMoveRightSetRowIndexAnimation->setDuration(arrowAnimationDuration);
 
 
@@ -213,7 +218,7 @@ void MyScript::createPlayerAnimator()
 			&playerMoveDownAnimation,
 			playerSpriteRenderer,
 			&SpriteRenderer::setSpriteSheetRowIndex,
-			Gradient<unsigned int>(2)); // Row index 2 for down
+			Gradient<unsigned int>(1)); // Row index 1 for down
 	playerMoveDownSetRowIndexAnimation->setDuration(arrowAnimationDuration);
 
 
@@ -235,7 +240,7 @@ void MyScript::createPlayerAnimator()
 			&playerMoveLeftAnimation,
 			playerSpriteRenderer,
 			&SpriteRenderer::setSpriteSheetRowIndex,
-			Gradient<unsigned int>(3)); // Row index 3 for left
+			Gradient<unsigned int>(0)); // Row index 0 for left
 	playerMoveLeftSetRowIndexAnimation->setDuration(arrowAnimationDuration);
 
 
@@ -248,33 +253,33 @@ void MyScript::createPlayerAnimator()
 	playerAnimator.addAnimation(playerMoveLeftAnimation, "left");
 
 	// Creating links from up to the others
-	playerAnimator.createLink("up", "right");
-	playerAnimator.createLink("up", "down");
-	playerAnimator.createLink("up", "left");
+	playerAnimator.createLink("up", "right", false);
+	playerAnimator.createLink("up", "down", false);
+	playerAnimator.createLink("up", "left", false);
 	playerAnimator.addConditionToLink("up", "left", "left", true);
 	playerAnimator.addConditionToLink("up", "right", "right", true);
 	playerAnimator.addConditionToLink("up", "down", "down", true);
 
 	// Creating links from right to the others
-	playerAnimator.createLink("right", "up");
-	playerAnimator.createLink("right", "down");
-	playerAnimator.createLink("right", "left");
+	playerAnimator.createLink("right", "up", false);
+	playerAnimator.createLink("right", "down", false);
+	playerAnimator.createLink("right", "left", false);
 	playerAnimator.addConditionToLink("right", "up", "up", true);
 	playerAnimator.addConditionToLink("right", "left", "left", true);
 	playerAnimator.addConditionToLink("right", "down", "down", true);
 
 	// Creating links from down to the others
-	playerAnimator.createLink("down", "up");
-	playerAnimator.createLink("down", "right");
-	playerAnimator.createLink("down", "left");
+	playerAnimator.createLink("down", "up", false);
+	playerAnimator.createLink("down", "right", false);
+	playerAnimator.createLink("down", "left", false);
 	playerAnimator.addConditionToLink("down", "up", "up", true);
 	playerAnimator.addConditionToLink("down", "right", "right", true);
 	playerAnimator.addConditionToLink("down", "left", "left", true);
 
 	// Creating links from left to the others
-	playerAnimator.createLink("left", "up");
-	playerAnimator.createLink("left", "right");
-	playerAnimator.createLink("left", "down");
+	playerAnimator.createLink("left", "up", false);
+	playerAnimator.createLink("left", "right", false);
+	playerAnimator.createLink("left", "down", false);
 	playerAnimator.addConditionToLink("left", "up", "up", true);
 	playerAnimator.addConditionToLink("left", "right", "right", true);
 	playerAnimator.addConditionToLink("left", "down", "down", true);
