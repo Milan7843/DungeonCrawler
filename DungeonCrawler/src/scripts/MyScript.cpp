@@ -146,10 +146,10 @@ void MyScript::update()
 		transform->rotate(30.0f * Time::getDeltaTime());
 	}
 
-	AnimationHandler::setAnimatorParameter("player_sprite", "up", Input::getKey(KEY_W));
-	AnimationHandler::setAnimatorParameter("player_sprite", "down", Input::getKey(KEY_S));
-	AnimationHandler::setAnimatorParameter("player_sprite", "left", Input::getKey(KEY_A));
-	AnimationHandler::setAnimatorParameter("player_sprite", "right", Input::getKey(KEY_D));
+	AnimationHandler::setAnimationWebParameter("player_sprite", "up", Input::getKey(KEY_W));
+	AnimationHandler::setAnimationWebParameter("player_sprite", "down", Input::getKey(KEY_S));
+	AnimationHandler::setAnimationWebParameter("player_sprite", "left", Input::getKey(KEY_A));
+	AnimationHandler::setAnimationWebParameter("player_sprite", "right", Input::getKey(KEY_D));
 }
 
 void MyScript::createPlayerAnimator()
@@ -244,50 +244,50 @@ void MyScript::createPlayerAnimator()
 	playerMoveLeftSetRowIndexAnimation->setDuration(arrowAnimationDuration);
 
 
-	// Creating an animator to add the animations to
-	Animator playerAnimator;
+	// Creating an animation web to add the animations to
+	AnimationWeb playerAnimationWeb;
 
-	playerAnimator.addAnimation(playerMoveUpAnimation, "up");
-	playerAnimator.addAnimation(playerMoveRightAnimation, "right", true);
-	playerAnimator.addAnimation(playerMoveDownAnimation, "down");
-	playerAnimator.addAnimation(playerMoveLeftAnimation, "left");
+	playerAnimationWeb.addAnimation(playerMoveUpAnimation, "up");
+	playerAnimationWeb.addAnimation(playerMoveRightAnimation, "right", true);
+	playerAnimationWeb.addAnimation(playerMoveDownAnimation, "down");
+	playerAnimationWeb.addAnimation(playerMoveLeftAnimation, "left");
 
 	// Creating links from up to the others
-	playerAnimator.createLink("up", "right", false);
-	playerAnimator.createLink("up", "down", false);
-	playerAnimator.createLink("up", "left", false);
-	playerAnimator.addConditionToLink("up", "left", "left", true);
-	playerAnimator.addConditionToLink("up", "right", "right", true);
-	playerAnimator.addConditionToLink("up", "down", "down", true);
+	playerAnimationWeb.createLink("up", "right", false);
+	playerAnimationWeb.createLink("up", "down", false);
+	playerAnimationWeb.createLink("up", "left", false);
+	playerAnimationWeb.addConditionToLink("up", "left", "left", true);
+	playerAnimationWeb.addConditionToLink("up", "right", "right", true);
+	playerAnimationWeb.addConditionToLink("up", "down", "down", true);
 
 	// Creating links from right to the others
-	playerAnimator.createLink("right", "up", false);
-	playerAnimator.createLink("right", "down", false);
-	playerAnimator.createLink("right", "left", false);
-	playerAnimator.addConditionToLink("right", "up", "up", true);
-	playerAnimator.addConditionToLink("right", "left", "left", true);
-	playerAnimator.addConditionToLink("right", "down", "down", true);
+	playerAnimationWeb.createLink("right", "up", false);
+	playerAnimationWeb.createLink("right", "down", false);
+	playerAnimationWeb.createLink("right", "left", false);
+	playerAnimationWeb.addConditionToLink("right", "up", "up", true);
+	playerAnimationWeb.addConditionToLink("right", "left", "left", true);
+	playerAnimationWeb.addConditionToLink("right", "down", "down", true);
 
 	// Creating links from down to the others
-	playerAnimator.createLink("down", "up", false);
-	playerAnimator.createLink("down", "right", false);
-	playerAnimator.createLink("down", "left", false);
-	playerAnimator.addConditionToLink("down", "up", "up", true);
-	playerAnimator.addConditionToLink("down", "right", "right", true);
-	playerAnimator.addConditionToLink("down", "left", "left", true);
+	playerAnimationWeb.createLink("down", "up", false);
+	playerAnimationWeb.createLink("down", "right", false);
+	playerAnimationWeb.createLink("down", "left", false);
+	playerAnimationWeb.addConditionToLink("down", "up", "up", true);
+	playerAnimationWeb.addConditionToLink("down", "right", "right", true);
+	playerAnimationWeb.addConditionToLink("down", "left", "left", true);
 
 	// Creating links from left to the others
-	playerAnimator.createLink("left", "up", false);
-	playerAnimator.createLink("left", "right", false);
-	playerAnimator.createLink("left", "down", false);
-	playerAnimator.addConditionToLink("left", "up", "up", true);
-	playerAnimator.addConditionToLink("left", "right", "right", true);
-	playerAnimator.addConditionToLink("left", "down", "down", true);
+	playerAnimationWeb.createLink("left", "up", false);
+	playerAnimationWeb.createLink("left", "right", false);
+	playerAnimationWeb.createLink("left", "down", false);
+	playerAnimationWeb.addConditionToLink("left", "up", "up", true);
+	playerAnimationWeb.addConditionToLink("left", "right", "right", true);
+	playerAnimationWeb.addConditionToLink("left", "down", "down", true);
 
-	playerAnimator.addParameter("up", false);
-	playerAnimator.addParameter("right", true);
-	playerAnimator.addParameter("down", false);
-	playerAnimator.addParameter("left", false);
+	playerAnimationWeb.addParameter("up", false);
+	playerAnimationWeb.addParameter("right", true);
+	playerAnimationWeb.addParameter("down", false);
+	playerAnimationWeb.addParameter("left", false);
 
-	AnimationHandler::addAnimator(playerAnimator, "player_sprite");
+	AnimationHandler::addAnimationWeb(playerAnimationWeb, "player_sprite");
 }
