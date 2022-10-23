@@ -4,6 +4,7 @@
 
 #include "scripts/MyComponentScript.h"
 #include "scripts/CollisionCallbackHandler.h"
+#include "animators/PlayerAnimator.h"
 
 #include <Root/Root.h>
 #include <Root/Components.h>
@@ -25,7 +26,7 @@ public:
 
 	void update() override;
 
-	void createPlayerAnimator();
+	static void createPlayerAnimator(SpriteRenderer* playerSpriteRenderer);
 
 private:
 	TransformPointer transform;

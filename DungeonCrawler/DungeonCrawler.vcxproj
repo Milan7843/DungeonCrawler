@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\animators\PlayerAnimator.h" />
     <ClInclude Include="src\scripts\GUIScript.h" />
     <ClInclude Include="src\scripts\CollisionCallbackHandler.h" />
     <ClInclude Include="src\ScriptLoader.h" />
@@ -150,6 +151,7 @@
     <ClInclude Include="src\scripts\MyScript.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\animators\PlayerAnimator.cpp" />
     <ClCompile Include="src\scripts\GUIScript.cpp" />
     <ClCompile Include="src\scripts\CollisionCallbackHandler.cpp" />
     <ClCompile Include="src\glad.c" />
