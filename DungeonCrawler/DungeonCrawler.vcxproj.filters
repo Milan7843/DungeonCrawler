@@ -18,7 +18,7 @@
     <ClInclude Include="src\ScriptLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\scripts\MyScript.h">
+    <ClInclude Include="src\scripts\GameManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\scripts\MyComponentScript.h">
@@ -33,6 +33,12 @@
     <ClInclude Include="src\animators\PlayerAnimator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\scripts\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scripts\Bullet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -44,7 +50,7 @@
     <ClCompile Include="src\ScriptLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\scripts\MyScript.cpp">
+    <ClCompile Include="src\scripts\GameManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\scripts\MyComponentScript.cpp">
@@ -57,6 +63,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\animators\PlayerAnimator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scripts\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scripts\Bullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

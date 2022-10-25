@@ -5,7 +5,7 @@
 #include <Root/Root.h>
 
 // Window size
-const int WIDTH = 1200, HEIGHT = 700;
+const int WIDTH = 1280, HEIGHT = 720;
 
 int main()
 {

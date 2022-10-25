@@ -143,14 +143,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\scripts\Bullet.h" />
+    <ClInclude Include="src\scripts\Player.h" />
     <ClInclude Include="src\animators\PlayerAnimator.h" />
     <ClInclude Include="src\scripts\GUIScript.h" />
     <ClInclude Include="src\scripts\CollisionCallbackHandler.h" />
     <ClInclude Include="src\ScriptLoader.h" />
     <ClInclude Include="src\scripts\MyComponentScript.h" />
-    <ClInclude Include="src\scripts\MyScript.h" />
+    <ClInclude Include="src\scripts\GameManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\scripts\Bullet.cpp" />
+    <ClCompile Include="src\scripts\Player.cpp" />
     <ClCompile Include="src\animators\PlayerAnimator.cpp" />
     <ClCompile Include="src\scripts\GUIScript.cpp" />
     <ClCompile Include="src\scripts\CollisionCallbackHandler.cpp" />
@@ -158,7 +162,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ScriptLoader.cpp" />
     <ClCompile Include="src\scripts\MyComponentScript.cpp" />
-    <ClCompile Include="src\scripts\MyScript.cpp" />
+    <ClCompile Include="src\scripts\GameManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

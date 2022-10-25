@@ -1,6 +1,6 @@
 #pragma once
 
-#include "scripts/MyScript.h"
+#include "scripts/GameManager.h"
 #include "scripts/GUIScript.h"
 
 #include <Root/components/Script.h>

@@ -3,6 +3,7 @@
 #include "MyComponentScript.h"
 
 #include "scripts/MyComponentScript.h"
+#include "scripts/Player.h"
 #include "scripts/CollisionCallbackHandler.h"
 #include "animators/PlayerAnimator.h"
 
@@ -16,25 +17,23 @@
 #include <Root/animation/ValueAnimation.h>
 #include <Root/animation/SetterValueAnimation.h>
 
-class MyScript : public Script
+class GameManager : public Script
 {
 public:
-	MyScript();
-	~MyScript();
+	GameManager();
+	~GameManager();
 
 	void start() override;
 
 	void update() override;
 
-	static void createPlayerAnimator(SpriteRenderer* playerSpriteRenderer);
-
 private:
-	TransformPointer transform;
+
+	void initialisePlayer();
+
+	TransformPointer player;
 	SpriteRendererPointer playerSpriteRenderer;
-	TransformPointer weapon;
 	TransformPointer cameraTransform;
-	TransformPointer cat;
-	TransformPointer cat2;
 	ParticleSystemPointer particleSystem;
 	TransformPointer particleSystemTransform;
 	CollisionCallbackHandler collisionCallbackHandler;
