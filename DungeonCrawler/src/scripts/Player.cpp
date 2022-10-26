@@ -14,6 +14,8 @@ void Player::start()
 
 	firePoint = Transform::create(glm::vec2(1.0f, 0.0f));
 	firePoint->setParent(weapon);
+
+	bulletCollider = BoxCollider(0.1f, 0.1f);
 }
 
 void Player::update()
@@ -53,11 +55,11 @@ void Player::update()
 void Player::shoot()
 {
 	Transform* bullet = Transform::create(firePoint->getPosition(), firePoint->getRotation(), glm::vec2(0.1f));
+	bullet->setName("bullet");
+	Rigidbody::create(bullet, bulletCollider, DYNAMIC, 0.0f, true);
 
 	SpriteRenderer::create(bullet, "src/sprites/cutie_cat.png", true);
 
 	std::shared_ptr<Bullet> bulletScript = std::shared_ptr<Bullet>(new Bullet());
 	bullet->addComponent(bulletScript);
-
-	Logger::log("Shooting");
 }

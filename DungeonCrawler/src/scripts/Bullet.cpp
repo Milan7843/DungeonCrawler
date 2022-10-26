@@ -14,5 +14,5 @@ void Bullet::start()
 
 void Bullet::update()
 {
-	transform->movePosition(transform->getLocalRightVector() * Time::getDeltaTime());
+	transform->movePosition(transform->getLocalRightVector() * Time::getDeltaTime() * 0.2f);
 }

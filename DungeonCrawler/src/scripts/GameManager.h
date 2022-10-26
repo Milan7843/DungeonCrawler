@@ -17,6 +17,8 @@
 #include <Root/animation/ValueAnimation.h>
 #include <Root/animation/SetterValueAnimation.h>
 
+#include <Root/colliders/BoxCollider.h>
+
 class GameManager : public Script
 {
 public:
