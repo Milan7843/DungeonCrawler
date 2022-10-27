@@ -3,9 +3,9 @@
 #include <functional>
 
 GameManager::GameManager()
-	: collisionCallbackHandler()
+	: collisionCallbackListener()
 {
-	Physics::setCollisionListener(&collisionCallbackHandler);
+	Physics::setCollisionListener(&collisionCallbackListener);
 }
 
 GameManager::~GameManager()
@@ -23,6 +23,16 @@ void GameManager::start()
 
 	Transform* backgroundTransform = Transform::create(glm::vec2(0.0f), 0.0f, glm::vec2(8.0f * (16.0f / 9.0f), 8.0f), 10000.0f);
 	SpriteRenderer::create(backgroundTransform, "src/sprites/background.png", true);
+	backgroundTransform->setName("wall");
+	// Creating the level border collider
+	std::vector<glm::vec2> backgroundColliderPoints{
+		glm::vec2(4.0f * (16.0f / 9.0f), 4.0f),
+		glm::vec2(4.0f * (16.0f / 9.0f), -4.0f),
+		glm::vec2(-4.0f * (16.0f / 9.0f), -4.0f),
+		glm::vec2(-4.0f * (16.0f / 9.0f), 4.0f)
+	};
+	LoopCollider backgroundCollider(backgroundColliderPoints);
+	Rigidbody::create(backgroundTransform, backgroundCollider, STATIC);
 
 	/*
 	particleSystemTransform = Transform::create(glm::vec2(2.0f, 1.0f));

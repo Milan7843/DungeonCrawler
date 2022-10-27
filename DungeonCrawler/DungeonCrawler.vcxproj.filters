@@ -24,7 +24,7 @@
     <ClInclude Include="src\scripts\MyComponentScript.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\scripts\CollisionCallbackHandler.h">
+    <ClInclude Include="src\scripts\CollisionCallbackListener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\scripts\GUIScript.h">
@@ -56,7 +56,7 @@
     <ClCompile Include="src\scripts\MyComponentScript.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\scripts\CollisionCallbackHandler.cpp">
+    <ClCompile Include="src\scripts\CollisionCallbackListener.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\scripts\GUIScript.cpp">

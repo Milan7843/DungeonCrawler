@@ -21,6 +21,9 @@ public:
 
 private:
 
+	float fireDelay{ 0.1f };
+	float timeSinceShot{ fireDelay };
+
 	void shoot();
 
 	BoxCollider bulletCollider;

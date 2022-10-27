@@ -4,7 +4,7 @@
 
 #include "scripts/MyComponentScript.h"
 #include "scripts/Player.h"
-#include "scripts/CollisionCallbackHandler.h"
+#include "scripts/CollisionCallbackListener.h"
 #include "animators/PlayerAnimator.h"
 
 #include <Root/Root.h>
@@ -18,6 +18,7 @@
 #include <Root/animation/SetterValueAnimation.h>
 
 #include <Root/colliders/BoxCollider.h>
+#include <Root/colliders/LoopCollider.h>
 
 class GameManager : public Script
 {
@@ -38,5 +39,5 @@ private:
 	TransformPointer cameraTransform;
 	ParticleSystemPointer particleSystem;
 	TransformPointer particleSystemTransform;
-	CollisionCallbackHandler collisionCallbackHandler;
+	CollisionCallbackListener collisionCallbackListener;
 };

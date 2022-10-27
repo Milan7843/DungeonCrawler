@@ -147,7 +147,7 @@
     <ClInclude Include="src\scripts\Player.h" />
     <ClInclude Include="src\animators\PlayerAnimator.h" />
     <ClInclude Include="src\scripts\GUIScript.h" />
-    <ClInclude Include="src\scripts\CollisionCallbackHandler.h" />
+    <ClInclude Include="src\scripts\CollisionCallbackListener.h" />
     <ClInclude Include="src\ScriptLoader.h" />
     <ClInclude Include="src\scripts\MyComponentScript.h" />
     <ClInclude Include="src\scripts\GameManager.h" />
@@ -157,7 +157,7 @@
     <ClCompile Include="src\scripts\Player.cpp" />
     <ClCompile Include="src\animators\PlayerAnimator.cpp" />
     <ClCompile Include="src\scripts\GUIScript.cpp" />
-    <ClCompile Include="src\scripts\CollisionCallbackHandler.cpp" />
+    <ClCompile Include="src\scripts\CollisionCallbackListener.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ScriptLoader.cpp" />
