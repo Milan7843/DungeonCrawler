@@ -59,7 +59,7 @@ void Player::shoot()
 {
 	Transform* bullet = Transform::create(firePoint->getPosition(), firePoint->getRotation(), glm::vec2(0.1f));
 	bullet->setName("bullet");
-	Rigidbody::create(bullet, bulletCollider, DYNAMIC, 0.0f, true);
+	Rigidbody::create(bullet, bulletCollider, DYNAMIC, LAYER_1, LAYER_ALL - LAYER_1, 0.0f, true);
 
 	bullet->getComponent<Rigidbody>()->setLinearVelocity(bullet->getLocalRightVector() * 2.0f);
 

@@ -85,7 +85,7 @@ void GameManager::initialisePlayer()
 	BoxCollider boxCollider(1.0f, 1.0f);
 
 	// Giving the player a rigidbody so that it can collide
-	Rigidbody::create(player, boxCollider, DYNAMIC, 0.0f, false, true, false);
+	Rigidbody::create(player, boxCollider, DYNAMIC, LAYER_0, LAYER_ALL - LAYER_1, 0.0f, false, true, false);
 
 	// Adding a sprite renderer to the object
 	playerSpriteRenderer = SpriteRenderer::create(player, "src/sprites/test_sprite_sheet_directions.png", true, 4, 4);

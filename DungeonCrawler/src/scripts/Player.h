@@ -6,6 +6,7 @@
 #include <Root/Transform.h>
 #include <Root/animation/AnimationHandler.h>
 #include <Root/Input.h>
+#include <Root/colliders/Collider.h>
 #include <Root/colliders/BoxCollider.h>
 #include <Root/components/Rigidbody.h>
 
