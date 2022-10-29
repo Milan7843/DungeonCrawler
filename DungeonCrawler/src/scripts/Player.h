@@ -9,6 +9,7 @@
 #include <Root/colliders/Collider.h>
 #include <Root/colliders/BoxCollider.h>
 #include <Root/components/Rigidbody.h>
+#include <Root/Audio.h>
 
 class Player : public Component
 {

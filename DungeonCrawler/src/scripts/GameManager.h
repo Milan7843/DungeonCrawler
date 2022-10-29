@@ -16,6 +16,7 @@
 #include <Root/animation/AnimationHandler.h>
 #include <Root/animation/ValueAnimation.h>
 #include <Root/animation/SetterValueAnimation.h>
+#include <Root/Audio.h>
 
 #include <Root/colliders/BoxCollider.h>
 #include <Root/colliders/LoopCollider.h>

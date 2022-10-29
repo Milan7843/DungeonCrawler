@@ -59,6 +59,8 @@ void GameManager::start()
 	Renderer::Bloom::setThreshold(0.7f);
 	Renderer::Bloom::setIntensity(0.5f);
 	Renderer::setMSAAQualityLevel(2);
+
+	Audio::loadSound("src/soundfx/shoot.wav", "shoot");
 }
 
 void GameManager::update()
