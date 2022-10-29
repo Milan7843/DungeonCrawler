@@ -2,6 +2,8 @@
 
 #include <Root/Logger.h>
 #include <Root/CollisionListener.h>
+#include <Root/components/Rigidbody.h>
+#include <Root/Transform.h>
 
 
 class CollisionCallbackListener : public CollisionListener

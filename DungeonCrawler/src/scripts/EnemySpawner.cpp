@@ -6,7 +6,9 @@ namespace EnemySpawner
 	{
 		// Adding an object to the scene
 		TransformPointer enemy = Transform::create();
+		enemy->setScale(glm::vec2(0.75f, 1.0f));
 		enemy->setName("enemy");
+		enemy->setTag("enemy");
 
 		// Adding a script to this object
 		std::shared_ptr<SimpleEnemy> simpleEnemyScript = std::shared_ptr<SimpleEnemy>(new SimpleEnemy());
@@ -15,7 +17,7 @@ namespace EnemySpawner
 		BoxCollider boxCollider(1.0f, 1.0f);
 
 		// Giving the player a rigidbody so that it can collide
-		Rigidbody::create(enemy, boxCollider, DYNAMIC, LAYER_0, LAYER_ALL - LAYER_1, 0.0f, false, true, false);
+		Rigidbody::create(enemy, boxCollider, DYNAMIC, LAYER_2, LAYER_ALL, 0.0f, false, true, false);
 
 		// Adding a sprite renderer to the object
 		SpriteRenderer::create(enemy, "src/sprites/monster_sprite_sheet.png", true, 3, 4);

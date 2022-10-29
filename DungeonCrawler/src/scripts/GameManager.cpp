@@ -24,6 +24,7 @@ void GameManager::start()
 	Transform* backgroundTransform = Transform::create(glm::vec2(0.0f), 0.0f, glm::vec2(8.0f * (16.0f / 9.0f), 8.0f), 10000.0f);
 	SpriteRenderer::create(backgroundTransform, "src/sprites/background.png", true);
 	backgroundTransform->setName("wall");
+	backgroundTransform->setTag("wall");
 	// Creating the level border collider
 	std::vector<glm::vec2> backgroundColliderPoints{
 		glm::vec2(4.0f * (16.0f / 9.0f), 4.0f),
@@ -81,6 +82,7 @@ void GameManager::initialisePlayer()
 	// Adding an object to the scene
 	player = Transform::create();
 	player->setName("player");
+	player->setTag("player");
 
 	// Adding a script to this object
 	std::shared_ptr<Player> playerScript = std::shared_ptr<Player>(new Player());

@@ -12,7 +12,7 @@ void Player::start()
 {
 	weapon = transform->getChildren()[0];
 
-	firePoint = Transform::create(glm::vec2(1.0f, 0.0f));
+	firePoint = Transform::create(glm::vec2(0.6f, 0.0f));
 	firePoint->setParent(weapon);
 
 	bulletCollider = BoxCollider(0.1f, 0.1f);
@@ -28,19 +28,19 @@ void Player::update()
 
 	if (Input::getKey(KEY_W))
 	{
-		transform->movePosition(glm::vec2(0.0f, 1.0f) * Time::getDeltaTime());
+		transform->movePosition(glm::vec2(0.0f, 1.0f) * Time::getDeltaTime() * playerSpeed);
 	}
 	if (Input::getKey(KEY_S))
 	{
-		transform->movePosition(glm::vec2(0.0f, -1.0f) * Time::getDeltaTime());
+		transform->movePosition(glm::vec2(0.0f, -1.0f) * Time::getDeltaTime() * playerSpeed);
 	}
 	if (Input::getKey(KEY_A))
 	{
-		transform->movePosition(glm::vec2(-1.0f, 0.0f) * Time::getDeltaTime());
+		transform->movePosition(glm::vec2(-1.0f, 0.0f) * Time::getDeltaTime() * playerSpeed);
 	}
 	if (Input::getKey(KEY_D))
 	{
-		transform->movePosition(glm::vec2(1.0f, 0.0f) * Time::getDeltaTime());
+		transform->movePosition(glm::vec2(1.0f, 0.0f) * Time::getDeltaTime() * playerSpeed);
 	}
 
 	if (Input::getMouseButton(MOUSE_LEFT) && timeSinceShot >= fireDelay)
@@ -61,9 +61,10 @@ void Player::shoot()
 
 	Transform* bullet = Transform::create(firePoint->getPosition(), firePoint->getRotation(), glm::vec2(0.1f));
 	bullet->setName("bullet");
+	bullet->setTag("bullet");
 	Rigidbody::create(bullet, bulletCollider, DYNAMIC, LAYER_1, LAYER_ALL - LAYER_1, 0.0f, true);
 
-	bullet->getComponent<Rigidbody>()->setLinearVelocity(bullet->getLocalRightVector() * 2.0f);
+	bullet->getComponent<Rigidbody>()->setLinearVelocity(bullet->getLocalRightVector() * 5.0f);
 
 	SpriteRenderer::create(bullet, "src/sprites/cutie_cat.png", true);
 
