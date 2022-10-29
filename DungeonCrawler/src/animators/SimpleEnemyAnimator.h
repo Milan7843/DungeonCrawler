@@ -4,15 +4,14 @@
 #include <Root/animation/SetterValueAnimation.h>
 #include <Root/animation/AnimationWeb.h>
 
-
 #include <Root/rendering/SpriteRenderer.h>
 
-class PlayerAnimator : public Animator
+class SimpleEnemyAnimator : public Animator
 {
 public:
 
 	/**
-	 * Create a new player animator.
+	 * Create a new simple enemy animator.
 	 * Will automatically add this component to the given transform.
 	 *
 	 * \param transform:		the transform to add this component to.

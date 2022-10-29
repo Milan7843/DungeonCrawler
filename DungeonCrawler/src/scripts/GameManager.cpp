@@ -61,6 +61,8 @@ void GameManager::start()
 	Renderer::setMSAAQualityLevel(2);
 
 	Audio::loadSound("src/soundfx/shoot.wav", "shoot");
+
+	EnemySpawner::spawnEnemy();
 }
 
 void GameManager::update()

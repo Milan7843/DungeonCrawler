@@ -143,6 +143,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\scripts\enemies\SimpleEnemy.h" />
+    <ClInclude Include="src\scripts\EnemySpawner.h" />
+    <ClInclude Include="src\animators\SimpleEnemyAnimator.h" />
     <ClInclude Include="src\scripts\Bullet.h" />
     <ClInclude Include="src\scripts\Player.h" />
     <ClInclude Include="src\animators\PlayerAnimator.h" />
@@ -153,6 +156,9 @@
     <ClInclude Include="src\scripts\GameManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\scripts\enemies\SimpleEnemy.cpp" />
+    <ClCompile Include="src\scripts\EnemySpawner.cpp" />
+    <ClCompile Include="src\animators\SimpleEnemyAnimator.cpp" />
     <ClCompile Include="src\scripts\Bullet.cpp" />
     <ClCompile Include="src\scripts\Player.cpp" />
     <ClCompile Include="src\animators\PlayerAnimator.cpp" />

@@ -3,6 +3,7 @@
 #include "MyComponentScript.h"
 
 #include "scripts/MyComponentScript.h"
+#include "scripts/EnemySpawner.h"
 #include "scripts/Player.h"
 #include "scripts/CollisionCallbackListener.h"
 #include "animators/PlayerAnimator.h"
