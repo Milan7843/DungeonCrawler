@@ -32,7 +32,7 @@ void GameManager::start()
 		glm::vec2(-4.0f * (16.0f / 9.0f), -4.0f),
 		glm::vec2(-4.0f * (16.0f / 9.0f), 4.0f)
 	};
-	LoopCollider backgroundCollider(backgroundColliderPoints);
+	ColliderPointer backgroundCollider = LoopCollider::create(backgroundColliderPoints);
 	Rigidbody::create(backgroundTransform, backgroundCollider, STATIC);
 
 	/*
@@ -64,6 +64,8 @@ void GameManager::start()
 	Audio::loadSound("src/soundfx/shoot.wav", "shoot");
 
 	EnemySpawner::spawnEnemy();
+
+	Physics::enableDebugMode();
 }
 
 void GameManager::update()
@@ -88,7 +90,7 @@ void GameManager::initialisePlayer()
 	std::shared_ptr<Player> playerScript = std::shared_ptr<Player>(new Player());
 	player->addComponent(playerScript);
 
-	BoxCollider boxCollider(1.0f, 1.0f);
+	ColliderPointer boxCollider{ BoxCollider::create(1.0f, 1.0f) };
 
 	// Giving the player a rigidbody so that it can collide
 	Rigidbody::create(player, boxCollider, DYNAMIC, LAYER_0, LAYER_ALL - LAYER_1, 0.0f, false, true, false);

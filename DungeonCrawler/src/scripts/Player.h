@@ -30,7 +30,7 @@ private:
 
 	void shoot();
 
-	BoxCollider bulletCollider;
+	ColliderPointer bulletCollider;
 
 	TransformPointer weapon;
 	TransformPointer firePoint;

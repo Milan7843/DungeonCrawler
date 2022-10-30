@@ -14,7 +14,7 @@ namespace EnemySpawner
 		std::shared_ptr<SimpleEnemy> simpleEnemyScript = std::shared_ptr<SimpleEnemy>(new SimpleEnemy());
 		enemy->addComponent(simpleEnemyScript);
 
-		BoxCollider boxCollider(1.0f, 1.0f);
+		ColliderPointer boxCollider{ BoxCollider::create(1.0f, 1.0f) };
 
 		// Giving the player a rigidbody so that it can collide
 		Rigidbody::create(enemy, boxCollider, DYNAMIC, LAYER_2, LAYER_ALL, 0.0f, false, true, false);

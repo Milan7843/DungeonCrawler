@@ -15,7 +15,7 @@ void Player::start()
 	firePoint = Transform::create(glm::vec2(0.6f, 0.0f));
 	firePoint->setParent(weapon);
 
-	bulletCollider = BoxCollider(0.1f, 0.1f);
+	bulletCollider = BoxCollider::create(0.1f, 0.1f);
 }
 
 void Player::update()

@@ -20,6 +20,7 @@
 #include <Root/Audio.h>
 
 #include <Root/colliders/BoxCollider.h>
+#include <Root/colliders/CircleCollider.h>
 #include <Root/colliders/LoopCollider.h>
 
 class GameManager : public Script
