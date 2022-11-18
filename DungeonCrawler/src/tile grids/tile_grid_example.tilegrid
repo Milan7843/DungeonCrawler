@@ -1,0 +1,17 @@
+# ====== Grid data ======
+
+# An '+' signifies a tile that should be filled in by the rules.
+# A ' ' (space) or '~' signifies an empty grid space
+# A letter signifies that a tile should be filled in by the rules,
+# but only with tiles with a tag that matches the letter.
+# Layer 1: the foreground
+0           + +
++ +     g      
+      g     + +
+0 + + ~ ~ ~ ~ 0
+
+# Layer 2: the background
+0 + 0 0 + 0 + +
++ + 0 + + + + +
+0 0 0 + + + + +
+0 + + 0 + + 0 0

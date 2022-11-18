@@ -72,7 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(ProjectDir)/src;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)/include</IncludePath>
-    <LibraryPath>C:\Git\Root\x64\Debug;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)/libs</LibraryPath>
+    <LibraryPath>C:\Users\Milan\Documents\Root\x64\Debug;C:\Git\Root\x64\Debug;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)/libs</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(ProjectDir)/src;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)/include</IncludePath>
@@ -114,7 +114,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
-      <AdditionalIncludeDirectories>C:\Git\Root\Root\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Milan\Documents\Root\Root\src;C:\Git\Root\Root\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

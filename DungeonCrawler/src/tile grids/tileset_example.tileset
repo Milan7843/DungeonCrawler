@@ -1,0 +1,24 @@
+# ====== Tiles ======
+
+# The first tile
+# We start with the tag: any letter a-z.
+# We will do g for ground. 
+g
+
+# 2D texture index
+(0, 0), (1, 0)
+# If we want to have an animated tile, simply add more 2D indices,
+# each pair of numbers separated by a comma
+
+# This is a tile rule description: the tile is at the star.
+# The numbers around it signify the neighbouring tiles / grid spaces.
+# A '~' means that there is no rule set for that neighbouring grid space.
+# A '+' means that the rule is satisfied if a tile exists there.
+# A '-' means that the rule is satisfied if no tile exists there.
+# A letter means that the rule is satisfied if a tile exists there,
+# with a tag matching the letter.
+# A fill-in tile will be placed if a place is found which requests a fill-in tile,
+# and each rule is satisfied.
++ + +
+- * ~
+~ ~ ~
