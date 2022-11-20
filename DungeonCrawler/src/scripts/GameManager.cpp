@@ -66,6 +66,57 @@ void GameManager::start()
 	EnemySpawner::spawnEnemy();
 
 	Physics::enableDebugMode();
+
+	RootGUI::loadFont("src/fonts/arial.ttf", "arial", 0.7f, 0.8f);
+	RootGUI::loadFont("src/fonts/ROCKB.TTF", "rockb", 0.4f, 1.0f);
+	RootGUI::enableDebugMode();
+
+	//RootGUIComponent::Text::create("test", "arial");
+	//RootGUIComponent::Text::create("abcdefghijklmnopqrstuvwxyz", "arial", 0.01f);
+
+
+
+	RectanglePointer pauseRect = RootGUIComponent::Rectangle::create(
+		glm::vec2(1.0f, 0.0f), glm::vec2(1.0f, 0.4f), 0.0f);
+	
+	TextPointer text = RootGUIComponent::Text::create(
+		"PLAY",
+		"rockb", 0.8f, glm::vec2(0.0f, 0.0f), glm::vec2(0.4f, 0.2f), 0.0f);
+
+	text->setParent(pauseRect);
+
+	text->setCenterHorizontally(true);
+	text->setCenterVertically(true);
+
+	text->setColor(glm::vec3(0.4f));
+	text->setColorOnHover(glm::vec3(0.2f));
+	text->setColorOnPress(glm::vec3(0.0f));
+
+	text->setTextColor(glm::vec3(1.0f));
+	text->setTextColorOnHover(glm::vec3(1.0f, 0.3f, 0.8f));
+	text->setTextColorOnPress(glm::vec3(0.5f, 0.7f, 1.0f));
+
+	text->setScaleOnHover(glm::vec2(1.05f));
+	text->setScaleOnPress(glm::vec2(0.96f));
+
+	text->setTransitionDuration(0.09f);
+	
+	/*
+	TextPointer text2 = RootGUIComponent::Text::create(
+		"If the code is working correctly, we should have a different font here.",
+		"rockb", 0.8f, glm::vec2(-0.5f, 0.0f), glm::vec2(1.0f, 1.0f));
+	*/
+
+	/*
+	RectanglePointer rect = RootGUIComponent::Rectangle::create(glm::vec2(-0.1f, 0.1f), glm::vec2(0.1f, 0.1f));
+	rect->setHorizontalScreenAnchorPoint(HorizontalAnchorPoint::Right);
+	rect->setVerticalScreenAnchorPoint(VerticalAnchorPoint::Bottom);
+	rect->setScaleReference(ScaleReference::Height);*/
+
+	TileSet::create("src/tile grids/tileset_example.tileset", "ground");
+
+	TransformPointer tileGridTransform = Transform::create();
+	TileGrid::create(tileGridTransform, "src/sprites/background.png", true, "src/tile grids/tile_grid_example.tilegrid", "ground");
 }
 
 void GameManager::update()

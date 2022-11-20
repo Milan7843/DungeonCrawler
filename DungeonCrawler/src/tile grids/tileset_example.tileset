@@ -6,7 +6,7 @@
 g
 
 # 2D texture index
-(0, 0), (1, 0)
+(01, 12), (1, 14)
 # If we want to have an animated tile, simply add more 2D indices,
 # each pair of numbers separated by a comma
 
@@ -22,3 +22,17 @@ g
 + + +
 - * ~
 ~ ~ ~
+
+# Now another tile
+# We start with the tag: any letter a-z.
+# We will do g for ground. 
+g
+
+# 2D texture index: a single one
+(01, 12)
+
+~ ~ ~
+~ * ~
+~ ~ ~
+
+

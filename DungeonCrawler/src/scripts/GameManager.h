@@ -17,7 +17,14 @@
 #include <Root/animation/AnimationHandler.h>
 #include <Root/animation/ValueAnimation.h>
 #include <Root/animation/SetterValueAnimation.h>
+#include <Root/engine/TextureEngine.h>
 #include <Root/Audio.h>
+#include <Root/tilegrids/TileSet.h>
+#include <Root/components/TileGrid.h>
+#include <rootgui/RootGUI.h>
+#include <rootgui/Text.h>
+#include <rootgui/Rectangle.h>
+#include <rootgui/Item.h>
 
 #include <Root/colliders/BoxCollider.h>
 #include <Root/colliders/CircleCollider.h>
