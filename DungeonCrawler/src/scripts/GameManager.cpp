@@ -116,7 +116,8 @@ void GameManager::start()
 	TileSet::create("src/tile grids/tileset_example.tileset", "ground");
 
 	TransformPointer tileGridTransform = Transform::create();
-	TileGrid::create(tileGridTransform, "src/sprites/background.png", true, "src/tile grids/tile_grid_example.tilegrid", "ground");
+	tileGridTransform->setRenderDepth(4000.0f);
+	TileGrid::create(tileGridTransform, "src/sprites/test_tileset.png", true, glm::ivec2(3, 3), "src/tile grids/tile_grid_example.tilegrid", "ground");
 }
 
 void GameManager::update()
@@ -160,5 +161,6 @@ void GameManager::initialisePlayer()
 
 	// Adding a sprite renderer to the object
 	SpriteRendererPointer weaponSpriteRenderer = SpriteRenderer::create(weapon, "src/sprites/weapon.png", true);
+
 }
 
