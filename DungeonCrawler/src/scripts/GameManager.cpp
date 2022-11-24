@@ -61,6 +61,7 @@ void GameManager::start()
 	Renderer::Bloom::setIntensity(0.5f);
 	Renderer::setMSAAQualityLevel(2);
 
+
 	Audio::loadSound("src/soundfx/shoot.wav", "shoot");
 
 	EnemySpawner::spawnEnemy();
@@ -106,14 +107,14 @@ void GameManager::start()
 		"If the code is working correctly, we should have a different font here.",
 		"rockb", 0.8f, glm::vec2(-0.5f, 0.0f), glm::vec2(1.0f, 1.0f));
 	*/
-
 	/*
 	RectanglePointer rect = RootGUIComponent::Rectangle::create(glm::vec2(-0.1f, 0.1f), glm::vec2(0.1f, 0.1f));
 	rect->setHorizontalScreenAnchorPoint(HorizontalAnchorPoint::Right);
 	rect->setVerticalScreenAnchorPoint(VerticalAnchorPoint::Bottom);
 	rect->setScaleReference(ScaleReference::Height);*/
 
-	TileSet::create("src/tile grids/tileset_example.tileset", "ground");
+
+	TileSet::create("src/tile grids/grass.tileset", "ground");
 
 	TransformPointer tileGridTransform = Transform::create();
 	tileGridTransform->setRenderDepth(4000.0f);

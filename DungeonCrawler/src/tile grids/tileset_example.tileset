@@ -6,7 +6,7 @@
 g
 
 # 2D texture index
-(01, 12), (1, 14)
+(0,0), (0, 1)
 # If we want to have an animated tile, simply add more 2D indices,
 # each pair of numbers separated by a comma
 
@@ -29,10 +29,11 @@ g
 g
 
 # 2D texture index: a single one
-(01, 12)
+(0, 0)
 
 ~ ~ ~
 ~ * ~
 ~ ~ ~
+
 
 
