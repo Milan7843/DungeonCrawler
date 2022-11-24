@@ -1,3 +1,6 @@
+# Animation speed (frame updates per second)
+1
+
 # 0: Tile for top left
 
 g
@@ -64,8 +67,8 @@ g
 
 (0, 0)
 
-~ g ~
-- * g
+~ + ~
+- * +
 ~ - ~
 
 # 7: Left
@@ -92,7 +95,7 @@ g
 
 w
 
-(1, 1)
+(3, 2), (4, 2), (5, 2)
 
 ~ ~ ~
 ~ * ~
