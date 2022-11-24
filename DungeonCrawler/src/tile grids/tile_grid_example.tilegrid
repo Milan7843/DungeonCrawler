@@ -10,17 +10,17 @@
 # A ' ' (space) or '-' signifies an empty grid space
 # A letter signifies that a tile should be filled in by the rules,
 # but only with tiles with a tag that matches the letter.
-# Layer 1: the foreground
-+ g         + +
-+ +     g g g g
-      g g g + +
-+ + + + + + + +
+# Layer 1: the ground
+g g         g g
+g g       g g g
+        g g g g
+g g g g g g g g
 
-# Layer 2: the background
-0 + 0 0 + 0 + +
-+ + 0 + + + + +
-0 0 0 + + + + +
-0 + + 0 + + 0 0
+# Layer 2: the water
+- - w w w w - -
+- - w w w - - -
+w w w w - - - -
+- - - - - - - -
 
 # Layer 3: test
 - - - - - + + +

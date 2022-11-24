@@ -118,7 +118,7 @@ void GameManager::start()
 
 	TransformPointer tileGridTransform = Transform::create();
 	tileGridTransform->setRenderDepth(4000.0f);
-	TileGrid::create(tileGridTransform, "src/sprites/test_tileset.png", true, glm::ivec2(3, 3), "src/tile grids/tile_grid_example.tilegrid", "ground");
+	TileGrid::create(tileGridTransform, "src/sprites/test_tileset.png", true, glm::ivec2(6, 3), "src/tile grids/tile_grid_example.tilegrid", "ground");
 }
 
 void GameManager::update()
