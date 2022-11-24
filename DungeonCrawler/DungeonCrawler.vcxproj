@@ -154,6 +154,7 @@
     <ClInclude Include="src\ScriptLoader.h" />
     <ClInclude Include="src\scripts\MyComponentScript.h" />
     <ClInclude Include="src\scripts\GameManager.h" />
+    <ClInclude Include="src\scripts\TileMapCreator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\scripts\enemies\SimpleEnemy.cpp" />
@@ -169,6 +170,7 @@
     <ClCompile Include="src\ScriptLoader.cpp" />
     <ClCompile Include="src\scripts\MyComponentScript.cpp" />
     <ClCompile Include="src\scripts\GameManager.cpp" />
+    <ClCompile Include="src\scripts\TileMapCreator.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

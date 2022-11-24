@@ -1,0 +1,102 @@
+#include "TileMapCreator.h"
+
+void TileMapCreator::createTileSets()
+{
+	std::vector<Tile> tiles
+	{
+		// Tile for top left
+		TileSet::createTile(
+			'g',
+			glm::ivec2(0,2),
+			'~','-','~',
+			'-',    '+',
+			'~','+','+'
+		),
+
+		// Tile for top middle
+		TileSet::createTile(
+			'g',
+			glm::ivec2(1,2),
+			'~','-','~',
+			'+',    '+',
+			'~','+','~'
+		),
+
+		// Tile for top right
+		TileSet::createTile(
+			'g',
+			glm::ivec2(2,2),
+			'~','-','~',
+			'+',    '-',
+			'~','+','~'
+		),
+
+		// Tile for middle right
+		TileSet::createTile(
+			'g',
+			glm::ivec2(2,1),
+			'~','+','~',
+			'+',    '-',
+			'~','+','~'
+		),
+
+		// Tile for bottom right
+		TileSet::createTile(
+			'g',
+			glm::ivec2(2,0),
+			'~','+','~',
+			'+',    '-',
+			'~','-','~'
+		),
+
+		// Tile for bottom middle
+		TileSet::createTile(
+			'g',
+			glm::ivec2(1,0),
+			'~','+','~',
+			'+',    '+',
+			'~','-','~'
+		),
+
+		// Tile for bottom left
+		TileSet::createTile(
+			'g',
+			glm::ivec2(0,0),
+			'~','+','~',
+			'-',    '+',
+			'~','-','~'
+		),
+
+		// Tile for middle left
+		TileSet::createTile(
+			'g',
+			glm::ivec2(0,1),
+			'~','+','~',
+			'-',    '+',
+			'~','+','~'
+		),
+
+		// Tile for full middle
+		TileSet::createTile(
+			'g',
+			glm::ivec2(1,1),
+			'~','~','~',
+			'~',    '~',
+			'~','~','~'
+		),
+
+		// Tile for animated water
+		TileSet::createTile(
+			'w',
+			std::vector<glm::ivec2> { glm::ivec2(3,2), glm::ivec2(4,2), glm::ivec2(5,2) },
+			'~','~','~',
+			'~',    '~',
+			'~','~','~',
+			0,
+			MultipleTextureIndexUsage::ANIMATION,
+			2.5f
+		)
+	};
+
+	TileSet::create(tiles, "ground", 2.0f);
+}

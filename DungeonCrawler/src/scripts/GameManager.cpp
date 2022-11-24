@@ -113,7 +113,8 @@ void GameManager::start()
 	rect->setScaleReference(ScaleReference::Height);*/
 
 
-	TileSet::create("src/tile grids/grass.tileset", "ground");
+	//TileSet::create("src/tile grids/grass.tileset", "ground");
+	TileMapCreator::createTileSets();
 
 	TransformPointer tileGridTransform = Transform::create();
 	tileGridTransform->setRenderDepth(4000.0f);
