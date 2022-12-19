@@ -30,6 +30,7 @@
 #include <Root/colliders/BoxCollider.h>
 #include <Root/colliders/CircleCollider.h>
 #include <Root/colliders/LoopCollider.h>
+#include <Root/colliders/TileGridCollider.h>
 
 class GameManager : public Script
 {

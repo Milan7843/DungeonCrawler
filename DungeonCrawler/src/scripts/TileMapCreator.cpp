@@ -94,9 +94,10 @@ void TileMapCreator::createTileSets()
 			'~','~','~',
 			0,
 			MultipleTextureIndexUsage::ANIMATION,
-			2.5f
+			0.5f,
+			true
 		)
 	};
 
-	TileSet::create(tiles, "ground", 2.0f);
+	TileSet::create(tiles, "ground", 1.0f);
 }

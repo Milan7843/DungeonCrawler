@@ -1,29 +1,27 @@
 # ====== Grid data ======
 
 # 4 rows by 8 columns
-4x8
+6x9
 
 # Number of layers
-3
+2
 
 # An '+' signifies a tile that should be filled in by the rules.
 # A ' ' (space) or '-' signifies an empty grid space
 # A letter signifies that a tile should be filled in by the rules,
 # but only with tiles with a tag that matches the letter.
 # Layer 1: the ground
-g g         g g
-g g       g g g
-        g g g g
-g g g g g g g g
+g g         g g g
+g g       g g g g
+        g g g g g
+g g g g g g g   g
+g g g g g g     g
+g g g g g g g g g
 
 # Layer 2: the water
-- - w w w w - -
-- - w w w - - -
-w w w w - - - -
-- - - - - - - -
-
-# Layer 3: test
-- - - - - + + +
-- + + + - + + +
-- + + + - + + +
-- + + + - - - -
+- - w w w w - - -
+- - w w w - - - -
+w w w w - - - - -
+- - - - - - - w -
+- - - - - - w w -
+- - - - - - - - -

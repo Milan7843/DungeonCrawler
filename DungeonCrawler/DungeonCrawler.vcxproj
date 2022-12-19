@@ -170,6 +170,7 @@
     <ClCompile Include="src\ScriptLoader.cpp" />
     <ClCompile Include="src\scripts\MyComponentScript.cpp" />
     <ClCompile Include="src\scripts\GameManager.cpp" />
+    <ClCompile Include="src\scripts\test.cpp" />
     <ClCompile Include="src\scripts\TileMapCreator.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -3,15 +3,29 @@
 layout(points) in;
 layout(triangle_strip, max_vertices = 6) out;
 
+struct Tile
+{
+	int baseIndex;
+	int tileTextureIndicesStartIndex;
+	int tileTextureIndexCount;
+	bool randomTileIndexOffset;
+};
+
 layout(std430, binding = 0) buffer Tiles
 {
-	int textureIndex[];
+	Tile tiles[];
+};
+
+layout(std430, binding = 1) buffer TileTextureIndices
+{
+	ivec2 textureIndex[];
 };
 
 out vec2 FragIn_TexCoords;
 
 in int GeoIn_TileIndex[];
 in int GeoIn_LayerIndex[];
+in int GeoIn_TileID[];
 
 uniform mat4 projection;
 uniform mat4 model;
@@ -20,16 +34,30 @@ uniform float renderDepth;
 
 uniform float tileSize;
 
+uniform int tileIndexRandomisationSeed;
+
 uniform ivec2 textureGridSize;
 
+float epsilon = 0.001;
+
 vec2 offsets[] = {
-	vec2( 0.5, 0.5),
-	vec2( 0.5,-0.5),
-	vec2(-0.5, 0.5),
-	vec2( 0.5,-0.5),
-	vec2(-0.5,-0.5),
-	vec2(-0.5, 0.5)
+	vec2( 0.5, 0.5) + vec2( epsilon,  epsilon),
+	vec2( 0.5,-0.5) + vec2( epsilon, -epsilon),
+	vec2(-0.5, 0.5) + vec2(-epsilon,  epsilon),
+	vec2( 0.5,-0.5) + vec2( epsilon, -epsilon),
+	vec2(-0.5,-0.5) + vec2(-epsilon,- epsilon),
+	vec2(-0.5, 0.5) + vec2(-epsilon,  epsilon)
 };
+
+float rand(int seed)
+{
+	return sin(mod(float(seed * 14), 6.14)) * 10000.;
+}
+
+int randInt(int seed)
+{
+	return abs(int(rand(seed)));
+}
 
 void main()
 {
@@ -39,17 +67,30 @@ void main()
 		return;
 	}
 
+	int finalTextureIndex = tiles[GeoIn_TileIndex[0]].baseIndex;
+
+	// Adding some random offset to the index
+	if (tiles[GeoIn_TileIndex[0]].randomTileIndexOffset)
+	{
+		finalTextureIndex += randInt(tileIndexRandomisationSeed + GeoIn_TileID[0]);
+	}
+
+	// Wrapping the index
+	finalTextureIndex = int(mod(finalTextureIndex, tiles[GeoIn_TileIndex[0]].tileTextureIndexCount));
+
+	finalTextureIndex += tiles[GeoIn_TileIndex[0]].tileTextureIndicesStartIndex;
+
 	for (int i = 0; i < 6; i++)
 	{
 		vec2 tileUV = offsets[i] + vec2(0.5, 0.5);
 		//FragIn_TexCoords = (tileUV + textureIndex[GeoIn_TileIndex[0]]) / vec2(textureGridSize);
-		FragIn_TexCoords = (tileUV + vec2(textureIndex[GeoIn_TileIndex[0] * 2], textureIndex[GeoIn_TileIndex[0] * 2 + 1])) / vec2(textureGridSize);
+		FragIn_TexCoords = (tileUV + vec2(textureIndex[finalTextureIndex])) / vec2(textureGridSize);
 
 		vec4 basePosition = gl_in[0].gl_Position;
 		basePosition.y = -basePosition.y;
 
 		gl_Position = basePosition
-			+ projection * view * model * vec4(offsets[i] * tileSize, 0.0, 1.0);
+			+ projection * view * model * vec4(offsets[i] * tileSize * 2, 0.0, 1.0);
 
 		// Depth
 		gl_Position.z = renderDepth + 0.00001 * GeoIn_LayerIndex[0];

@@ -14,6 +14,7 @@ uniform float tileSize;
 
 out int GeoIn_TileIndex;
 out int GeoIn_LayerIndex;
+out int GeoIn_TileID;
 
 void main()
 {
@@ -27,10 +28,11 @@ void main()
     position += vec2(x, y);
 
     // Screen position
-    gl_Position = projection * view * model * vec4(position * tileSize, 0.0, 1.0);
+    gl_Position = projection * view * model * vec4(position * tileSize * 2, 0.0, 1.0);
     // Depth
     gl_Position.z = renderDepth;
 
     GeoIn_TileIndex = tileIndex;
     GeoIn_LayerIndex = layer;
+    GeoIn_TileID = gl_VertexID;
 }
