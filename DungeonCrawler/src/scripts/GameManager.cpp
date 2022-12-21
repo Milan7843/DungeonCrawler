@@ -127,8 +127,8 @@ void GameManager::start()
 			1.4f);
 
 
-	ColliderPointer tileGridCollider = TileGridCollider::create(tileGrid, 1);
-	Rigidbody::create(tileGridTransform, tileGridCollider, STATIC);
+	ColliderPointer tileGridCollider = TileGridCollider::create(tileGrid, CollisionType::INSIDE, 1);
+	Rigidbody::create(tileGridTransform, tileGridCollider, KINEMATIC, LAYER_0, LAYER_ALL - LAYER_1, 1.0f);
 }
 
 void GameManager::update()
@@ -153,7 +153,8 @@ void GameManager::initialisePlayer()
 	std::shared_ptr<Player> playerScript = std::shared_ptr<Player>(new Player());
 	player->addComponent(playerScript);
 
-	ColliderPointer boxCollider{ BoxCollider::create(1.0f, 1.0f) };
+	ColliderPointer fullBoxCollider{ BoxCollider::create(1.0f, 1.0f) };
+	ColliderPointer lowerBoxCollider{ BoxCollider::create(1.0f, 1.0f) };
 
 	// Giving the player a rigidbody so that it can collide
 	Rigidbody::create(player, boxCollider, DYNAMIC, LAYER_0, LAYER_ALL - LAYER_1, 0.0f, false, true, false);
