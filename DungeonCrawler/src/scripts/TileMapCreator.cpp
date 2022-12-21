@@ -102,7 +102,7 @@ void TileMapCreator::createTileSets()
 	TileSet::create(tiles, "ground", 1.0f);
 
 	// Dungeon tileset
-	std::vector<Tile> tiles{
+	std::vector<Tile> dungeonTiles{
 		TileSet::createTile(
 			'g',
 			glm::ivec2(0,2),

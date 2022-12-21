@@ -127,8 +127,8 @@ void GameManager::start()
 			1.4f);
 
 
-	ColliderPointer tileGridCollider = TileGridCollider::create(tileGrid, CollisionType::INSIDE, 1);
-	Rigidbody::create(tileGridTransform, tileGridCollider, KINEMATIC, LAYER_0, LAYER_ALL - LAYER_1, 1.0f);
+	ColliderPointer tileGridCollider = TileGridCollider::create(tileGrid, LAYER_0, LAYER_ALL - LAYER_1, CollisionType::INSIDE, 1);
+	Rigidbody::create(tileGridTransform, tileGridCollider, KINEMATIC, 1.0f);
 }
 
 void GameManager::update()
@@ -153,11 +153,15 @@ void GameManager::initialisePlayer()
 	std::shared_ptr<Player> playerScript = std::shared_ptr<Player>(new Player());
 	player->addComponent(playerScript);
 
-	ColliderPointer fullBoxCollider{ BoxCollider::create(1.0f, 1.0f) };
-	ColliderPointer lowerBoxCollider{ BoxCollider::create(1.0f, 1.0f) };
+	ColliderPointer fullBoxCollider{ BoxCollider::create(1.0f, 1.0f, LAYER_0, LAYER_ALL - LAYER_1 - LAYER_0) };
+	ColliderPointer lowerBoxCollider{ BoxCollider::create(1.0f, 0.5f, LAYER_0, LAYER_ALL - LAYER_1, glm::vec2(0.0f, -0.25f)) };
+
+	std::vector<ColliderPointer> colliders{
+		fullBoxCollider, lowerBoxCollider
+	};
 
 	// Giving the player a rigidbody so that it can collide
-	Rigidbody::create(player, boxCollider, DYNAMIC, LAYER_0, LAYER_ALL - LAYER_1, 0.0f, false, true, false);
+	Rigidbody::create(player, colliders, DYNAMIC, 0.0f, false, true, false);
 
 	// Adding a sprite renderer to the object
 	playerSpriteRenderer = SpriteRenderer::create(player, "src/sprites/test_sprite_sheet_directions.png", true, 4, 4);

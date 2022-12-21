@@ -15,7 +15,7 @@ void Player::start()
 	firePoint = Transform::create(glm::vec2(0.6f, 0.0f));
 	firePoint->setParent(weapon);
 
-	bulletCollider = BoxCollider::create(0.1f, 0.1f);
+	bulletCollider = BoxCollider::create(0.1f, 0.1f, LAYER_1, LAYER_ALL - LAYER_1);
 }
 
 void Player::update()
@@ -62,7 +62,7 @@ void Player::shoot()
 	Transform* bullet = Transform::create(firePoint->getPosition(), firePoint->getRotation(), glm::vec2(0.1f));
 	bullet->setName("bullet");
 	bullet->setTag("bullet");
-	Rigidbody::create(bullet, bulletCollider, DYNAMIC, LAYER_1, LAYER_ALL - LAYER_1, 0.0f, true);
+	Rigidbody::create(bullet, bulletCollider, DYNAMIC, 0.0f, true);
 
 	bullet->getComponent<Rigidbody>()->setLinearVelocity(bullet->getLocalRightVector() * 5.0f);
 
