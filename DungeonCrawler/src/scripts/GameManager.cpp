@@ -177,6 +177,5 @@ void GameManager::initialisePlayer()
 
 	// Adding a sprite renderer to the object
 	SpriteRendererPointer weaponSpriteRenderer = SpriteRenderer::create(weapon, "src/sprites/weapon.png", true);
-
 }
 

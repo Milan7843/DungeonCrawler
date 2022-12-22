@@ -102,13 +102,52 @@ void TileMapCreator::createTileSets()
 	TileSet::create(tiles, "ground", 1.0f);
 
 	// Dungeon tileset
-	std::vector<Tile> dungeonTiles{
+	std::vector<Tile> dungeonTiles {
+
+		/* ====== CORNER WALL PIECES ====== */
+
+		// Bottom left corner for top of walls
 		TileSet::createTile(
-			'g',
-			glm::ivec2(0,2),
-			'~','-','~',
+			't', // t for top
+			glm::ivec2(0,1),
+			'-','-','-',
+			'+',    '-',
+			'~','+','-'
+		),
+		// Bottom right corner for top of walls
+		TileSet::createTile(
+			't', // t for top
+			glm::ivec2(1,1),
+			'-','-','-',
 			'-',    '+',
-			'~','+','+'
+			'-','+','~'
+		),
+		// Top left corner for top of walls
+		TileSet::createTile(
+			't', // t for top
+			glm::ivec2(0, 2),
+			'~','+','-',
+			'+',    '-',
+			'-','-','-'
+		),
+		// Top right corner for top of walls
+		TileSet::createTile(
+			't', // t for top
+			glm::ivec2(1,2),
+			'-','+','~',
+			'-',    '+',
+			'-','-','-'
+		),
+
+		/* ====== MAIN WALL PIECES ====== */
+
+		// Top left corner for top of walls
+		TileSet::createTile(
+			't', // t for top
+			glm::ivec2(1,2),
+			'-','-','-',
+			'-',    '+',
+			'-','+','-'
 		),
 	};
 }
