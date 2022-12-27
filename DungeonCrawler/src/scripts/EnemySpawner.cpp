@@ -20,7 +20,7 @@ namespace EnemySpawner
 		Rigidbody::create(enemy, boxCollider, DYNAMIC, 0.0f, false, true, false);
 
 		// Adding a sprite renderer to the object
-		SpriteRenderer::create(enemy, "src/sprites/monster_sprite_sheet.png", true, 3, 4);
+		SpriteRenderer::create(enemy, "src/sprites/monster_sprite_sheet.png", glm::vec2(0.0f), true, 3, 4);
 		enemy->setRenderDepth(200.0f);
 
 		// Creating an animator for the player

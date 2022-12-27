@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\scripts\weapons\Crossbow.h" />
     <ClInclude Include="src\scripts\enemies\SimpleEnemy.h" />
     <ClInclude Include="src\scripts\EnemySpawner.h" />
     <ClInclude Include="src\animators\SimpleEnemyAnimator.h" />
@@ -157,6 +158,7 @@
     <ClInclude Include="src\scripts\TileMapCreator.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\scripts\weapons\Crossbow.cpp" />
     <ClCompile Include="src\scripts\enemies\SimpleEnemy.cpp" />
     <ClCompile Include="src\scripts\EnemySpawner.cpp" />
     <ClCompile Include="src\animators\SimpleEnemyAnimator.cpp" />

@@ -108,33 +108,33 @@ AnimatorPointer SimpleEnemyAnimator::create(TransformPointer transform, std::str
 	animationWeb.createLink("up_right", "up_left", false);
 	animationWeb.createLink("up_right", "down_right", false);
 	animationWeb.createLink("up_right", "down_left", false);
-	animationWeb.addConditionToLink("up_right", "up_left", "up_left", true);
-	animationWeb.addConditionToLink("up_right", "down_right", "down_right", true);
-	animationWeb.addConditionToLink("up_right", "down_left", "down_left", true);
+	animationWeb.addConditionToLink("up_right", "up_left", "up_left");
+	animationWeb.addConditionToLink("up_right", "down_right", "down_right");
+	animationWeb.addConditionToLink("up_right", "down_left", "down_left");
 
 	// Creating links from up left to the others
 	animationWeb.createLink("up_left", "up_right", false);
 	animationWeb.createLink("up_left", "down_right", false);
 	animationWeb.createLink("up_left", "down_left", false);
-	animationWeb.addConditionToLink("up_left", "up_right", "up_right", true);
-	animationWeb.addConditionToLink("up_left", "down_right", "down_right", true);
-	animationWeb.addConditionToLink("up_left", "down_left", "down_left", true);
+	animationWeb.addConditionToLink("up_left", "up_right", "up_right");
+	animationWeb.addConditionToLink("up_left", "down_right", "down_right");
+	animationWeb.addConditionToLink("up_left", "down_left", "down_left");
 
 	// Creating links from down right to the others
 	animationWeb.createLink("down_right", "up_right", false);
 	animationWeb.createLink("down_right", "up_left", false);
 	animationWeb.createLink("down_right", "down_left", false);
-	animationWeb.addConditionToLink("down_right", "up_right", "up_right", true);
-	animationWeb.addConditionToLink("down_right", "up_left", "up_left", true);
-	animationWeb.addConditionToLink("down_right", "down_left", "down_left", true);
+	animationWeb.addConditionToLink("down_right", "up_right", "up_right");
+	animationWeb.addConditionToLink("down_right", "up_left", "up_left");
+	animationWeb.addConditionToLink("down_right", "down_left", "down_left");
 
 	// Creating links from down left to the others
 	animationWeb.createLink("down_left", "up_right", false);
 	animationWeb.createLink("down_left", "up_left", false);
 	animationWeb.createLink("down_left", "down_right", false);
-	animationWeb.addConditionToLink("down_left", "up_right", "up_right", true);
-	animationWeb.addConditionToLink("down_left", "up_left", "up_left", true);
-	animationWeb.addConditionToLink("down_left", "down_right", "down_right", true);
+	animationWeb.addConditionToLink("down_left", "up_right", "up_right");
+	animationWeb.addConditionToLink("down_left", "up_left", "up_left");
+	animationWeb.addConditionToLink("down_left", "down_right", "down_right");
 
 	animationWeb.addParameter("up_right", false);
 	animationWeb.addParameter("up_left", true); // Looking up-left by default

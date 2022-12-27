@@ -10,6 +10,8 @@ Player::~Player()
 
 void Player::start()
 {
+	crossbow = std::shared_ptr<Crossbow>(new Crossbow(this->getTransform()));
+
 	weapon = transform->getChildren()[0];
 
 	firePoint = Transform::create(glm::vec2(0.6f, 0.0f));
@@ -24,7 +26,6 @@ void Player::update()
 	AnimationHandler::setAnimationWebParameter("player_sprite", "down", Input::getKey(KEY_S));
 	AnimationHandler::setAnimationWebParameter("player_sprite", "left", Input::getKey(KEY_A));
 	AnimationHandler::setAnimationWebParameter("player_sprite", "right", Input::getKey(KEY_D));
-
 
 	if (Input::getKey(KEY_W))
 	{
@@ -45,7 +46,7 @@ void Player::update()
 
 	if (Input::getMouseButton(MOUSE_LEFT) && timeSinceShot >= fireDelay)
 	{
-		shoot();
+		crossbow->shoot();
 		timeSinceShot = glm::mod(timeSinceShot, fireDelay);
 	}
 
@@ -66,7 +67,7 @@ void Player::shoot()
 
 	bullet->getComponent<Rigidbody>()->setLinearVelocity(bullet->getLocalRightVector() * 5.0f);
 
-	SpriteRenderer::create(bullet, "src/sprites/cutie_cat.png", true);
+	SpriteRenderer::create(bullet, "src/sprites/cutie_cat.png", glm::vec2(0.0f), true);
 
 	std::shared_ptr<Bullet> bulletScript = std::shared_ptr<Bullet>(new Bullet());
 	bullet->addComponent(bulletScript);

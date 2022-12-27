@@ -22,7 +22,7 @@ void GameManager::start()
 	CameraPointer camera = Camera::create(cameraTransform, 8.0f);
 
 	Transform* backgroundTransform = Transform::create(glm::vec2(0.0f), 0.0f, glm::vec2(8.0f * (16.0f / 9.0f), 8.0f), 10000.0f);
-	SpriteRenderer::create(backgroundTransform, "src/sprites/background.png", true);
+	SpriteRenderer::create(backgroundTransform, "src/sprites/background.png", glm::vec2(0, 0), true);
 	backgroundTransform->setName("wall");
 	backgroundTransform->setTag("wall");
 	// Creating the level border collider
@@ -164,18 +164,10 @@ void GameManager::initialisePlayer()
 	Rigidbody::create(player, colliders, DYNAMIC, 0.0f, false, true, false);
 
 	// Adding a sprite renderer to the object
-	playerSpriteRenderer = SpriteRenderer::create(player, "src/sprites/test_sprite_sheet_directions.png", true, 4, 4);
+	playerSpriteRenderer = SpriteRenderer::create(player, "src/sprites/test_sprite_sheet_directions.png", glm::vec2(0, 0), true, 4, 4);
 	player->setRenderDepth(100.0f);
 
 	// Creating an animator for the player
 	PlayerAnimator::create(player, "player_sprite");
-
-	// Creating a weapon for the player to hold
-	TransformPointer weapon = Transform::create(glm::vec2(0.0f, -0.1f));
-	weapon->setScale(glm::vec2(0.8f, 0.4f));
-	weapon->setParent(player);
-
-	// Adding a sprite renderer to the object
-	SpriteRendererPointer weaponSpriteRenderer = SpriteRenderer::create(weapon, "src/sprites/weapon.png", true);
 }
 

@@ -1,0 +1,35 @@
+# ====== Grid data ======
+
+# 6 rows by 9 columns
+6x9
+
+# Number of layers
+3
+
+# An '+' signifies a tile that should be filled in by the rules.
+# A ' ' (space) or '-' signifies an empty grid space
+# A letter signifies that a tile should be filled in by the rules,
+# but only with tiles with a tag that matches the letter.
+# Layer 1: the ground
+g g         g g g
+g g       g g g g
+        g g g g g
+g g g g g g g   g
+g g g g g g     g
+g g g g g g g g g
+
+# Layer 2: the walls
+- - w w w w - - -
+- - w w w - - - -
+w w w w - - - - -
+- - - - - - - w -
+- - - - - - w w -
+- - - - - - - - -
+
+# Layer 3: the wall top
+- - - - - - - - -
+- - - - - - - - -
+- - - - - - - - -
+- - - - - - - - -
+- - - - - - - - -
+- - - - - - - - -

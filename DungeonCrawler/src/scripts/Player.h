@@ -1,6 +1,7 @@
 #pragma once
 
 #include "scripts/Bullet.h"
+#include "scripts/weapons/Crossbow.h"
 
 #include <Root/Logger.h>
 #include <Root/Transform.h>
@@ -23,12 +24,14 @@ public:
 
 private:
 
-	float fireDelay{ 0.1f };
+	float fireDelay{ 1.0f };
 	float timeSinceShot{ fireDelay };
 
 	float playerSpeed{ 2.0f };
 
 	void shoot();
+
+	std::shared_ptr<Crossbow> crossbow = nullptr;
 
 	ColliderPointer bulletCollider;
 

@@ -18,21 +18,13 @@ AnimatorPointer PlayerAnimator::create(TransformPointer transform, std::string a
 
 	// Creating a setter value animation (a sub-animation which sets a value via a setter),
 	// which is added to the particle system animation
-	SetterValueAnimation<unsigned int, SpriteRenderer>* playerMoveUpSetColumnIndexAnimation
-		= SetterValueAnimation<unsigned int, SpriteRenderer>::create(
+	SetterValueAnimation<glm::ivec2, SpriteRenderer>* playerMoveUpSetColumnIndexAnimation
+		= SetterValueAnimation<glm::ivec2, SpriteRenderer>::create(
 			&playerMoveUpAnimation,
 			playerSpriteRenderer,
-			&SpriteRenderer::setSpriteSheetColumnIndex,
-			Gradient<unsigned int>::spriteIndexGradient(0, 3, arrowAnimationDuration));
+			&SpriteRenderer::setSpriteSheetIndex,
+			Gradient<glm::ivec2>::sprite2DIndexGradient(glm::ivec2(0, 3), glm::ivec2(3, 3), arrowAnimationDuration));
 	playerMoveUpSetColumnIndexAnimation->setDuration(arrowAnimationDuration);
-
-	SetterValueAnimation<unsigned int, SpriteRenderer>* playerMoveUpSetRowIndexAnimation
-		= SetterValueAnimation<unsigned int, SpriteRenderer>::create(
-			&playerMoveUpAnimation,
-			playerSpriteRenderer,
-			&SpriteRenderer::setSpriteSheetRowIndex,
-			Gradient<unsigned int>(3)); // Row index 3 for up
-	playerMoveUpSetRowIndexAnimation->setDuration(arrowAnimationDuration);
 
 
 	// Creating an animation for the up direction
@@ -40,21 +32,13 @@ AnimatorPointer PlayerAnimator::create(TransformPointer transform, std::string a
 
 	// Creating a setter value animation (a sub-animation which sets a value via a setter),
 	// which is added to the particle system animation
-	SetterValueAnimation<unsigned int, SpriteRenderer>* playerMoveRightSetColumnIndexAnimation
-		= SetterValueAnimation<unsigned int, SpriteRenderer>::create(
+	SetterValueAnimation<glm::ivec2, SpriteRenderer>* playerMoveRightSetColumnIndexAnimation
+		= SetterValueAnimation<glm::ivec2, SpriteRenderer>::create(
 			&playerMoveRightAnimation,
 			playerSpriteRenderer,
-			&SpriteRenderer::setSpriteSheetColumnIndex,
-			Gradient<unsigned int>::spriteIndexGradient(0, 3, arrowAnimationDuration));
+			&SpriteRenderer::setSpriteSheetIndex,
+			Gradient<glm::ivec2>::sprite2DIndexGradient(glm::ivec2(0, 2), glm::ivec2(3, 2), arrowAnimationDuration)); // Row index 1 for down
 	playerMoveRightSetColumnIndexAnimation->setDuration(arrowAnimationDuration);
-
-	SetterValueAnimation<unsigned int, SpriteRenderer>* playerMoveRightSetRowIndexAnimation
-		= SetterValueAnimation<unsigned int, SpriteRenderer>::create(
-			&playerMoveRightAnimation,
-			playerSpriteRenderer,
-			&SpriteRenderer::setSpriteSheetRowIndex,
-			Gradient<unsigned int>(2)); // Row index 2 for right
-	playerMoveRightSetRowIndexAnimation->setDuration(arrowAnimationDuration);
 
 
 	// Creating an animation for the down direction
@@ -62,21 +46,13 @@ AnimatorPointer PlayerAnimator::create(TransformPointer transform, std::string a
 
 	// Creating a setter value animation (a sub-animation which sets a value via a setter),
 	// which is added to the particle system animation
-	SetterValueAnimation<unsigned int, SpriteRenderer>* playerMoveDownSetColumnIndexAnimation
-		= SetterValueAnimation<unsigned int, SpriteRenderer>::create(
+	SetterValueAnimation<glm::ivec2, SpriteRenderer>* playerMoveDownSetColumnIndexAnimation
+		= SetterValueAnimation<glm::ivec2, SpriteRenderer>::create(
 			&playerMoveDownAnimation,
 			playerSpriteRenderer,
-			&SpriteRenderer::setSpriteSheetColumnIndex,
-			Gradient<unsigned int>::spriteIndexGradient(0, 3, arrowAnimationDuration));
+			&SpriteRenderer::setSpriteSheetIndex,
+			Gradient<glm::ivec2>::sprite2DIndexGradient(glm::ivec2(0, 1), glm::ivec2(3, 1), arrowAnimationDuration)); // Row index 1 for down
 	playerMoveDownSetColumnIndexAnimation->setDuration(arrowAnimationDuration);
-
-	SetterValueAnimation<unsigned int, SpriteRenderer>* playerMoveDownSetRowIndexAnimation
-		= SetterValueAnimation<unsigned int, SpriteRenderer>::create(
-			&playerMoveDownAnimation,
-			playerSpriteRenderer,
-			&SpriteRenderer::setSpriteSheetRowIndex,
-			Gradient<unsigned int>(1)); // Row index 1 for down
-	playerMoveDownSetRowIndexAnimation->setDuration(arrowAnimationDuration);
 
 
 	// Creating an animation for the left direction
@@ -84,21 +60,13 @@ AnimatorPointer PlayerAnimator::create(TransformPointer transform, std::string a
 
 	// Creating a setter value animation (a sub-animation which sets a value via a setter),
 	// which is added to the particle system animation
-	SetterValueAnimation<unsigned int, SpriteRenderer>* playerMoveLeftSetColumnIndexAnimation
-		= SetterValueAnimation<unsigned int, SpriteRenderer>::create(
+	SetterValueAnimation<glm::ivec2, SpriteRenderer>* playerMoveLeftSetColumnIndexAnimation
+		= SetterValueAnimation<glm::ivec2, SpriteRenderer>::create(
 			&playerMoveLeftAnimation,
 			playerSpriteRenderer,
-			&SpriteRenderer::setSpriteSheetColumnIndex,
-			Gradient<unsigned int>::spriteIndexGradient(0, 3, arrowAnimationDuration));
+			&SpriteRenderer::setSpriteSheetIndex,
+			Gradient<glm::ivec2>::sprite2DIndexGradient(glm::ivec2(0, 0), glm::ivec2(3, 0), arrowAnimationDuration));
 	playerMoveLeftSetColumnIndexAnimation->setDuration(arrowAnimationDuration);
-
-	SetterValueAnimation<unsigned int, SpriteRenderer>* playerMoveLeftSetRowIndexAnimation
-		= SetterValueAnimation<unsigned int, SpriteRenderer>::create(
-			&playerMoveLeftAnimation,
-			playerSpriteRenderer,
-			&SpriteRenderer::setSpriteSheetRowIndex,
-			Gradient<unsigned int>(0)); // Row index 0 for left
-	playerMoveLeftSetRowIndexAnimation->setDuration(arrowAnimationDuration);
 
 
 	// Creating an animation web to add the animations to
@@ -113,33 +81,33 @@ AnimatorPointer PlayerAnimator::create(TransformPointer transform, std::string a
 	playerAnimationWeb.createLink("up", "right", false);
 	playerAnimationWeb.createLink("up", "down", false);
 	playerAnimationWeb.createLink("up", "left", false);
-	playerAnimationWeb.addConditionToLink("up", "left", "left", true);
-	playerAnimationWeb.addConditionToLink("up", "right", "right", true);
-	playerAnimationWeb.addConditionToLink("up", "down", "down", true);
+	playerAnimationWeb.addConditionToLink("up", "left", "left");
+	playerAnimationWeb.addConditionToLink("up", "right", "right");
+	playerAnimationWeb.addConditionToLink("up", "down", "down");
 
 	// Creating links from right to the others
 	playerAnimationWeb.createLink("right", "up", false);
 	playerAnimationWeb.createLink("right", "down", false);
 	playerAnimationWeb.createLink("right", "left", false);
-	playerAnimationWeb.addConditionToLink("right", "up", "up", true);
-	playerAnimationWeb.addConditionToLink("right", "left", "left", true);
-	playerAnimationWeb.addConditionToLink("right", "down", "down", true);
+	playerAnimationWeb.addConditionToLink("right", "up", "up");
+	playerAnimationWeb.addConditionToLink("right", "left", "left");
+	playerAnimationWeb.addConditionToLink("right", "down", "down");
 
 	// Creating links from down to the others
 	playerAnimationWeb.createLink("down", "up", false);
 	playerAnimationWeb.createLink("down", "right", false);
 	playerAnimationWeb.createLink("down", "left", false);
-	playerAnimationWeb.addConditionToLink("down", "up", "up", true);
-	playerAnimationWeb.addConditionToLink("down", "right", "right", true);
-	playerAnimationWeb.addConditionToLink("down", "left", "left", true);
+	playerAnimationWeb.addConditionToLink("down", "up", "up");
+	playerAnimationWeb.addConditionToLink("down", "right", "right");
+	playerAnimationWeb.addConditionToLink("down", "left", "left");
 
 	// Creating links from left to the others
 	playerAnimationWeb.createLink("left", "up", false);
 	playerAnimationWeb.createLink("left", "right", false);
 	playerAnimationWeb.createLink("left", "down", false);
-	playerAnimationWeb.addConditionToLink("left", "up", "up", true);
-	playerAnimationWeb.addConditionToLink("left", "right", "right", true);
-	playerAnimationWeb.addConditionToLink("left", "down", "down", true);
+	playerAnimationWeb.addConditionToLink("left", "up", "up");
+	playerAnimationWeb.addConditionToLink("left", "right", "right");
+	playerAnimationWeb.addConditionToLink("left", "down", "down");
 
 	playerAnimationWeb.addParameter("up", false);
 	playerAnimationWeb.addParameter("right", true);

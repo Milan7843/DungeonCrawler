@@ -109,7 +109,7 @@ void TileMapCreator::createTileSets()
 		// Bottom left corner for top of walls
 		TileSet::createTile(
 			't', // t for top
-			glm::ivec2(0,1),
+			glm::ivec2(2,7),
 			'-','-','-',
 			'+',    '-',
 			'~','+','-'
@@ -117,7 +117,7 @@ void TileMapCreator::createTileSets()
 		// Bottom right corner for top of walls
 		TileSet::createTile(
 			't', // t for top
-			glm::ivec2(1,1),
+			glm::ivec2(0,7),
 			'-','-','-',
 			'-',    '+',
 			'-','+','~'
@@ -125,7 +125,7 @@ void TileMapCreator::createTileSets()
 		// Top left corner for top of walls
 		TileSet::createTile(
 			't', // t for top
-			glm::ivec2(0, 2),
+			glm::ivec2(2, 5),
 			'~','+','-',
 			'+',    '-',
 			'-','-','-'
@@ -133,7 +133,7 @@ void TileMapCreator::createTileSets()
 		// Top right corner for top of walls
 		TileSet::createTile(
 			't', // t for top
-			glm::ivec2(1,2),
+			glm::ivec2(0,5),
 			'-','+','~',
 			'-',    '+',
 			'-','-','-'
@@ -141,13 +141,37 @@ void TileMapCreator::createTileSets()
 
 		/* ====== MAIN WALL PIECES ====== */
 
-		// Top left corner for top of walls
+		// Top side for top of walls
 		TileSet::createTile(
 			't', // t for top
 			glm::ivec2(1,2),
-			'-','-','-',
+			'~','-','~',
+			'+',    '+',
+			'+','+','+'
+		),
+		// Right side for top of walls
+		TileSet::createTile(
+			't', // t for top
+			glm::ivec2(1,2),
+			'+','+','~',
+			'+',    '-',
+			'+','+','~'
+		),
+		// Bottom side for top of walls
+		TileSet::createTile(
+			't', // t for top
+			glm::ivec2(1,2),
+			'+','+','+',
+			'+',    '+',
+			'~','-','~'
+		),
+		// Left side for top of walls
+		TileSet::createTile(
+			't', // t for top
+			glm::ivec2(1,2),
+			'~','+','+',
 			'-',    '+',
-			'-','+','-'
+			'~','+','+'
 		),
 	};
 }
