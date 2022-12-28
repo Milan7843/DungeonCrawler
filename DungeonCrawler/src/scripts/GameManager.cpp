@@ -55,10 +55,10 @@ void GameManager::start()
 	particleSystem->play();
 	*/
 
-	Renderer::addScreenSpaceEffect(ScreenSpaceEffect::create("src/shaders/screenSpaceFragment.shader"));
-	//Renderer::Bloom::setEnabled(true);
-	Renderer::Bloom::setThreshold(0.7f);
-	Renderer::Bloom::setIntensity(0.5f);
+	//Renderer::addScreenSpaceEffect(ScreenSpaceEffect::create("src/shaders/screenSpaceFragment.shader"));
+	Renderer::Bloom::setEnabled(true);
+	//Renderer::Bloom::setThreshold(0.7f);
+	//Renderer::Bloom::setIntensity(0.5f);
 	Renderer::setMSAAQualityLevel(2);
 
 	Audio::loadSound("src/soundfx/shoot.wav", "shoot");
@@ -71,9 +71,10 @@ void GameManager::start()
 	RootGUI::loadFont("src/fonts/ROCKB.TTF", "rockb", 0.4f, 1.0f);
 	RootGUI::enableDebugMode();
 
+
+
 	//RootGUIComponent::Text::create("test", "arial");
 	//RootGUIComponent::Text::create("abcdefghijklmnopqrstuvwxyz", "arial", 0.01f);
-
 
 
 	RectanglePointer pauseRect = RootGUIComponent::Rectangle::create(
@@ -82,6 +83,7 @@ void GameManager::start()
 	TextPointer text = RootGUIComponent::Text::create(
 		"PLAY",
 		"rockb", 0.8f, glm::vec2(0.0f, 0.0f), glm::vec2(0.4f, 0.2f), 0.0f);
+
 
 	text->setParent(pauseRect);
 
