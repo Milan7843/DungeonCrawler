@@ -13,11 +13,6 @@ void Player::start()
 	crossbow = std::shared_ptr<Crossbow>(new Crossbow(this->getTransform()));
 
 	weapon = transform->getChildren()[0];
-
-	firePoint = Transform::create(glm::vec2(0.6f, 0.0f));
-	firePoint->setParent(weapon);
-
-	bulletCollider = BoxCollider::create(0.1f, 0.1f, LAYER_1, LAYER_ALL - LAYER_1);
 }
 
 void Player::update()
@@ -58,6 +53,7 @@ void Player::update()
 
 void Player::shoot()
 {
+	/*
 	Audio::playSound("shoot");
 
 	Transform* bullet = Transform::create(firePoint->getPosition(), firePoint->getRotation(), glm::vec2(0.6f));
@@ -71,4 +67,5 @@ void Player::shoot()
 
 	std::shared_ptr<Bullet> bulletScript = std::shared_ptr<Bullet>(new Bullet());
 	bullet->addComponent(bulletScript);
+	*/
 }

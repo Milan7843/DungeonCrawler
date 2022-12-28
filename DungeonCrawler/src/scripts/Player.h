@@ -1,6 +1,5 @@
 #pragma once
 
-#include "scripts/Bullet.h"
 #include "scripts/weapons/Crossbow.h"
 
 #include <Root/Logger.h>
@@ -33,9 +32,6 @@ private:
 
 	std::shared_ptr<Crossbow> crossbow = nullptr;
 
-	ColliderPointer bulletCollider;
-
 	TransformPointer weapon;
-	TransformPointer firePoint;
 };
 
