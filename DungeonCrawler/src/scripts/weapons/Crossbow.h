@@ -5,6 +5,8 @@
 #include <Root/Transform.h>
 #include <Root/rendering/SpriteRenderer.h>
 
+#include <Root/Audio.h>
+
 #include <Root/colliders/BoxCollider.h>
 
 #include <Root/animation/SetterValueAnimation.h>
@@ -28,5 +30,5 @@ private:
 	TransformPointer transform;
 	TransformPointer firePoint;
 
-	ColliderPointer bulletCollider;
+	ColliderPointer arrowCollider;
 };

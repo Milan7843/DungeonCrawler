@@ -21,8 +21,8 @@ void GameManager::start()
 	cameraTransform = Transform::create();
 	CameraPointer camera = Camera::create(cameraTransform, 8.0f);
 
-	Transform* backgroundTransform = Transform::create(glm::vec2(0.0f), 0.0f, glm::vec2(8.0f * (16.0f / 9.0f), 8.0f), 10000.0f);
-	SpriteRenderer::create(backgroundTransform, "src/sprites/background.png", glm::vec2(0, 0), true);
+	Transform* backgroundTransform = Transform::create(glm::vec2(0.0f), 0.0f, glm::vec2(1.0f), 10000.0f);
+	SpriteRenderer::create(backgroundTransform, "src/sprites/background.png", glm::vec2(8.0f * (16.0f / 9.0f), 8.0f), glm::vec2(0, 0), true);
 	backgroundTransform->setName("wall");
 	backgroundTransform->setTag("wall");
 	// Creating the level border collider
@@ -142,6 +142,15 @@ void GameManager::update()
 		<< r[0][2] << " " << r[1][2] << " " << r[2][2] << " " << r[3][2] << "\n"
 		<< r[0][3] << " " << r[1][3] << " " << r[2][3] << " " << r[3][3] << std::endl;
 	*/
+
+	if (Input::getKey(KEY_X))
+	{
+		Time::setTimeScale(0.05f);
+	}
+	else
+	{
+		Time::setTimeScale(1.0f);
+	}
 }
 
 void GameManager::initialisePlayer()
@@ -156,7 +165,7 @@ void GameManager::initialisePlayer()
 	player->addComponent(playerScript);
 
 	ColliderPointer fullBoxCollider{ BoxCollider::create(1.0f, 1.0f, LAYER_0, LAYER_ALL - LAYER_1 - LAYER_0) };
-	ColliderPointer lowerBoxCollider{ BoxCollider::create(1.0f, 0.5f, LAYER_0, LAYER_ALL - LAYER_1, glm::vec2(0.0f, -0.25f)) };
+	ColliderPointer lowerBoxCollider{ BoxCollider::create(1.0f, 0.5f, LAYER_0, LAYER_ALL - LAYER_1, false, 1.0f, 0.3f, glm::vec2(0.0f, -0.25f)) };
 
 	std::vector<ColliderPointer> colliders{
 		fullBoxCollider, lowerBoxCollider
@@ -166,7 +175,7 @@ void GameManager::initialisePlayer()
 	Rigidbody::create(player, colliders, DYNAMIC, 0.0f, false, true, false);
 
 	// Adding a sprite renderer to the object
-	playerSpriteRenderer = SpriteRenderer::create(player, "src/sprites/test_sprite_sheet_directions.png", glm::vec2(0, 0), true, 4, 4);
+	playerSpriteRenderer = SpriteRenderer::create(player, "src/sprites/test_sprite_sheet_directions.png", glm::vec2(1.0f), glm::vec2(0, 0), true, 4, 4);
 	player->setRenderDepth(100.0f);
 
 	// Creating an animator for the player

@@ -10,7 +10,7 @@ Crossbow::Crossbow(TransformPointer parent)
 	std::cout << "CHILDREN " << parent->getChildren().size() << std::endl;
 
 	// Adding a sprite renderer to the object
-	SpriteRendererPointer spriteRenderer = SpriteRenderer::create(transform, "src/sprites/crossbow.png", glm::vec2(0.2f, 0), true, 9, 1);
+	SpriteRendererPointer spriteRenderer = SpriteRenderer::create(transform, "src/sprites/crossbow.png", glm::vec2(1.0f), glm::vec2(0.2f, 0), true, 9, 1);
 
 	// Creating an animation for the shooting
 	Animation shootAnimation;
@@ -39,7 +39,6 @@ Crossbow::Crossbow(TransformPointer parent)
 			&SpriteRenderer::setSpriteSheetIndex,
 			Gradient<glm::ivec2>(glm::ivec2(0, 0)));
 
-
 	// Adding the shooting as part of the animation
 	AnimationFunctionCallPointer shootArrowFunction = ClassAnimationFunction<Crossbow>::create(this, &Crossbow::spawnArrow);
 
@@ -61,8 +60,7 @@ Crossbow::Crossbow(TransformPointer parent)
 	AnimationHandler::addAnimationWeb(animationWeb, "crossbow");
 
 
-	bulletCollider = BoxCollider::create(0.1f, 0.1f, LAYER_1, LAYER_ALL - LAYER_1);
-
+	arrowCollider = BoxCollider::create(0.8f, 0.1f, LAYER_1, LAYER_ALL - LAYER_1, true);
 
 	firePoint = Transform::create(glm::vec2(0.6f, 0.0f));
 	firePoint->setParent(transform);
@@ -80,19 +78,18 @@ void Crossbow::shoot()
 
 void Crossbow::spawnArrow()
 {
-	//Audio::playSound("shoot");
+	Audio::playSound("shoot");
 
-	Transform* bullet = Transform::create(transform->getPosition(), transform->getRotation(), glm::vec2(0.6f));
-	bullet->setName("bullet");
-	bullet->setTag("bullet");
-	Rigidbody::create(bullet, bulletCollider, DYNAMIC, 0.0f, true);
+	Transform* arrow = Transform::create(firePoint->getPosition(), firePoint->getRotation());
+	arrow->setName("arrow");
+	arrow->setTag("arrow");
+	Rigidbody::create(arrow, arrowCollider, DYNAMIC, 0.0f, true);
 
-	bullet->getComponent<Rigidbody>()->setLinearVelocity(bullet->getLocalRightVector() * 12.0f);
+	arrow->getComponent<Rigidbody>()->setLinearVelocity(arrow->getLocalRightVector() * 12.0f);
 
-	SpriteRenderer::create(bullet, "src/sprites/arrow.png", glm::vec2(0.0f), true);
-	float height{ 0.3f };
-	bullet->setScale(glm::vec2(height * 11.0f / 3.0f, height));
+	float height{ 0.1875f };
+	SpriteRenderer::create(arrow, "src/sprites/arrow.png", glm::vec2(height * 11.0f / 3.0f, height), glm::vec2(0.0f), true);
 
 	std::shared_ptr<Bullet> bulletScript = std::shared_ptr<Bullet>(new Bullet());
-	bullet->addComponent(bulletScript);
+	arrow->addComponent(bulletScript);
 }
